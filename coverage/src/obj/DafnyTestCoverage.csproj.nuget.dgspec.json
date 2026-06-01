@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/DafnyTestCoverage.csproj": {}
+    "/Users/Sofia/DafnyFaultLoc/coverage/src/DafnyTestCoverage.csproj": {}
   },
   "projects": {
-    "/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/DafnyTestCoverage.csproj": {
+    "/Users/Sofia/DafnyFaultLoc/coverage/src/DafnyTestCoverage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/DafnyTestCoverage.csproj",
+        "projectUniqueName": "/Users/Sofia/DafnyFaultLoc/coverage/src/DafnyTestCoverage.csproj",
         "projectName": "DafnyTestCoverage",
-        "projectPath": "/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/DafnyTestCoverage.csproj",
+        "projectPath": "/Users/Sofia/DafnyFaultLoc/coverage/src/DafnyTestCoverage.csproj",
         "packagesPath": "/Users/Sofia/.nuget/packages/",
-        "outputPath": "/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/",
+        "outputPath": "/Users/Sofia/DafnyFaultLoc/coverage/src/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/Sofia/.nuget/NuGet/NuGet.Config"

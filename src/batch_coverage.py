@@ -61,7 +61,7 @@ def run_coverage_on_file(dafny_file, dafny_cmd):
     for test_name, info in coverage_data.items():
         formatted_data[test_name] = {
             "passed": info["passed"],
-            "coverage": list(info["coverage"])
+            "coverage": sorted(list(info["coverage"]))
         }
 
     return formatted_data
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Dafny Batch Coverage Generator")
     parser.add_argument("input_folder", help="Folder containing the Dafny test files")
     parser.add_argument("--output", default="coverage.json", help="Path to save the output JSON")
-    parser.add_argument("--dafny", default="/Users/Sofia/dafny/Binaries/dafny", help="Path to your dafny executable")
+    parser.add_argument("--dafny", default="dafny", help="Path to your dafny executable")
     
     args = parser.parse_args()
     
