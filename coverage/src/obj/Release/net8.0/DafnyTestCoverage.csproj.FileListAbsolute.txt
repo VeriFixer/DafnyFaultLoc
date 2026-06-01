@@ -1,0 +1,15 @@
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/bin/Release/net8.0/DafnyTestCoverage.deps.json
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/bin/Release/net8.0/DafnyTestCoverage.dll
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/bin/Release/net8.0/DafnyTestCoverage.pdb
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/bin/Release/net8.0/System.Reactive.dll
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/bin/Release/net8.0/System.Reactive.xml
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.csproj.AssemblyReference.cache
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.AssemblyInfoInputs.cache
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.AssemblyInfo.cs
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.csproj.CoreCompileInputs.cache
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTes.5D3BD104.Up2Date
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.dll
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/refint/DafnyTestCoverage.dll
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/DafnyTestCoverage.pdb
+/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/obj/Release/net8.0/ref/DafnyTestCoverage.dll
