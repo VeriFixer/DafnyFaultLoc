@@ -134,8 +134,22 @@ public sealed class CoverageTraceBuilder {
                     HandleBlock(elsBlock);
                     
                     if (elsBlock.StartToken != null && blockStartLine != firstStmtLine && elsBlock.Body != null) {
-                        var printStmt = CreateCoveragePrint((Token)elsBlock.StartToken);
-                        elsBlock.Body.Insert(0, printStmt); 
+                        var targetToken = (Token)elsBlock.StartToken;
+                        var currentTok = targetToken.Prev;
+
+                        while (currentTok != null) {
+                            if (currentTok.val == "else") {
+                                targetToken = currentTok;
+                                break;
+                            }
+                            if (currentTok == ifStmt.StartToken) {
+                                break;
+                            }
+                            currentTok = currentTok.Prev;
+                        }
+                        
+                        var printStmt = CreateCoveragePrint(targetToken);
+                        elsBlock.Body.Insert(0, printStmt);
                     }
                 } 
                 else {

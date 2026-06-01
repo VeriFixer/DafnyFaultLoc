@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XAXVXZZL3zg=",
+  "dgSpecHash": "ysQ9SKeszFs=",
   "success": true,
-  "projectFilePath": "/Users/Sofia/DafnyFaultLoc/DafnyTestCoverage/src/DafnyTestCoverage.csproj",
+  "projectFilePath": "/Users/Sofia/DafnyFaultLoc/coverage/src/DafnyTestCoverage.csproj",
   "expectedPackageFiles": [
     "/Users/Sofia/.nuget/packages/boogie.abstractinterpretation/3.5.5/boogie.abstractinterpretation.3.5.5.nupkg.sha512",
     "/Users/Sofia/.nuget/packages/boogie.basetypes/3.5.5/boogie.basetypes.3.5.5.nupkg.sha512",
