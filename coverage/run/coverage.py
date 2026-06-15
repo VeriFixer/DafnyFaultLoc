@@ -9,9 +9,18 @@ PLUGIN_PATH = os.path.abspath(os.path.join(
     SCRIPT_DIR, "..", "src", "bin", "Release", "net8.0", "DafnyTestCoverage.dll"
 ))
 
+RUNTIME_PATH = os.path.abspath(os.path.join(
+    SCRIPT_DIR, "..", "src", "CoverageRuntime.cs"
+))
+
+EXTERN_PATH = os.path.abspath(os.path.join(
+    SCRIPT_DIR, "..", "src", "CoverageExterns.dfy"
+))
+
 def run_coverage(dafny_file, dafny_cmd):
     cmd = [
         dafny_cmd, "test", dafny_file, 
+        RUNTIME_PATH, EXTERN_PATH,
         "--plugin", PLUGIN_PATH, 
         "--no-verify"
     ]
@@ -35,6 +44,13 @@ def run_coverage(dafny_file, dafny_cmd):
             
         elif line == "FAILED" and current_test:
             coverage_data[current_test]["passed"] = False
+
+        elif line.startswith("Unhandled exception."):
+            print("\n[ERROR] Unhandled exception.")
+            print("--- RAW DAFNY OUTPUT FOR DEBUGGING ---")
+            print(output)
+            print("--------------------------------------")
+            sys.exit(1)
 
     if not coverage_data:
         print("\n[ERROR] No coverage data was found. Dafny likely failed to run.")

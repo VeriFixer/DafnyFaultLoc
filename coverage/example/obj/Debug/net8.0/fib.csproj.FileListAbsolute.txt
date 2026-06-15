@@ -1,0 +1,15 @@
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.AssemblyInfoInputs.cache
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.AssemblyInfo.cs
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.csproj.CoreCompileInputs.cache
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.sourcelink.json
+/Users/Sofia/DafnyFaultLoc/coverage/example/fib
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.dll
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/refint/fib.dll
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.pdb
+/Users/Sofia/DafnyFaultLoc/coverage/example/fib.deps.json
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/fib.genruntimeconfig.cache
+/Users/Sofia/DafnyFaultLoc/coverage/example/fib.runtimeconfig.json
+/Users/Sofia/DafnyFaultLoc/coverage/example/fib.dll
+/Users/Sofia/DafnyFaultLoc/coverage/example/obj/Debug/net8.0/ref/fib.dll
+/Users/Sofia/DafnyFaultLoc/coverage/example/fib.pdb
