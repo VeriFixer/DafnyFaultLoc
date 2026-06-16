@@ -58,48 +58,39 @@ public sealed class CoverageTraceBuilder {
     }
 
     public void InstrumentMethod(Method method) {
-    if (method == null || method.Body == null) return;
+        if (method == null || method.Body == null) return;
 
-    if (method.Attributes != null && Attributes.Contains(method.Attributes, "test")) {
-        var token = (Token)method.StartToken;
-        
-        var resetFuncName = new NameSegment(token, "Reset", null);
-        var emptyBindings = new ActualBindings(new List<Expression>());
-        var resetCall = new ApplySuffix(token, null, resetFuncName, emptyBindings, token);
-        var resetMsg = new StringLiteralExpr(token, "Recursion counter reset", false);
-        var resetExpect = new ExpectStmt(token, resetCall, resetMsg, null);
-        
-        var prefix = new StringLiteralExpr(token, "--- RUNNING TEST: " + method.Name + " ---\\n", false);
-        var printStmt = new PrintStmt(token, new List<Expression> { prefix });
+        if (method.Attributes != null && Attributes.Contains(method.Attributes, "test")) {
+            var token = (Token)method.StartToken;
+            var resetCall = CoverageUtils.CreateFunctionCall(token, "Reset");
+            
+            var resetMsg = new StringLiteralExpr(token, "Recursion counter reset", false);
+            var resetExpect = new ExpectStmt(token, resetCall, resetMsg, null);
+            
+            var prefix = new StringLiteralExpr(token, "--- RUNNING TEST: " + method.Name + " ---\\n", false);
+            var printStmt = new PrintStmt(token, new List<Expression> { prefix });
 
-        if (method.Body.Body != null) {
-            method.Body.Body.Insert(0, printStmt);
-            method.Body.Body.Insert(0, resetExpect);
+            if (method.Body.Body != null) {
+                method.Body.Body.Insert(0, printStmt);
+                method.Body.Body.Insert(0, resetExpect);
+            }  
+            return; 
         }
-        
-        return; 
+        HandleBlock(method.Body);
+        InjectRecursionExpect(method);
     }
-
-    HandleBlock(method.Body);
-    InjectRecursionExpect(method);
-}
 
     public void InstrumentFunction(Function function) {
         if (function == null || function.Body == null) return;
         
         var token = (Token)function.StartToken;
-
-        var funcName = new NameSegment(token, "CheckDepth", null);
         var argExpr = Expression.CreateIntLiteral(token, _maxIterations);
-        var exprList = new List<Expression> { argExpr };
-        var bindings = new ActualBindings(exprList);
-        var applySuffix = new ApplySuffix(token, null, funcName, bindings, token);
+        var checkDepthCall = CoverageUtils.CreateFunctionCall(token, "CheckDepth", argExpr);
 
         var cloner = new Microsoft.Dafny.Cloner();
         var clonedBody = cloner.CloneExpr(function.Body);
 
-        var iteExpr = new ITEExpr(token, false, applySuffix, function.Body, clonedBody);
-
+        var iteExpr = new ITEExpr(token, false, checkDepthCall, function.Body, clonedBody);
         function.Body = iteExpr;
     }
 
@@ -137,7 +128,6 @@ public sealed class CoverageTraceBuilder {
             }
             
             _newBlockBody.Add(stmt);
-            
             HandleStatement(stmt); 
 
             if (stmt is WhileStmt whileStmtAfter) {
@@ -192,58 +182,30 @@ public sealed class CoverageTraceBuilder {
 
     private void InjectLoopVariable(WhileStmt whileStmt) {
         var token = (Token)whileStmt.StartToken;
-        string counterName = $"__loop_counter_{token.line}_{token.col}";
-
-        var localVar = new LocalVariable(token, counterName, new IntType(), false);
-        var varDecl = new VarDeclStmt(token, new List<LocalVariable> { localVar }, null);
-        _newBlockBody.Add(varDecl); 
-
-        var initLhs = new NameSegment(token, counterName, null);
-        var initAssign = new AssignStatement(token, 
-            new List<Expression> { initLhs }, 
-            new List<AssignmentRhs> { new ExprRhs(Expression.CreateIntLiteral(token, 0)) }
-        );
-        _newBlockBody.Add(initAssign);
+        var initStatements = CoverageUtils.CreateLoopVariableInits(token);
+        _newBlockBody.AddRange(initStatements); 
     }
 
     private void InjectLoopIncrementAndExpect(WhileStmt whileStmt) {
-        var token = (Token)whileStmt.StartToken;
-        string counterName = $"__loop_counter_{token.line}_{token.col}";
-
         if (whileStmt.Body != null && whileStmt.Body.Body != null) {
-            var incLhs = new NameSegment(token, counterName, null);
-            var incRhs = new NameSegment(token, counterName, null);
-            var expectLhs = new NameSegment(token, counterName, null);
+            var token = (Token)whileStmt.StartToken;
+            var loopGuards = CoverageUtils.CreateLoopIncrementAndExpect(token, _maxIterations);
 
-            var plusOneExpr = new BinaryExpr(token, BinaryExpr.Opcode.Add, incRhs, Expression.CreateIntLiteral(token, 1));
-            var incrementStmt = new AssignStatement(token, 
-                new List<Expression> { incLhs }, 
-                new List<AssignmentRhs> { new ExprRhs(plusOneExpr) }
-            );
-
-            var condition = new BinaryExpr(token, BinaryExpr.Opcode.Le, expectLhs, Expression.CreateIntLiteral(token, _maxIterations));
-            var expectMsg = new StringLiteralExpr(token, "Infinite loop blocked by test coverage plugin", false);
-            var expectStmt = new ExpectStmt(token, condition, expectMsg, null);
-
-            whileStmt.Body.Body.Insert(0, incrementStmt);
-            whileStmt.Body.Body.Insert(1, expectStmt);
+            whileStmt.Body.Body.Insert(0, loopGuards[0]);
+            whileStmt.Body.Body.Insert(1, loopGuards[1]);
         }
     }
 
     private void InjectRecursionExpect(Method method) {
-        var token = (Token)method.StartToken;
         if (method.Body == null || method.Body.Body == null) return;
 
-        var funcName = new NameSegment(token, "CheckDepth", null);
+        var token = (Token)method.StartToken;
 
         var argExpr = Expression.CreateIntLiteral(token, _maxIterations);
-
-        var exprList = new List<Expression> { argExpr };
-        var bindings = new ActualBindings(exprList);
-        var applySuffix = new ApplySuffix(token, null, funcName, bindings, token);
-
-        var expectMsg = new StringLiteralExpr(token, "Possible infinite recursion blocked by test coverage plugin", false);
-        var expectStmt = new ExpectStmt(token, applySuffix, expectMsg, null);
+        var checkDepthCall = CoverageUtils.CreateFunctionCall(token, "CheckDepth", argExpr);
+        
+        var expectMsg = new StringLiteralExpr(token, "Possible infinite recursion blocked by coverage plugin", false);
+        var expectStmt = new ExpectStmt(token, checkDepthCall, expectMsg, null);
 
         method.Body.Body.Insert(0, expectStmt);
     }

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import subprocess
 import sys
 import os
@@ -8,9 +7,7 @@ import tempfile
 import shutil
 import time
 import math
-
-# Import your parallel execution script
-from parallel_executor import run_parallel_or_seq
+from sbfl_eval.src.parallel_executor import run_parallel_or_seq
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
