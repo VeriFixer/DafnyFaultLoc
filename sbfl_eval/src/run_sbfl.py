@@ -7,21 +7,15 @@ import tempfile
 import shutil
 import time
 import math
-from sbfl_eval.src.parallel_executor import run_parallel_or_seq
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-PLUGIN_PATH = os.path.abspath(os.path.join(
-    SCRIPT_DIR, "..", "coverage", "src", "bin", "Release", "net8.0", "DafnyTestCoverage.dll"
-))
-
-RUNTIME_PATH = os.path.abspath(os.path.join(
-    SCRIPT_DIR, "..", "coverage", "src", "CoverageRuntime.cs"
-))
-
-EXTERN_PATH = os.path.abspath(os.path.join(
-    SCRIPT_DIR, "..", "coverage", "src", "CoverageExterns.dfy"
-))
+from src.parallel_executor import run_parallel_or_seq
+from src.config import (
+    DAFNY_BINARY,
+    DATASET_ROOT,
+    RESULTS_ROOT,
+    PLUGIN_PATH,
+    RUNTIME_PATH,
+    EXTERN_PATH
+)
 
 def calculate_file_metrics(file_data):
     """Calculates SBFL (Ochiai, Tarantula, DStar) metrics for a given file's coverage data."""
@@ -62,7 +56,7 @@ def calculate_file_metrics(file_data):
         denom_tarantula = fail_ratio + pass_ratio
         tarantula = (fail_ratio / denom_tarantula) if denom_tarantula > 0 else 0.0
         
-        # --- DSTAR (using * = 2 based on your original script) ---
+        # --- DSTAR ---
         denom_dstar = n_cp + n_uf
         dstar = ((n_cf ** 2) / denom_dstar) if denom_dstar > 0 else 0.0
         
@@ -160,35 +154,18 @@ def process_folder(folder_path, dafny_cmd):
         
     return aggregated_results
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Dafny Batch Coverage & SBFL Generator")
-    parser.add_argument("--input", default="dataset", help="Root folder containing subfolders of Dafny test files")
-    parser.add_argument("--output", default="results", help="Directory to save the output JSONs")
-    parser.add_argument("--dafny", default="dafny", help="Path to your dafny executable")
     
-    args = parser.parse_args()
-    
-    if not os.path.isdir(args.input):
-        print(f"Error: Directory '{args.input}' not found.")
-        sys.exit(1)
+def main() -> None:
 
-    if os.path.isdir(args.dafny):
-        potential_executable = os.path.join(args.dafny, "dafny")
-        if os.path.exists(potential_executable):
-            args.dafny = potential_executable
-        else:
-            print(f"Error: '{args.dafny}' is a folder missing a 'dafny' executable.")
-            sys.exit(1)
+    os.makedirs(RESULTS_ROOT, exist_ok=True)
 
-    os.makedirs(args.output, exist_ok=True)
-
-    subfolders = [f.path for f in os.scandir(args.input) if f.is_dir()]
+    subfolders = [f.path for f in os.scandir(DATASET_ROOT) if f.is_dir()]
     
     if not subfolders:
-        print(f"Error: No subfolders found inside '{args.input}'.")
+        print(f"Error: No subfolders found inside '{DATASET_ROOT}'.")
         sys.exit(1)
 
-    print(f"Found {len(subfolders)} folders to process in: {args.input}\n")
+    print(f"Found {len(subfolders)} folders to process in: {DATASET_ROOT}\n")
     
     folder_stats = {}
 
@@ -198,14 +175,14 @@ if __name__ == "__main__":
         
         start_time = time.time()
         
-        coverage_data = process_folder(folder, args.dafny)
+        coverage_data = process_folder(folder, DAFNY_BINARY)
         
         num_files_saved = 0
         if coverage_data:
             num_files_saved = len(coverage_data)
             
             # Save Coverage
-            coverage_output_file = os.path.join(args.output, f"{folder_name}_coverage.json")
+            coverage_output_file = os.path.join(RESULTS_ROOT, f"{folder_name}_coverage.json")
             with open(coverage_output_file, "w") as outfile:
                 json.dump(coverage_data, outfile, indent=2)
             print(f"  -> Saved {num_files_saved} coverage files to: {coverage_output_file}")
@@ -216,7 +193,7 @@ if __name__ == "__main__":
             for filename, test_data in coverage_data.items():
                 sbfl_results[filename] = calculate_file_metrics(test_data)
 
-            sbfl_output_file = os.path.join(args.output, f"{folder_name}_results.json")
+            sbfl_output_file = os.path.join(RESULTS_ROOT, f"{folder_name}_results.json")
             with open(sbfl_output_file, "w") as outfile:
                 json.dump(sbfl_results, outfile, indent=2)
             print(f"  -> Saved SBFL metrics to: {sbfl_output_file}\n")
@@ -240,3 +217,7 @@ if __name__ == "__main__":
         print(f" [{folder_name}]")
         print(f"    -> Time:  {stats['time'] / 60:.4f} minutes")
         print(f"    -> Files: {stats['files']} files stored in {folder_name}_coverage.json & {folder_name}_results.json")
+
+
+if __name__ == "__main__":
+    main()
