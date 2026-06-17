@@ -1,4 +1,5 @@
 import subprocess
+from tqdm import tqdm
 import sys
 import os
 import argparse
@@ -109,6 +110,9 @@ def run_coverage_on_file(dafny_file, dafny_cmd):
 
     if not coverage_data:
         print(f"\n[WARNING] No tests were run for '{os.path.basename(dafny_file)}'!")
+        tqdm.write(f"--- WHAT DAFNY ACTUALLY SAID ---")
+        tqdm.write(output) # This will print the hidden error!
+        tqdm.write(f"--------------------------------")
         return {}
 
     formatted_data = {}
@@ -129,7 +133,7 @@ def _process_single_file_wrapper(filename, folder_path, dafny_cmd):
 def process_folder(folder_path, dafny_cmd):
     """Scans a folder, processes all .dfy files in parallel, and returns the aggregated JSON dict."""
     aggregated_results = {}
-    files = [f for f in os.listdir(folder_path) if f.endswith('.dfy')]
+    files = [f for f in os.listdir(folder_path) if f.endswith('.test.dfy')]
     
     if not files:
         print(f"[SKIP] No .dfy files found in '{folder_path}'")

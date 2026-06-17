@@ -45,7 +45,7 @@ TEST_GEN_RESULTS_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" /
 # === Coverage Plugin Structure ===
 PLUGIN_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "bin" / "Release" / "net8.0" / "DafnyTestCoverage.dll"
 RUNTIME_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "CoverageRuntime.cs"
-EXTERN_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "CoverageExterns.cs"
+EXTERN_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "CoverageExterns.dfy"
 
 # === Dafny Binary ===
 _DAFNY_BINARY_LOCAL: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Binaries" / "Dafny"
