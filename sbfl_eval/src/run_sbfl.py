@@ -1,5 +1,4 @@
 import subprocess
-from tqdm import tqdm
 import sys
 import os
 import argparse
@@ -109,10 +108,7 @@ def run_coverage_on_file(dafny_file, dafny_cmd):
             coverage_data[current_test]["passed"] = False
 
     if not coverage_data:
-        print(f"\n[WARNING] No tests were run for '{os.path.basename(dafny_file)}'!")
-        tqdm.write(f"--- WHAT DAFNY ACTUALLY SAID ---")
-        tqdm.write(output) # This will print the hidden error!
-        tqdm.write(f"--------------------------------")
+        print(f"\n[WARNING] No tests were run for '{os.path.basename(dafny_file)}'")
         return {}
 
     formatted_data = {}
@@ -166,7 +162,7 @@ def main() -> None:
     subfolders = [f.path for f in os.scandir(DATASET_ROOT) if f.is_dir()]
     
     if not subfolders:
-        print(f"Error: No subfolders found inside '{DATASET_ROOT}'.")
+        print(f"\n[ERROR] No subfolders found inside '{DATASET_ROOT}'.")
         sys.exit(1)
 
     print(f"Found {len(subfolders)} folders to process in: {DATASET_ROOT}\n")
