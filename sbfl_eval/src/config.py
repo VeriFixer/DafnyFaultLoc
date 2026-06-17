@@ -38,9 +38,9 @@ DATASET_ROOT: Path = BASE_PATH / "dataset"
 RESULTS_ROOT: Path = BASE_PATH / "results"
 
 # === test_gen_eval Structure to gather dataset from ===
-TEST_GEN_GROUND_TRUTH_ROOT: Path = BASE_PATH.parent / "test_gen_eval" / "dataset" / "data"
-TEST_GEN_DATASET_OUT_ROOT: Path = BASE_PATH.parent / "test_gen_eval" / "dataset_output"
-TEST_GEN_RESULTS_ROOT: Path = BASE_PATH.parent / "test_gen_eval" / "results"
+TEST_GEN_GROUND_TRUTH_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset" / "data"
+TEST_GEN_DATASET_OUT_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset_output"
+TEST_GEN_RESULTS_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "results"
 
 # === Coverage Plugin Structure ===
 PLUGIN_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "bin" / "Release" / "net8.0" / "DafnyTestCoverage.dll"
@@ -48,14 +48,14 @@ RUNTIME_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "CoverageRuntime.cs
 EXTERN_PATH: Path = BASE_PATH.parent / "coverage" / "src" / "CoverageExterns.cs"
 
 # === Dafny Binary ===
-_DAFNY_BINARY_LOCAL: Path = BASE_PATH.parent.parent / "dafny" / "Binaries" / "Dafny"
+_DAFNY_BINARY_LOCAL: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Binaries" / "Dafny"
 DAFNY_BINARY: Path = _DAFNY_BINARY_LOCAL if _DAFNY_BINARY_LOCAL.exists() else Path("dafny")
 
 # === Repetition cut-off for each strategy ===
-BLOCK_REP: 10
-PATH_REP: 10
-SPEC_REP: 10
-SPEC_BVA_REP: 10
+BLOCK_REP = 8
+PATH_REP = 8
+SPEC_REP = 8
+SPEC_BVA_REP = 5
 
 # === Memory Limit for Dafny/Z3 solver (MB) ===
 # Default: 75% of total system RAM. Override with MT_MAX_MEMORY_MB env var.
