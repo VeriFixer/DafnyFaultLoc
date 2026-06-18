@@ -100,7 +100,7 @@ def main():
     print(f"✓ Found {len(shared_programs)} highly-compatible programs.")
 
     for strategy, cutoff in strategy_cutoffs.items():
-        src_folder = os.path.join(TEST_GEN_DATASET_OUT_ROOT, f"tests_{strategy}")
+        src_folder = os.path.join(TEST_GEN_DATASET_OUT_ROOT, f"selected_programs_mutants_with_tests_{strategy}", "all")
         dest_folder = os.path.join(DATASET_ROOT, f"tests_{strategy}")
         
         if not os.path.exists(src_folder):

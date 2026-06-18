@@ -1,4 +1,5 @@
 import subprocess
+from tqdm import tqdm
 import sys
 import os
 import argparse
@@ -109,6 +110,9 @@ def run_coverage_on_file(dafny_file, dafny_cmd):
 
     if not coverage_data:
         print(f"\n[WARNING] No tests were run for '{os.path.basename(dafny_file)}'")
+        print(f"\n          What went wrong:\n")
+        tqdm.write(output) # This will print the hidden error!
+        tqdm.write(f"--------------------------------")
         return {}
 
     formatted_data = {}
