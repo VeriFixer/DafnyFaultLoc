@@ -15,7 +15,8 @@ from src.config import (
     RESULTS_ROOT,
     PLUGIN_PATH,
     RUNTIME_PATH,
-    EXTERN_PATH
+    EXTERN_PATH,
+    DAFNY_MAX_MEMORY_MB
 )
 
 def calculate_file_metrics(file_data):
@@ -81,7 +82,8 @@ def run_coverage_on_file(dafny_file, dafny_cmd):
             dafny_cmd, "test", temp_dfy_path, 
             RUNTIME_PATH, EXTERN_PATH,
             "--plugin", PLUGIN_PATH, 
-            "--no-verify", "--allow-warnings"
+            "--no-verify", "--allow-warnings",
+            f"--solver-option:O:memory_max_size={DAFNY_MAX_MEMORY_MB}",
         ]
         
         try:

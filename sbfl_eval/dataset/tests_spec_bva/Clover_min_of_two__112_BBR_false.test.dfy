@@ -11,18 +11,6 @@ method {:testEntry} Min(x: int, y: int) returns (z: int)
   }
 }
 
-
-method {:testEntry} Min(x: int, y:int) returns (z: int)
-  ensures x<=y ==> z==x
-  ensures x>y ==> z==y
-{
-  if x < y {
-    return x;
-  } else {
-    return y;
-  }
-}
-
 method {:test} Test0() {
 var r0 := Min(1, 0);
 expect 1 <= 0 ==> r0 == 1;

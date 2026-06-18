@@ -3,6 +3,10 @@ import math
 import argparse
 import sys
 import os
+from src.config import (
+    DATASET_ROOT,
+    RESULTS_ROOT
+)
 
 def calculate_sbfl_for_file(file_data):
     all_lines = set()
@@ -75,27 +79,25 @@ def calculate_stats(ranks_list):
 
 def main():
     parser = argparse.ArgumentParser(description="Merge and Analyze SBFL Complementarity dynamically")
-    parser.add_argument("--folder", default="results", help="Folder containing *_coverage.json files")
-    parser.add_argument("--truth", default="dataset/ground_truth.json", required=True, help="Path to ground truth JSON")
     parser.add_argument("--save-merged", help="Optional path to save the merged coverage JSON file")
+    parser.add_argument("--strategies", nargs='+', help="List of strategies to include (e.g., tests_spec_bva tests_path)")
     args = parser.parse_args()
 
-    if not os.path.isdir(args.folder):
-        print(f"Error: Directory '{args.folder}' not found.")
-        sys.exit(1)
-
-    cov_files = [f for f in os.listdir(args.folder) if f.endswith('_coverage.json')]
+    cov_files = [f for f in os.listdir(RESULTS_ROOT) if f.endswith('_coverage.json')]
     
+    if args.strategies:
+        cov_files = [f for f in cov_files if f.replace('_coverage.json', '') in args.strategies]
+
     if not cov_files:
-        print(f"Error: No files ending in '_coverage.json' found in {args.folder}.")
+        print(f"Error: No files ending in '_coverage.json' found in {RESULTS_ROOT}.")
         sys.exit(1)
 
     labels = [f.replace('_coverage.json', '') for f in cov_files]
-    file_paths = [os.path.join(args.folder, f) for f in cov_files]
+    file_paths = [os.path.join(RESULTS_ROOT, f) for f in cov_files]
 
     print(f"Merging {len(labels)} coverage files: {', '.join(labels)}")
 
-    with open(args.truth, 'r') as f: truth_data = json.load(f)
+    with open(os.path.join(DATASET_ROOT, "ground_truth.json"), 'r')  as f: truth_data = json.load(f)
 
     # 1. Load Data
     all_cov_data = {}
@@ -128,16 +130,17 @@ def main():
 
     print("🔄 Processing and ranking files...")
     for filename, true_bug_lines in truth_data.items():
+        cov_key = filename.replace('.dfy', '.test.dfy')
         
         # Calculate for individual approaches
         for label in labels:
-            scores = calculate_sbfl_for_file(all_cov_data[label].get(filename, {}))
+            scores = calculate_sbfl_for_file(all_cov_data[label].get(cov_key, {}))
             for m in metrics:
                 r = get_fair_rank(scores.get(m, []), true_bug_lines)
                 if r is not None: ranks[label][m].append(r)
 
         # Calculate for Combined
-        c_scores = calculate_sbfl_for_file(merged_data.get(filename, {}))
+        c_scores = calculate_sbfl_for_file(merged_data.get(cov_key, {}))
         for m in metrics:
             rc = get_fair_rank(c_scores.get(m, []), true_bug_lines)
             if rc is not None: ranks["Combined (Merged)"][m].append(rc)

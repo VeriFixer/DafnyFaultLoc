@@ -8,15 +8,6 @@ method {:testEntry} Swap(a: int, b: int) returns (result: seq<int>)
   result := [a, a];
 }
 
-
-method {:testEntry} Swap(a: int, b: int) returns (result: seq<int>)
-    ensures |result| == 2
-    ensures result[0] == b
-    ensures result[1] == a
-{
-    result := [b, a];
-}
-
 method {:test} Test0() {
 var r0 := Swap(25, 24);
 expect |r0| == 2;

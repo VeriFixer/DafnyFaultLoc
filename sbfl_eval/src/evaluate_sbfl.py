@@ -4,6 +4,11 @@ import os
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
+from src.config import (
+    DATASET_ROOT,
+    RESULTS_ROOT,
+    GRAPHS_ROOT
+)
 
 def get_fair_rank(ranked_list, target_lines):
     if not isinstance(target_lines, list):
@@ -34,29 +39,24 @@ def calculate_stats(ranks_list):
     }
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate multiple SBFL approaches from a folder")
-    parser.add_argument("--folder", default="results", help="Folder containing *_results.json files")
-    parser.add_argument("--truth", default="dataset/ground_truth.json", help="Path to ground truth JSON")
-    args = parser.parse_args()
-
-    if not os.path.isdir(args.folder):
-        print(f"Error: Directory '{args.folder}' not found.")
+    if not os.path.isdir(RESULTS_ROOT):
+        print(f"Error: Directory '{RESULTS_ROOT}' not found.")
         sys.exit(1)
 
     # Automatically find all _results.json files
-    result_files = [f for f in os.listdir(args.folder) if f.endswith('_results.json')]
+    result_files = [f for f in os.listdir(RESULTS_ROOT) if f.endswith('_results.json')]
     
     if not result_files:
-        print(f"Error: No files ending in '_results.json' found in {args.folder}.")
+        print(f"Error: No files ending in '_results.json' found in {RESULTS_ROOT}.")
         sys.exit(1)
 
     # Extract labels (everything before _results.json)
     labels = [f.replace('_results.json', '') for f in result_files]
-    file_paths = [os.path.join(args.folder, f) for f in result_files]
+    file_paths = [os.path.join(RESULTS_ROOT, f) for f in result_files]
 
     print(f"Found {len(labels)} approaches: {', '.join(labels)}")
 
-    with open(args.truth, 'r') as f: 
+    with open(os.path.join(DATASET_ROOT, "ground_truth.json"), 'r') as f: 
         truth_data = json.load(f)
 
     metrics = ["ochiai", "tarantula", "dstar"]
@@ -70,9 +70,10 @@ def main():
             data = json.load(f)
             
         for filename, true_bug_lines in truth_data.items():
-            if filename in data:
+            results_key = filename.replace('.dfy', '.test.dfy')
+            if results_key in data:
                 for metric in metrics:
-                    r = get_fair_rank(data[filename][metric], true_bug_lines)
+                    r = get_fair_rank(data[results_key][metric], true_bug_lines)
                     if r is not None: 
                         ranks[label][metric].append(r)
 
@@ -148,7 +149,7 @@ def main():
     ax3.legend(handles=legend_elements)
 
     plt.tight_layout()
-    plt.savefig("sbfl_comparison_charts.png", dpi=300)
+    plt.savefig(os.path.join(GRAPHS_ROOT, "sbfl_comparison.png"), dpi=300)
     print("\n✅ Visualizations saved to sbfl_comparison_charts.png\n")
 
 if __name__ == "__main__":

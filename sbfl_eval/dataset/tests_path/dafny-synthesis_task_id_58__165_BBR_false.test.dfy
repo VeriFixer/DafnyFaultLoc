@@ -6,13 +6,6 @@ method {:testEntry} HasOppositeSign(a: int, b: int) returns (result: bool)
   result := false;
 }
 
-
-method {:testEntry} HasOppositeSign(a: int, b: int) returns (result: bool)
-  ensures result <==> (a < 0 && b > 0) || (a > 0 && b < 0)
-{
-  result := (a < 0 && b > 0) || (a > 0 && b < 0);
-}
-
 method {:test} Test0() {
 var r0 := HasOppositeSign(-1, 0);
 expect r0 <==> (-1 < 0 && 0 > 0) || (-1 > 0 && 0 < 0);

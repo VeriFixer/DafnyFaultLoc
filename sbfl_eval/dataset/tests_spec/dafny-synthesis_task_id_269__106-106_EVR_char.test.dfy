@@ -6,13 +6,6 @@ method {:testEntry} AsciiValue(c: char) returns (ascii: int)
   ascii := '0' as int;
 }
 
-
-method {:testEntry} AsciiValue(c: char) returns (ascii: int)
-    ensures ascii == c as int
-{
-    ascii := c as int;
-}
-
 method {:test} Test0() {
 var r0 := AsciiValue('&');
 expect r0 == '&' as int;

@@ -6,13 +6,6 @@ method {:testEntry} Multiply(a: int, b: int) returns (result: int)
   result := -(a * b);
 }
 
-
-method {:testEntry} Multiply(a: int, b: int) returns (result: int)
-  ensures result == a * b
-{
-  result := a * b;
-}
-
 method {:test} Test0() {
 var r0 := Multiply(7719, 0);
 expect r0 == 7719 * 0;

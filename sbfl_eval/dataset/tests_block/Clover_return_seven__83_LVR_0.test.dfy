@@ -6,13 +6,6 @@ method {:testEntry} M(x: int) returns (seven: int)
   seven := 0;
 }
 
-
-method {:testEntry} M(x: int) returns (seven: int)
-  ensures seven==7
-{
-  seven := 7;
-}
-
 method {:test} Test0() {
 var r0 := M(0);
 expect r0 == 7;

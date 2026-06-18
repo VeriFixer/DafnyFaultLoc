@@ -7,14 +7,6 @@ method {:testEntry} CountNonEmptySubstrings(s: string) returns (count: int)
   count := |s| * (|s| + 1) * 2;
 }
 
-
-method {:testEntry} CountNonEmptySubstrings(s: string) returns (count: int)
-    ensures count >= 0
-    ensures count == (|s| * (|s| + 1)) / 2 // Formula for the number of non-empty substrings of a string
-{
-    count := (|s| * (|s| + 1)) / 2;
-}
-
 method {:test} Test0() {
 var r0 := CountNonEmptySubstrings("a");
 expect r0 >= 0;

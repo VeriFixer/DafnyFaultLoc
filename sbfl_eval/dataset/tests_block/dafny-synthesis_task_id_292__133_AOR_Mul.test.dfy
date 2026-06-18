@@ -7,14 +7,6 @@ method {:testEntry} Quotient(a: int, b: int) returns (result: int)
   result := a * b;
 }
 
-
-method {:testEntry} Quotient(a: int, b: int) returns (result: int)
-    requires b != 0
-    ensures result == a / b
-{
-    result := a / b;
-}
-
 method {:test} Test0() {
 expect -1 != 0, "If this check fails at runtime, the test does not meet the preconditions";
 var r0 := Quotient(-8365, -1);

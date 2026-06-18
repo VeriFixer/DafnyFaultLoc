@@ -7,18 +7,6 @@ method {:testEntry} Max(a: int, b: int) returns (maxValue: int)
   maxValue := b;
 }
 
-
-method {:testEntry} Max(a: int, b: int) returns (maxValue: int)
-    ensures maxValue == a || maxValue == b
-    ensures maxValue >= a && maxValue >= b
-{
-    if a >= b {
-        maxValue := a;
-    } else {
-        maxValue := b;
-    }
-}
-
 method {:test} Test0() {
 var r0 := Max(-1, 0);
 expect r0 == -1 || r0 == 0;

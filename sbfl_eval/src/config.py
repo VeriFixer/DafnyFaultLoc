@@ -36,6 +36,7 @@ def find_repo_root(marker: str = ".repo_sbfl_marker") -> Path:
 BASE_PATH: Path = find_repo_root()
 DATASET_ROOT: Path = BASE_PATH / "dataset"
 RESULTS_ROOT: Path = BASE_PATH / "results"
+GRAPHS_ROOT: Path = BASE_PATH / "results" / "graphs"
 
 # === test_gen_eval Structure to gather dataset from ===
 TEST_GEN_DATASET_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset"

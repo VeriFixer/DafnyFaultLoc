@@ -7,14 +7,6 @@ method {:testEntry} ClosestSmaller(n: int) returns (m: int)
   m := 0 - 1;
 }
 
-
-method {:testEntry} ClosestSmaller(n: int) returns (m: int)
-    requires n > 0
-    ensures m + 1 == n
-{
-    m := n - 1;
-}
-
 method {:test} Test0() {
 expect 1 > 0, "If this check fails at runtime, the test does not meet the preconditions";
 var r0 := ClosestSmaller(1);

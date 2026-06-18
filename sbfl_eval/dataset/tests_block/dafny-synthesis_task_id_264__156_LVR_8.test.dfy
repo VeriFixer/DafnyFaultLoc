@@ -7,14 +7,6 @@ method {:testEntry} DogYears(humanYears: int) returns (dogYears: int)
   dogYears := 8 * humanYears;
 }
 
-
-method {:testEntry} DogYears(humanYears: int) returns (dogYears: int)
-    requires humanYears >= 0
-    ensures dogYears == 7 * humanYears
-{
-    dogYears := 7 * humanYears;
-}
-
 method {:test} Test0() {
 expect 38 >= 0, "If this check fails at runtime, the test does not meet the preconditions";
 var r0 := DogYears(38);

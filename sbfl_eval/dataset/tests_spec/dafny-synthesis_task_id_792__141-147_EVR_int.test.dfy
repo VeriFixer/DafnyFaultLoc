@@ -7,14 +7,6 @@ method {:testEntry} CountLists(lists: seq<seq<int>>) returns (count: int)
   count := 0;
 }
 
-
-method {:testEntry} CountLists(lists: seq<seq<int>>) returns (count: int)
-    ensures count >= 0
-    ensures count == |lists|
-{
-    count := |lists|;
-}
-
 method {:test} Test0() {
 var seqint0 : seq<int> := [];
 var seqseqint0 : seq<seq<int>> := [seqint0];

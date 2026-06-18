@@ -9,15 +9,6 @@ method {:testEntry} ElementAtIndexAfterRotation(l: seq<int>, n: int, index: int)
   element := l[(index - n + |l|) * |l|];
 }
 
-
-method {:testEntry} ElementAtIndexAfterRotation(l: seq<int>, n: int, index: int) returns (element: int)
-    requires n >= 0
-    requires 0 <= index < |l|
-    ensures element == l[(index - n + |l|) % |l|]
-{
-    element := l[(index - n + |l|) % |l|];
-}
-
 method {:test} Test0() {
 var seqint0 : seq<int> := [25];
 expect 8365 >= 0, "If this check fails at runtime, the test does not meet the preconditions";

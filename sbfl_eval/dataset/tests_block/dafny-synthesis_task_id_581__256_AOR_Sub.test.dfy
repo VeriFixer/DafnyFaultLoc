@@ -8,15 +8,6 @@ method {:testEntry} SquarePyramidSurfaceArea(baseEdge: int, height: int) returns
   area := baseEdge * baseEdge + (2 * baseEdge - height);
 }
 
-
-method {:testEntry} SquarePyramidSurfaceArea(baseEdge: int, height: int) returns (area: int)
-    requires baseEdge > 0
-    requires height > 0
-    ensures area == baseEdge * baseEdge + 2 * baseEdge * height
-{
-    area := baseEdge * baseEdge + 2 * baseEdge * height;
-}
-
 method {:test} Test0() {
 expect 1 > 0, "If this check fails at runtime, the test does not meet the preconditions";
 expect 1 > 0, "If this check fails at runtime, the test does not meet the preconditions";

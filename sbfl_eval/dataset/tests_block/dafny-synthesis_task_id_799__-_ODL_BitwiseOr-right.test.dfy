@@ -7,14 +7,6 @@ method {:testEntry} RotateLeftBits(n: bv32, d: int) returns (result: bv32)
   result := n << d;
 }
 
-
-method {:testEntry} RotateLeftBits(n: bv32, d: int) returns (result: bv32)
-    requires 0 <= d < 32
-    ensures result == ((n << d) | (n >> (32 - d)))
-{
-    result := ((n << d) | (n >> (32 - d)));
-}
-
 method {:test} Test0() {
 expect 0 <= 31 < 32, "If this check fails at runtime, the test does not meet the preconditions";
 var r0 := RotateLeftBits((0 as bv32), 31);

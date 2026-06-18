@@ -10,17 +10,6 @@ method {:testEntry} SplitAndAppend(l: seq<int>, n: int) returns (r: seq<int>)
   r := secondPart + firstPart;
 }
 
-
-method {:testEntry} SplitAndAppend(l: seq<int>, n: int) returns (r: seq<int>)
-    requires n >= 0 && n < |l|
-    ensures |r| == |l|
-    ensures forall i :: 0 <= i < |l| ==> r[i] == l[(i + n) % |l|]
-{
-    var firstPart: seq<int> := l[..n];
-    var secondPart: seq<int> := l[n..];
-    r := secondPart + firstPart;
-}
-
 method {:test} Test0() {
 var seqint0 : seq<int> := [0, 0];
 expect 1 >= 0 && 1 < |seqint0|, "If this check fails at runtime, the test does not meet the preconditions";
