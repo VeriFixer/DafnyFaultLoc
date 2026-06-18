@@ -38,7 +38,7 @@ DATASET_ROOT: Path = BASE_PATH / "dataset"
 RESULTS_ROOT: Path = BASE_PATH / "results"
 
 # === test_gen_eval Structure to gather dataset from ===
-TEST_GEN_GROUND_TRUTH_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset" / "data"
+TEST_GEN_DATASET_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset"
 TEST_GEN_DATASET_OUT_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset_output"
 TEST_GEN_RESULTS_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "results"
 

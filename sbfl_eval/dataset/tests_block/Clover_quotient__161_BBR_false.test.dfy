@@ -1,0 +1,98 @@
+// Clover_quotient.dfy
+
+method {:testEntry} Quotient(x: nat, y: nat)
+    returns (r: int, q: int)
+  requires y != 0
+  ensures q * y + r == x && 0 <= r < y && 0 <= q
+{
+  r := x;
+  q := 0;
+  while false
+    invariant q * y + r == x && r >= 0
+    decreases r
+  {
+    r := r - y;
+    q := q + 1;
+  }
+}
+
+
+method {:testEntry} Quotient(x: nat, y:nat) returns (r:int, q:int)
+  requires y != 0
+  ensures q * y + r == x && 0 <= r < y && 0 <= q
+{
+  r:=x;
+  q:=0;
+  while y<=r
+    invariant q*y+r==x && r>=0
+    decreases r
+  {
+    r:=r-y;
+    q:=q+1;
+
+  }
+}
+
+method {:test} Test0() {
+expect 1 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(1, 1);
+expect r1 * 1 + r0 == 1 && 0 <= r0 < 1 && 0 <= r1;
+}
+
+// REPEAT 1 - TIME: 1.7707407 s
+
+method {:test} Test1() {
+expect 7721 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7721, 7721);
+expect r1 * 7721 + r0 == 7721 && 0 <= r0 < 7721 && 0 <= r1;
+}
+
+// REPEAT 2 - TIME: 2.4205998 s
+
+method {:test} Test2() {
+expect 7722 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7722, 7722);
+expect r1 * 7722 + r0 == 7722 && 0 <= r0 < 7722 && 0 <= r1;
+}
+
+// REPEAT 3 - TIME: 3.2038094 s
+
+method {:test} Test3() {
+expect 7723 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7723, 7723);
+expect r1 * 7723 + r0 == 7723 && 0 <= r0 < 7723 && 0 <= r1;
+}
+
+// REPEAT 4 - TIME: 3.9445612 s
+
+method {:test} Test4() {
+expect 7724 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7724, 7724);
+expect r1 * 7724 + r0 == 7724 && 0 <= r0 < 7724 && 0 <= r1;
+}
+
+// REPEAT 5 - TIME: 4.6385015 s
+
+method {:test} Test5() {
+expect 7725 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7725, 7725);
+expect r1 * 7725 + r0 == 7725 && 0 <= r0 < 7725 && 0 <= r1;
+}
+
+// REPEAT 6 - TIME: 5.3717459 s
+
+method {:test} Test6() {
+expect 7726 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7726, 7726);
+expect r1 * 7726 + r0 == 7726 && 0 <= r0 < 7726 && 0 <= r1;
+}
+
+// REPEAT 7 - TIME: 6.2354872 s
+
+method {:test} Test7() {
+expect 7727 != 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0, r1 := Quotient(7727, 7727);
+expect r1 * 7727 + r0 == 7727 && 0 <= r0 < 7727 && 0 <= r1;
+}
+
+// REPEAT 8 - TIME: 6.8039757 s

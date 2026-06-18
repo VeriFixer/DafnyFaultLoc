@@ -4,7 +4,7 @@ import shutil
 import re
 from src.config import (
     DATASET_ROOT,
-    TEST_GEN_GROUND_TRUTH_ROOT,
+    TEST_GEN_DATASET_ROOT,
     TEST_GEN_DATASET_OUT_ROOT,
     TEST_GEN_RESULTS_ROOT,
     BLOCK_REP,
@@ -82,14 +82,14 @@ def main():
     
     os.makedirs(DATASET_ROOT, exist_ok=True)
     
-    ground_truth_src = os.path.join(TEST_GEN_GROUND_TRUTH_ROOT, "ground_truth.json")
+    ground_truth_src = os.path.join(TEST_GEN_DATASET_ROOT, "ground_truth.json")
     ground_truth_dest = os.path.join(DATASET_ROOT, "ground_truth.json")
     
     if os.path.exists(ground_truth_src):
         shutil.copy2(ground_truth_src, ground_truth_dest)
-        print(f"✓ Copied ground_truth.json to {DATASET_ROOT}")
+        print(f"Copied ground_truth.json to {DATASET_ROOT}")
     else:
-        print(f"⚠ Warning: {ground_truth_src} not found.")
+        print(f"[WARNING]: {ground_truth_src} not found.")
 
     print("Scanning for shared programs across all strategies (max_rep=10)...")
     shared_programs = get_shared_programs_for_combo(
@@ -97,19 +97,22 @@ def main():
         strategies=strategies_list, 
         max_rep=10
     )
-    print(f"✓ Found {len(shared_programs)} highly-compatible programs.")
+    print(f"Found {len(shared_programs)} programs compatible across all strategies.")
 
     for strategy, cutoff in strategy_cutoffs.items():
         src_folder = os.path.join(TEST_GEN_DATASET_OUT_ROOT, f"selected_programs_mutants_with_tests_{strategy}", "all")
         dest_folder = os.path.join(DATASET_ROOT, f"tests_{strategy}")
         
         if not os.path.exists(src_folder):
-            print(f"⚠ Warning: Folder {src_folder} not found. Skipping strategy '{strategy}'.")
+            print(f"[WARNING]: Folder {src_folder} not found. Skipping strategy '{strategy}'.")
             continue
             
         processed_count = 0
         for file_name in os.listdir(src_folder):
-            prog_name = file_name.replace(".test.dfy", "") 
+            if not file_name.endswith(".test.dfy"):
+                continue
+
+            prog_name = file_name.replace(".test.dfy", "").split("__")[0]
             
             if prog_name in shared_programs:
                 src_file_path = os.path.join(src_folder, file_name)
@@ -118,7 +121,7 @@ def main():
                 copy_and_truncate_test_file(src_file_path, dest_file_path, cutoff)
                 processed_count += 1
                 
-        print(f"✓ Processed {processed_count} files for 'tests_{strategy}' (Cutoff: Rep {cutoff})")
+        print(f"Processed {processed_count} files for 'tests_{strategy}' (Cutoff: Rep {cutoff})")
 
 if __name__ == "__main__":
     main()
