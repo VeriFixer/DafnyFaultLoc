@@ -86,7 +86,8 @@ def main():
     cov_files = [f for f in os.listdir(RESULTS_ROOT) if f.endswith('_coverage.json')]
     
     if args.strategies:
-        cov_files = [f for f in cov_files if f.replace('_coverage.json', '') in args.strategies]
+        print(args.strategies)
+        cov_files = [f for f in cov_files if f.replace('_coverage.json', '').replace('tests_', '') in args.strategies]
 
     if not cov_files:
         print(f"Error: No files ending in '_coverage.json' found in {RESULTS_ROOT}.")

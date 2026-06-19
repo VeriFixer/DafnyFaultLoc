@@ -148,9 +148,10 @@ def main():
     legend_elements = [Patch(facecolor=colors[i], label=labels[i]) for i in range(num_approaches)]
     ax3.legend(handles=legend_elements)
 
+    GRAPHS_ROOT.mkdir(parents=True, exist_ok=True)
     plt.tight_layout()
     plt.savefig(os.path.join(GRAPHS_ROOT, "sbfl_comparison.png"), dpi=300)
-    print("\n✅ Visualizations saved to sbfl_comparison_charts.png\n")
+    print(f"\nVisualizations saved to {GRAPHS_ROOT}/sbfl_comparison_charts.png\n")
 
 if __name__ == "__main__":
     main()
