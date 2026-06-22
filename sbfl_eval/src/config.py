@@ -34,9 +34,9 @@ def find_repo_root(marker: str = ".repo_sbfl_marker") -> Path:
 
 # === Repository Structure ===
 BASE_PATH: Path = find_repo_root()
-DATASET_ROOT: Path = BASE_PATH / "dataset"
-RESULTS_ROOT: Path = BASE_PATH / "results"
-GRAPHS_ROOT: Path = BASE_PATH / "results" / "graphs"
+DATASET_ROOT: Path = BASE_PATH / "dataset_cutoff_5"
+RESULTS_ROOT: Path = BASE_PATH / "results_cutoff_5"
+GRAPHS_ROOT: Path = BASE_PATH / "results_cutoff_5" / "graphs"
 
 # === test_gen_eval Structure to gather dataset from ===
 TEST_GEN_DATASET_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset"
@@ -53,9 +53,9 @@ _DAFNY_BINARY_LOCAL: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "
 DAFNY_BINARY: Path = _DAFNY_BINARY_LOCAL if _DAFNY_BINARY_LOCAL.exists() else Path("dafny")
 
 # === Repetition cut-off for each strategy ===
-BLOCK_REP = 8
-PATH_REP = 8
-SPEC_REP = 8
+BLOCK_REP = 5
+PATH_REP = 5
+SPEC_REP = 5
 SPEC_BVA_REP = 5
 
 # === Memory Limit for Dafny/Z3 solver (MB) ===
