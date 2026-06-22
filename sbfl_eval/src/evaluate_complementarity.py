@@ -56,25 +56,33 @@ def get_fair_rank(ranked_list, target_lines):
     if not isinstance(target_lines, list):
         target_lines = [target_lines]
 
+    total_lines = len(ranked_list)
     for i, item in enumerate(ranked_list):
         if item['line'] in target_lines:
             score = item['score']
             block_start = i
-            while block_start > 0 and ranked_list[block_start - 1]['score'] == score: block_start -= 1
+            while block_start > 0 and ranked_list[block_start - 1]['score'] == score:
+                block_start -= 1
             block_end = i
-            while block_end < len(ranked_list) - 1 and ranked_list[block_end + 1]['score'] == score: block_end += 1
-            return sum(range(block_start + 1, block_end + 2)) / (block_end - block_start + 1)
-    return None
+            while block_end < len(ranked_list) - 1 and ranked_list[block_end + 1]['score'] == score:
+                block_end += 1
+            
+            fair_rank = sum(range(block_start + 1, block_end + 2)) / (block_end - block_start + 1)
+            exam_score = fair_rank / total_lines if total_lines > 0 else 0
+            return fair_rank, exam_score
+            
+    return None, None
 
-def calculate_stats(ranks_list):
+def calculate_stats(ranks_list, exams_list):
     if not ranks_list:
-        return {"top_1": 0, "top_3": 0, "top_5": 0, "mrr": 0.0, "avg_rank": 0.0}
+        return {"top_1": 0, "top_3": 0, "top_5": 0, "mrr": 0.0, "avg_rank": 0.0, "avg_exam": 0.0}
     return {
         "top_1": sum(1 for r in ranks_list if r <= 1.0),
         "top_3": sum(1 for r in ranks_list if r <= 3.0),
         "top_5": sum(1 for r in ranks_list if r <= 5.0),
         "mrr": sum(1.0 / r for r in ranks_list) / len(ranks_list),
-        "avg_rank": sum(ranks_list) / len(ranks_list)
+        "avg_rank": sum(ranks_list) / len(ranks_list),
+        "avg_exam": sum(exams_list) / len(exams_list)
     }
 
 def main():
@@ -100,13 +108,11 @@ def main():
 
     with open(os.path.join(DATASET_ROOT, "ground_truth.json"), 'r')  as f: truth_data = json.load(f)
 
-    # 1. Load Data
     all_cov_data = {}
     for i, path in enumerate(file_paths):
         with open(path, 'r') as f:
             all_cov_data[labels[i]] = json.load(f)
 
-    # 2. Merge Coverage Data
     merged_data = {}
     all_filenames = set()
     for data in all_cov_data.values():
@@ -117,47 +123,50 @@ def main():
         for label, cov_dict in all_cov_data.items():
             if fname in cov_dict:
                 for test_name, test_info in cov_dict[fname].items():
-                    # Prefix/suffix the test name to avoid collisions across files
                     merged_data[fname][f"{test_name}_{label}"] = test_info
 
     if args.save_merged:
         with open(args.save_merged, 'w') as f: json.dump(merged_data, f, indent=2)
-        print(f"💾 Saved merged coverage file to {args.save_merged}")
+        print(f"Saved merged coverage file to {args.save_merged}")
 
-    # 3. Run SBFL Pipelines
     metrics = ["ochiai", "tarantula", "dstar"]
-    approaches = labels + ["Combined (Merged)"]
+    approaches = labels + ["Combined"]
     ranks = {app: {m: [] for m in metrics} for app in approaches}
+    exams = {app: {m: [] for m in metrics} for app in approaches}
 
-    print("🔄 Processing and ranking files...")
+    print("Processing and ranking files...")
     for filename, true_bug_lines in truth_data.items():
         cov_key = filename.replace('.dfy', '.test.dfy')
         
-        # Calculate for individual approaches
         for label in labels:
             scores = calculate_sbfl_for_file(all_cov_data[label].get(cov_key, {}))
             for m in metrics:
-                r = get_fair_rank(scores.get(m, []), true_bug_lines)
-                if r is not None: ranks[label][m].append(r)
+                r, e = get_fair_rank(scores.get(m, []), true_bug_lines)
+                if r is not None:
+                    ranks[label][m].append(r)
+                    exams[label][m].append(e)
 
-        # Calculate for Combined
         c_scores = calculate_sbfl_for_file(merged_data.get(cov_key, {}))
         for m in metrics:
-            rc = get_fair_rank(c_scores.get(m, []), true_bug_lines)
-            if rc is not None: ranks["Combined (Merged)"][m].append(rc)
+            rc, ec = get_fair_rank(c_scores.get(m, []), true_bug_lines)
 
-    # 4. Print Comparison Table
+            if rc is not None: 
+                ranks["Combined"][m].append(rc)
+                exams["Combined"][m].append(ec)
+
+
     print("\n" + "="*95)
     print(f" 🧩 SBFL COMPLEMENTARITY ANALYSIS ({len(labels)} inputs)")
     print("="*95)
-    print(f"{'Metric':<10} | {'Configuration':<20} | {'Top-1':<7} | {'Top-3':<7} | {'Top-5':<7} | {'MRR':<7} | {'Avg Rank':<8}")
+    print(f"{'Metric':<10} | {'Configuration':<20} | {'Top-1':<7} | {'Top-3':<7} | {'Top-5':<7} | {'MRR':<7} | {'Avg Rank':<8} | {'EXAM (%)':<8}")
     print("-" * 95)
 
     for m in metrics:
         for app in approaches:
-            stats = calculate_stats(ranks[app][m])
+            stats = calculate_stats(ranks[app][m], exams[app][m])
             m_str = m.capitalize() if app == labels[0] else ""
-            print(f"{m_str:<10} | {app:<20} | {stats['top_1']:<7} | {stats['top_3']:<7} | {stats['top_5']:<7} | {stats['mrr']:<7.3f} | {stats['avg_rank']:<8.2f}")
+            exam_pct = stats['avg_exam'] * 100
+            print(f"{m_str:<10} | {app:<20} | {stats['top_1']:<7} | {stats['top_3']:<7} | {stats['top_5']:<7} | {stats['mrr']:<7.3f} | {stats['avg_rank']:<8.2f} | {exam_pct:<8.2f}")
         print("-" * 95)
 
 if __name__ == "__main__":

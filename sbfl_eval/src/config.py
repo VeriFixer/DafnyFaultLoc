@@ -31,12 +31,14 @@ def find_repo_root(marker: str = ".repo_sbfl_marker") -> Path:
         f"Could not find '{marker}'. Ensure you're running inside the sbfl_eval repo."
     )
 
+CUTOFF_VALUE = 10
 
 # === Repository Structure ===
 BASE_PATH: Path = find_repo_root()
-DATASET_ROOT: Path = BASE_PATH / "dataset_cutoff_5"
-RESULTS_ROOT: Path = BASE_PATH / "results_cutoff_5"
-GRAPHS_ROOT: Path = BASE_PATH / "results_cutoff_5" / "graphs"
+DATASET_ROOT: Path = BASE_PATH / f"dataset"
+RESULTS_ROOT: Path = BASE_PATH / f"results"
+GRAPHS_ROOT: Path = BASE_PATH / f"results" / "graphs"
+TABLES_ROOT: Path = BASE_PATH / f"results" / "tables"
 
 # === test_gen_eval Structure to gather dataset from ===
 TEST_GEN_DATASET_ROOT: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "Evaluation" / "dataset"
@@ -53,10 +55,10 @@ _DAFNY_BINARY_LOCAL: Path = BASE_PATH.parent / "external" / "dafny_test_gen" / "
 DAFNY_BINARY: Path = _DAFNY_BINARY_LOCAL if _DAFNY_BINARY_LOCAL.exists() else Path("dafny")
 
 # === Repetition cut-off for each strategy ===
-BLOCK_REP = 5
-PATH_REP = 5
-SPEC_REP = 5
-SPEC_BVA_REP = 5
+BLOCK_REP = CUTOFF_VALUE
+PATH_REP = CUTOFF_VALUE
+SPEC_REP = CUTOFF_VALUE
+SPEC_BVA_REP = CUTOFF_VALUE
 
 # === Memory Limit for Dafny/Z3 solver (MB) ===
 # Default: 75% of total system RAM. Override with MT_MAX_MEMORY_MB env var.

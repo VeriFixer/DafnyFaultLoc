@@ -1,5 +1,5 @@
 import json
-import argparse
+import csv
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -7,13 +7,15 @@ import numpy as np
 from src.config import (
     DATASET_ROOT,
     RESULTS_ROOT,
-    GRAPHS_ROOT
+    GRAPHS_ROOT,
+    TABLES_ROOT
 )
 
 def get_fair_rank(ranked_list, target_lines):
     if not isinstance(target_lines, list):
         target_lines = [target_lines]
 
+    total_lines = len(ranked_list)
     for i, item in enumerate(ranked_list):
         if item['line'] in target_lines:
             score = item['score']
@@ -23,18 +25,23 @@ def get_fair_rank(ranked_list, target_lines):
             block_end = i
             while block_end < len(ranked_list) - 1 and ranked_list[block_end + 1]['score'] == score:
                 block_end += 1
-            return sum(range(block_start + 1, block_end + 2)) / (block_end - block_start + 1)
-    return None
+            
+            fair_rank = sum(range(block_start + 1, block_end + 2)) / (block_end - block_start + 1)
+            exam_score = fair_rank / total_lines if total_lines > 0 else 0
+            return fair_rank, exam_score
+            
+    return None, None
 
-def calculate_stats(ranks_list):
+def calculate_stats(ranks_list, exams_list):
     if not ranks_list:
-        return {"top_1": 0, "top_3": 0, "top_5": 0, "mrr": 0.0, "avg_rank": 0.0, "total": 0}
+        return {"top_1": 0, "top_3": 0, "top_5": 0, "mrr": 0.0, "avg_rank": 0.0, "avg_exam": 0.0, "total": 0}
     return {
         "top_1": sum(1 for r in ranks_list if r <= 1.0),
         "top_3": sum(1 for r in ranks_list if r <= 3.0),
         "top_5": sum(1 for r in ranks_list if r <= 5.0),
         "mrr": sum(1.0 / r for r in ranks_list) / len(ranks_list),
         "avg_rank": sum(ranks_list) / len(ranks_list),
+        "avg_exam": sum(exams_list) / len(exams_list),
         "total": len(ranks_list)
     }
 
@@ -43,14 +50,12 @@ def main():
         print(f"Error: Directory '{RESULTS_ROOT}' not found.")
         sys.exit(1)
 
-    # Automatically find all _results.json files
     result_files = [f for f in os.listdir(RESULTS_ROOT) if f.endswith('_results.json')]
     
     if not result_files:
         print(f"Error: No files ending in '_results.json' found in {RESULTS_ROOT}.")
         sys.exit(1)
 
-    # Extract labels (everything before _results.json)
     labels = [f.replace('_results.json', '') for f in result_files]
     file_paths = [os.path.join(RESULTS_ROOT, f) for f in result_files]
 
@@ -61,6 +66,7 @@ def main():
 
     metrics = ["ochiai", "tarantula", "dstar"]
     ranks = {label: {m: [] for m in metrics} for label in labels}
+    exams = {label: {m: [] for m in metrics} for label in labels}
     stats = {label: {} for label in labels}
 
     # Extract ranks for all approaches
@@ -73,25 +79,53 @@ def main():
             results_key = filename.replace('.dfy', '.test.dfy')
             if results_key in data:
                 for metric in metrics:
-                    r = get_fair_rank(data[results_key][metric], true_bug_lines)
+                    r, e = get_fair_rank(data[results_key][metric], true_bug_lines)
                     if r is not None: 
                         ranks[label][metric].append(r)
+                        exams[label][metric].append(e)
 
     # --- CONSOLE TABLE OUTPUT ---
     print("\n" + "="*95)
     print(f" 🐛 SBFL APPROACH COMPARISON ({len(labels)} Methods)")
     print("="*95)
-    print(f"{'Metric':<10} | {'Approach':<20} | {'Top-1':<7} | {'Top-3':<7} | {'Top-5':<7} | {'MRR':<7} | {'Avg Rank':<8}")
+    print(f"{'Metric':<14} | {'Approach':<20} | {'Top-1':<7} | {'Top-3':<7} | {'Top-5':<7} | {'MRR':<7} | {'Avg Rank':<8} | {'EXAM (%)':<8}")
     print("-" * 95)
+
+    csv_rows = [["Metric", "Approach", "Top-1", "Top-3", "Top-5", "MRR", "Avg Rank", "EXAM (%)"]]
+    latex_rows = []
 
     for metric in metrics:
         for label in labels:
-            s = calculate_stats(ranks[label][metric])
+            s = calculate_stats(ranks[label][metric], exams[label][metric])
             stats[label][metric] = s
             
             m_label = metric.capitalize() if label == labels[0] else ""
-            print(f"{m_label:<10} | {label:<20} | {s['top_1']:<7} | {s['top_3']:<7} | {s['top_5']:<7} | {s['mrr']:<7.3f} | {s['avg_rank']:<8.2f}")
-        print("-" * 95)
+            exam_pct = s['avg_exam'] * 100
+            
+            print(f"{m_label:<14} | {label:<20} | {s['top_1']:<7} | {s['top_3']:<7} | {s['top_5']:<7} | {s['mrr']:<7.3f} | {s['avg_rank']:<8.2f} | {exam_pct:<8.2f}")
+            
+            csv_rows.append([metric.capitalize(), label, s['top_1'], s['top_3'], s['top_5'], f"{s['mrr']:.3f}", f"{s['avg_rank']:.2f}", f"{exam_pct:.2f}"])
+            latex_rows.append(f"{metric.capitalize().replace('_', '\\_')} & {label} & {s['top_1']} & {s['top_3']} & {s['top_5']} & {s['mrr']:.3f} & {s['avg_rank']:.2f} & {exam_pct:.2f}\\% \\\\")
+        print("-" * 108)
+
+    # --- FILE EXPORTS ---
+    TABLES_ROOT.mkdir(parents=True, exist_ok=True)
+    csv_path = os.path.join(TABLES_ROOT, "sbfl_table.csv")
+    with open(csv_path, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(csv_rows)
+        
+    latex_path = os.path.join(TABLES_ROOT, "sbfl_table.tex")
+    with open(latex_path, 'w') as f:
+        f.write("\\begin{table}[htbp]\n\\centering\n")
+        f.write("\\begin{tabular}{l l c c c c c c}\n\\hline\n")
+        f.write("Metric & Approach & Top-1 & Top-3 & Top-5 & MRR & Avg Rank & EXAM (\\%) \\\\\n\\hline\n")
+        for row in latex_rows:
+            f.write(row + "\n")
+        f.write("\\hline\n\\end{tabular}\n")
+        f.write("\\caption{SBFL Approach Comparison}\n\\label{tab:sbfl_comparison}\n\\end{table}\n")
+
+    print(f"\nTables saved to {csv_path} and {latex_path}")
 
     # --- VISUALIZATIONS ---
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 6))
