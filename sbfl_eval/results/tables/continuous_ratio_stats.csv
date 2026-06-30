@@ -1,0 +1,5 @@
+Approach,N (Mutants),Spearman Rho (MRR),P-Value (MRR),Spearman Rho (EXAM),P-Value (EXAM)
+spec_bva,1401,0.049,0.067,0.402,0.000
+spec,1356,0.007,0.784,0.379,0.000
+path,1355,0.051,0.059,0.413,0.000
+block,1353,0.055,0.043,0.363,0.000

@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\caption{Fault Localisation Performance by Test Generation Strategy and Metric}
+\label{tab:all_metrics_results}
+\begin{tabular}{l l c c c c c c}
+\hline
+\textbf{Metric} & \textbf{Strategy} & \textbf{Top-1 (\%)} & \textbf{Top-3 (\%)} & \textbf{Top-5 (\%)} & \textbf{MRR} & \textbf{Avg Rank} & \textbf{EXAM (\%)} \\
+\hline
+Ochiai & Block & 37.6\% & 91.1\% & 97.9\% & 0.652 & 1.96 & 68.41\% \\
+ & Path & 41.2\% & 91.4\% & 98.0\% & 0.677 & 1.89 & 66.29\% \\
+ & Spec & 44.0\% & 90.9\% & 97.1\% & 0.690 & 1.94 & 66.81\% \\
+ & SpecBva & 46.0\% & 91.4\% & 97.2\% & 0.707 & 1.84 & 64.32\% \\
+\hline
+Tarantula & Block & 37.0\% & 89.2\% & 97.6\% & 0.640 & 2.04 & 69.24\% \\
+ & Path & 40.1\% & 88.6\% & 97.5\% & 0.659 & 2.00 & 67.78\% \\
+ & Spec & 42.4\% & 88.6\% & 96.8\% & 0.674 & 2.01 & 68.16\% \\
+ & SpecBva & 44.3\% & 88.2\% & 97.2\% & 0.685 & 1.96 & 66.25\% \\
+\hline
+Dstar & Block & 36.7\% & 83.4\% & 92.8\% & 0.619 & 2.35 & 72.46\% \\
+ & Path & 37.2\% & 79.9\% & 92.5\% & 0.616 & 2.48 & 73.27\% \\
+ & Spec & 38.3\% & 79.4\% & 90.6\% & 0.619 & 2.49 & 74.60\% \\
+ & SpecBva & 40.5\% & 79.4\% & 91.9\% & 0.635 & 2.39 & 72.54\% \\
+\hline
+\end{tabular}
+\end{table}

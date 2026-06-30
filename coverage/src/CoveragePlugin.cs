@@ -178,6 +178,29 @@ public sealed class CoverageTraceBuilder {
         } else if (stmt is BlockStmt blockStmt) {
             HandleBlock(blockStmt);
         }
+
+        else if (stmt is MatchStmt matchStmt) {
+            if (matchStmt.Cases != null) {
+                foreach (var matchCase in matchStmt.Cases) {
+                    if (matchCase.Body != null) {
+                        foreach (var caseStmt in matchCase.Body) {
+                            HandleStatement(caseStmt);
+                        }
+                    }
+                }
+            }
+        }
+        else if (stmt is AlternativeStmt altStmt) {
+            if (altStmt.Alternatives != null) {
+                foreach (var alt in altStmt.Alternatives) {
+                    if (alt.Body != null) {
+                        foreach (var altStmtBody in alt.Body) {
+                            HandleStatement(altStmtBody);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void InjectLoopVariable(WhileStmt whileStmt) {

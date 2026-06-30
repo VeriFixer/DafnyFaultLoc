@@ -4,7 +4,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
-from scipy.stats import spearmanr
+from scipy.stats import spearmanr, mannwhitneyu
 
 from src.utils.config import (
     DATASET_ROOT,
@@ -67,7 +67,7 @@ def main():
     labels = [f.replace('_results.json', '') for f in result_files]
 
     # Store continuous data: approach -> {ratios: [], exams: [], mrrs: []}
-    continuous_data = {label: {'ratios': [], 'exams': [], 'mrrs': []} for label in labels}
+    continuous_data = {label: {'ratios': [], 'exams': [], 'mrrs': [], 'top1s': []} for label in labels}
 
     # Debug trackers
     missing_cov_files = 0
@@ -100,10 +100,12 @@ def main():
                 if rank is not None and total_tests > 0 and fails > 0:
                     fail_ratio = fails / total_tests
                     mrr = 1.0 / rank
+                    is_top_1 = 1 if rank <= 1.0 else 0
                     
                     continuous_data[label]['ratios'].append(fail_ratio)
-                    continuous_data[label]['exams'].append(exam * 100) # Store EXAM as a percentage
+                    continuous_data[label]['exams'].append(exam * 100)
                     continuous_data[label]['mrrs'].append(mrr)
+                    continuous_data[label]['top1s'].append(is_top_1)
 
     if missing_cov_files > 0:
         print(f"⚠️ WARNING: Could not find the coverage JSON file for {missing_cov_files} items.")
@@ -139,6 +141,21 @@ def main():
                 
                 print(f"{label:<20} | {len(ratios):<12} | {rho_mrr:>8.3f} (p={p_mrr:.3f}) | {rho_exam:>8.3f} (p={p_exam:.3f})")
                 writer.writerow([label, len(ratios), f"{rho_mrr:.3f}", f"{p_mrr:.3f}", f"{rho_exam:.3f}", f"{p_exam:.3f}"])
+            
+                ratios_top1_success = [ratios[k] for k in range(len(ratios)) if continuous_data[label]['top1s'][k] == 1]
+                ratios_top1_fail = [ratios[k] for k in range(len(ratios)) if continuous_data[label]['top1s'][k] == 0]
+
+                if len(ratios_top1_success) > 0 and len(ratios_top1_fail) > 0:
+                    u_stat, p_mw = mannwhitneyu(ratios_top1_success, ratios_top1_fail, alternative='two-sided')
+                    
+                    n1 = len(ratios_top1_success)
+                    n2 = len(ratios_top1_fail)
+                    rank_biserial = 1 - (2 * u_stat) / (n1 * n2)
+                    
+                    print(f"   ↳ Top-1 vs Ratio (Rank-Biserial Effect): {rank_biserial:.3f} (p={p_mw:.3f})")
+                else:
+                    print("   ↳ Not enough variation in Top-1 to run Mann-Whitney U test.")
+            
             else:
                 print(f"{label:<20} | {len(ratios):<12} | Insufficient data for correlation.")
 

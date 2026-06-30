@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DafnyTestCoverage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e25f802ace3ab02fcba8b5575587ee9e5ca5213")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0508d0f0d169ea57dc93725edbca85825a0b9875")]
 [assembly: System.Reflection.AssemblyProductAttribute("DafnyTestCoverage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DafnyTestCoverage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -17,7 +17,8 @@ from src.utils.config import (
     PLUGIN_PATH,
     RUNTIME_PATH,
     EXTERN_PATH,
-    DAFNY_MAX_MEMORY_MB
+    DAFNY_MAX_MEMORY_MB,
+    TIMEOUT
 )
 
 def calculate_file_metrics(file_data):
@@ -75,7 +76,6 @@ def calculate_file_metrics(file_data):
 def run_coverage_fast(dafny_file, dafny_cmd):
     """The fast path: Attempts to run all tests in the file at once in a sandbox."""
     
-    # FIX 1: Sandbox the execution in a temp directory to prevent .dll/.pdb pollution
     with tempfile.TemporaryDirectory() as temp_dir:
         filename = os.path.basename(dafny_file)
         temp_dfy_path = os.path.join(temp_dir, filename)
@@ -84,24 +84,28 @@ def run_coverage_fast(dafny_file, dafny_cmd):
         cmd = [
             dafny_cmd, "test", temp_dfy_path, 
             RUNTIME_PATH, EXTERN_PATH,
-            f"--plugin:{PLUGIN_PATH},max_iter=10000",
+            f"--plugin:{PLUGIN_PATH},max_iter=5000",
             "--no-verify", "--allow-warnings",
             f"--solver-option:O:memory_max_size={DAFNY_MAX_MEMORY_MB}"
         ]
         
         try:
-            # Note: cwd=temp_dir ensures all Dafny background artifacts stay in the temp folder
-            result = subprocess.run(cmd, capture_output=True, text=True, cwd=temp_dir)
+            result = subprocess.run(cmd, capture_output=True, text=True, cwd=temp_dir, timeout=TIMEOUT)
             output = result.stdout + result.stderr
         except FileNotFoundError:
             print(f"\n[ERROR] Could not find executable at: '{dafny_cmd}'")
             sys.exit(1)
+        except subprocess.TimeoutExpired as e:
+            output = ""
+            if e.stdout:
+                output += e.stdout.decode('utf-8', errors='ignore')
+            if e.stderr:
+                output += e.stderr.decode('utf-8', errors='ignore')
+            print(f"\n[ERROR] Timedout: '{filename}'")
+            return None
 
-    # FIX 2: Correctly trigger the fallback for native crashes
-    # If it crashes before emitting coverage, or throws an unhandled exception, trigger isolation.
-    # (If it's a true syntax error, isolation will safely process it and return {} anyway).
     if "Unhandled exception" in output or (result.returncode != 0 and "COVERAGE_LINE" not in output):
-        return None  # Signal the wrapper to use the fallback
+        return None
 
     coverage_data = {}
     current_test = None

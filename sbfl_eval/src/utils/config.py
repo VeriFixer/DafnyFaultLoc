@@ -69,3 +69,5 @@ DAFNY_MAX_MEMORY_MB: int = int(os.environ.get(
     "MT_MAX_MEMORY_MB",
     str(int(_total_ram_mb * 0.75/ MAX_JOBS)),
 ))
+
+TIMEOUT = 600

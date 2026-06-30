@@ -218,7 +218,7 @@ def main():
     x_labels = [m.capitalize() for m in metrics]
 
     plot_configs = {
-        "top_1": {"title": "Top-1 Accuracy Across Similarity Coefficients", "ylabel": "Top-1 Accuracy (%)"},
+        "top_1_pct": {"title": "Top-1 Accuracy Across Similarity Coefficients", "ylabel": "Top-1 Accuracy (%)"},
         "top_3": {"title": "Top-3 Accuracy Across Similarity Coefficients", "ylabel": "Top-3 Accuracy (Count)"},
         "top_5": {"title": "Top-5 Accuracy Across Similarity Coefficients", "ylabel": "Top-5 Accuracy (Count)"},
         "mrr": {"title": "Mean Reciprocal Rank Across Similarity Coefficients", "ylabel": "MRR (Higher is Better)"},
