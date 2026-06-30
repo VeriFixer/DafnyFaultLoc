@@ -4,7 +4,7 @@ This plugin returns the test coverage of each test over a Dafny program.
 
 ## Usage
 
-In the root folder (`DafnyTestCoverage`) run:
+Inside the `coverage` folder run:
 
 ```bash
 python3 run/coverage.py example/example.dfy

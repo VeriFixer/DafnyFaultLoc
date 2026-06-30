@@ -1,3 +1,5 @@
 psutil
 tqdm
 matplotlib
+scipy
+seaborn
