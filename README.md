@@ -10,9 +10,9 @@ While software verification offers strong mathematical guarantees of correctness
 
 ## Key Contributions & Findings
 
-* **DSpec2Test (Submodule):** A novel specification-driven test generator for Dafny that uses Disjunctive Normal Form (DNF) for Equivalence Class Partitioning and Boundary Value Analysis (BVA). Evaluated on the [DafnyBench](https://github.com/sun-wendy/DafnyBench) dataset, this black-box approach (*SpecBva*) killed **91.5%** of realistically-killable mutants, outperforming traditional white-box approaches.
+* **[DSpec2Test](https://github.com/VeriFixer/DSpec2Test) (Submodule):** A novel specification-driven test generator for Dafny that uses Disjunctive Normal Form (DNF) for Equivalence Class Partitioning and Boundary Value Analysis (BVA). Evaluated on the [DafnyBench](https://github.com/sun-wendy/DafnyBench) dataset, this black-box approach (*SpecBva*) killed **91.5%** of realistically-killable mutants, outperforming traditional white-box approaches.
 
-* **Custom Code Coverage Plugin:** The first per-test code coverage plugin for Dafny, designed to seamlessly handle infinite loops and recursive calls.
+* **Custom Code Coverage Plugin:** The first per-test code coverage plugin for Dafny, designed to seamlessly handle infinite loops and recursive calls. Exact information on how to run it can be found [here](https://github.com/VeriFixer/DafnyFaultLoc/blob/main/coverage/README.md).
 
 * **SBFL vs. LLM Evaluation:** In our SBFL evaluation, the combination of black-box (*SpecBva*) and white-box testing paired with the Ochiai coefficient yielded the best results (46.5% Top-1 accuracy). However, our non-deterministic LLM-based approach (using `gpt-5-mini`) drastically outperformed SBFL on complex codebases, achieving an Exact Match of ~75% and an Any Match exceeding 90%.
 
