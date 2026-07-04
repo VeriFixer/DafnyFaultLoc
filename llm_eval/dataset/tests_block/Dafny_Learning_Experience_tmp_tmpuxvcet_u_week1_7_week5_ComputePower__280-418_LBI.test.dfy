@@ -1,0 +1,120 @@
+function Power(n: nat): nat
+{
+  if n == 0 then
+    1
+  else
+    2 * Power(n - 1)
+}
+
+method {:testEntry} CalcPower(n: nat) returns (p: nat)
+  ensures p == 2 * n
+{
+  p := 2 * n;
+}
+
+method {:testEntry} ComputePower(n: nat) returns (p: nat)
+  ensures p == Power(n)
+{
+  p := 1;
+  var i := 0;
+  while i != n
+    invariant 0 <= i <= n
+    invariant p * Power(n - i) == Power(n)
+  {
+    break;
+    p := CalcPower(p);
+    i := i + 1;
+  }
+}
+
+
+method {:test} Test0() {
+var r0 := CalcPower(2437);
+expect r0 == 2 * 2437;
+}
+method {:test} Test1() {
+var r0 := ComputePower(2);
+expect r0 == Power(2);
+}
+
+method {:test} Test2() {
+var r0 := CalcPower(2438);
+expect r0 == 2 * 2438;
+}
+method {:test} Test3() {
+var r0 := ComputePower(5);
+expect r0 == Power(5);
+}
+
+method {:test} Test4() {
+var r0 := CalcPower(2439);
+expect r0 == 2 * 2439;
+}
+method {:test} Test5() {
+var r0 := ComputePower(6);
+expect r0 == Power(6);
+}
+
+method {:test} Test6() {
+var r0 := CalcPower(2440);
+expect r0 == 2 * 2440;
+}
+method {:test} Test7() {
+var r0 := ComputePower(7);
+expect r0 == Power(7);
+}
+
+method {:test} Test8() {
+var r0 := CalcPower(2441);
+expect r0 == 2 * 2441;
+}
+method {:test} Test9() {
+var r0 := ComputePower(8);
+expect r0 == Power(8);
+}
+
+method {:test} Test10() {
+var r0 := CalcPower(2442);
+expect r0 == 2 * 2442;
+}
+method {:test} Test11() {
+var r0 := ComputePower(9);
+expect r0 == Power(9);
+}
+
+method {:test} Test12() {
+var r0 := CalcPower(2443);
+expect r0 == 2 * 2443;
+}
+method {:test} Test13() {
+var r0 := ComputePower(10);
+expect r0 == Power(10);
+}
+
+method {:test} Test14() {
+var r0 := CalcPower(2444);
+expect r0 == 2 * 2444;
+}
+method {:test} Test15() {
+var r0 := ComputePower(11);
+expect r0 == Power(11);
+}
+
+method {:test} Test16() {
+var r0 := CalcPower(2445);
+expect r0 == 2 * 2445;
+}
+method {:test} Test17() {
+var r0 := ComputePower(12);
+expect r0 == Power(12);
+}
+
+method {:test} Test18() {
+var r0 := CalcPower(2446);
+expect r0 == 2 * 2446;
+}
+method {:test} Test19() {
+var r0 := ComputePower(13);
+expect r0 == Power(13);
+}
+

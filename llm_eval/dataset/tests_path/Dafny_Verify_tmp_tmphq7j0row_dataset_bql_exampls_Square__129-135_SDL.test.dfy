@@ -1,0 +1,80 @@
+method {:testEntry} square(n: int) returns (r: int)
+  requires 0 <= n
+  ensures r == n * n
+{
+  var x: int;
+  var i: int;
+  r := 0;
+  x := 1;
+  while i < n
+    invariant i <= n
+    invariant r == i * i
+    invariant x == 2 * i + 1
+  {
+    r := r + x;
+    x := x + 2;
+    i := i + 1;
+  }
+}
+
+
+method {:test} Test0() {
+expect 0 <= 0, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(0);
+expect r0 == 0 * 0;
+}
+
+method {:test} Test1() {
+expect 0 <= 1, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(1);
+expect r0 == 1 * 1;
+}
+
+method {:test} Test2() {
+expect 0 <= 2, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(2);
+expect r0 == 2 * 2;
+}
+
+method {:test} Test3() {
+expect 0 <= 3, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(3);
+expect r0 == 3 * 3;
+}
+
+method {:test} Test4() {
+expect 0 <= 4, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(4);
+expect r0 == 4 * 4;
+}
+
+method {:test} Test5() {
+expect 0 <= 5, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(5);
+expect r0 == 5 * 5;
+}
+
+method {:test} Test6() {
+expect 0 <= 6, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(6);
+expect r0 == 6 * 6;
+}
+
+method {:test} Test7() {
+expect 0 <= 7, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(7);
+expect r0 == 7 * 7;
+}
+
+method {:test} Test8() {
+expect 0 <= 8, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(8);
+expect r0 == 8 * 8;
+}
+
+method {:test} Test9() {
+expect 0 <= 9, "If this check fails at runtime, the test does not meet the preconditions";
+var r0 := square(9);
+expect r0 == 9 * 9;
+}
+

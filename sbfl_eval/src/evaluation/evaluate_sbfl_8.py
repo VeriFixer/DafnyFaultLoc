@@ -115,7 +115,7 @@ def get_fair_rank(ranked_list, target_lines):
             
     return None, None
 
-def get_qualified_files(folder_path, threshold=5):
+def get_qualified_files(folder_path, threshold=8):
     qualified = set()
     dfy_files = glob.glob(os.path.join(folder_path, "*.dfy"))
     for f in dfy_files:

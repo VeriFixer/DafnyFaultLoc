@@ -1,0 +1,27 @@
+{
+    "no_tests": {},
+    "all_tests": {
+        "path": {
+            "gpt-5-mini": {
+                "files_processed": 498,
+                "input_tokens": 734808.6666666659,
+                "output_tokens": 33179.66666666668,
+                "total_cost_usd": 1.1994375000000002,
+                "time_seconds": 8706.19
+            },
+            "total_strategy_time": 8706.19
+        },
+        "spec_bva": {
+            "gpt-5-mini": {
+                "files_processed": 498,
+                "input_tokens": 801614.0000000001,
+                "output_tokens": 32988.66666666667,
+                "total_cost_usd": 1.1608108333333331,
+                "time_seconds": 8848.58
+            },
+            "total_strategy_time": 8848.58
+        },
+        "total_experiment_time": 17554.77
+    },
+    "total_execution_time": 17554.77
+}

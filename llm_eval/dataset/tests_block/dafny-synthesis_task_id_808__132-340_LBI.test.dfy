@@ -1,0 +1,77 @@
+method {:testEntry} ContainsK(s: seq<int>, k: int) returns (result: bool)
+  ensures result <==> k in s
+{
+  result := false;
+  for i := 0 to |s|
+    invariant 0 <= i <= |s|
+    invariant result <==> exists j :: 0 <= j < i && s[j] == k
+  {
+    break;
+    if s[i] == k {
+      result := true;
+      break;
+    }
+  }
+}
+
+
+method {:test} Test0() {
+var seqint0 : seq<int> := [0, 0, 0, 0, 0, 0, 0, 0, 26];
+var r0 := ContainsK(seqint0, 26);
+expect r0 <==> 26 in seqint0;
+}
+
+method {:test} Test1() {
+var seqint0 : seq<int> := [0, 0, 0, 0, 0, 0, 27];
+var r0 := ContainsK(seqint0, 27);
+expect r0 <==> 27 in seqint0;
+}
+
+method {:test} Test2() {
+var seqint0 : seq<int> := [28, 39];
+var r0 := ContainsK(seqint0, 28);
+expect r0 <==> 28 in seqint0;
+}
+
+method {:test} Test3() {
+var seqint0 : seq<int> := [45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 29];
+var r0 := ContainsK(seqint0, 29);
+expect r0 <==> 29 in seqint0;
+}
+
+method {:test} Test4() {
+var seqint0 : seq<int> := [32, 68, 65];
+var r0 := ContainsK(seqint0, 32);
+expect r0 <==> 32 in seqint0;
+}
+
+method {:test} Test5() {
+var seqint0 : seq<int> := [72];
+var r0 := ContainsK(seqint0, 72);
+expect r0 <==> 72 in seqint0;
+}
+
+method {:test} Test6() {
+var seqint0 : seq<int> := [0, 0, 0, 0, 33, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4];
+var r0 := ContainsK(seqint0, 33);
+expect r0 <==> 33 in seqint0;
+}
+
+method {:test} Test7() {
+var seqint0 : seq<int> := [30, 3, 0, 0, 0, 0, 0, 8, 0, 6, 0, 0, 0, 0, 0, 0, 0, 10];
+var r0 := ContainsK(seqint0, 30);
+expect r0 <==> 30 in seqint0;
+}
+
+method {:test} Test8() {
+var seqint0 : seq<int> := [0, 112, 0, 0, 31, 108];
+var r0 := ContainsK(seqint0, 31);
+expect r0 <==> 31 in seqint0;
+}
+
+method {:test} Test9() {
+var seqint0 : seq<int> := [123, 113, 0, 0, 0, 0, 0, 117, 0, 114, 0, 0, 0, 0, 0, 0, 0, 34, 118];
+var r0 := ContainsK(seqint0, 34);
+expect r0 <==> 34 in seqint0;
+}
+

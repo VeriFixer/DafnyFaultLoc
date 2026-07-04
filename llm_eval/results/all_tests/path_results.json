@@ -1,0 +1,4090 @@
+{
+    "dafny-synthesis_task_id_445__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "The loop body assigns result and i to themselves (lines 13-14) so it neither appends a[i]*b[i] to result nor increments i, preventing progress and producing incorrect output."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__123_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop in add_by_inc uses the wrong condition 'while i >= y' instead of 'while i < y', causing the loop to execute incorrectly (and break the decreases/invariant reasoning)."
+        }
+    },
+    "dafny-synthesis_task_id_267__-_ODL_Mul-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body adds i instead of i*i, so it sums the odd numbers rather than the squares of the odd numbers required by the postcondition."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Fine_Tune_Examples_error_data_completion_11__123-244_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "An unconditional 'break' on line 11 exits the loop before j and i are updated, leaving j == 0 and violating the postcondition j == 2 * x."
+        }
+    },
+    "dafny-synthesis_task_id_113__236_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The condition is 'if true', so the then-branch always executes (setting result false) instead of checking whether the string is empty (e.g., using '|s| == 0') and running the character-check loop for non-empty strings."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__402_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop uses 'while true', causing an infinite loop; the condition should depend on m (e.g., 'while m > 0') so the loop terminates after decrementing m to zero."
+        }
+    },
+    "dafny-synthesis_task_id_445__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "Inside the loop the code overwrites result with a single-element sequence (result := [a[i] * b[i]]) and sets i := 1 instead of appending to result and incrementing i (i := i + 1), so the loop does not build the full product sequence correctly."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__416_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The inner loop guard is 'while s == r + 1' which is wrong (it prevents the loop from running); it should be a '<' (e.g., 'while s < r + 1') so the repeated addition runs to compute the multiplication."
+        }
+    },
+    "dafny-synthesis_task_id_230__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                14
+            ],
+            "reason": "Inside the loop s' is overwritten with a single-character string ([ch] or [s[i]]) instead of appending to s', so the result has wrong length/content."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__132_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop uses 'while true' (an unconditional infinite loop) so it never terminates instead of using a condition like 'while m > 0' to perform exactly m additions."
+        }
+    },
+    "dafny-synthesis_task_id_399__258_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is inverted ('while i > |a|') so the loop never executes (should be 'while i < |a|'), preventing result from being populated."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__672_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "The while loop in peasantMult uses the constant condition 'false' so the loop never runs and r remains 0, preventing the peasant multiplication algorithm from executing."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__243_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is wrong\u2014'while e < 0' never holds for nat e so the loop never runs and r stays 1; it should be 'while e > 0' (or equivalent) to compute the power."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__155_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop uses 'while true' causing an unbounded/infinite loop and preventing termination and correct computation; it should loop while n < N."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__543-769_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The unconditional 'break' on line 13 makes the loop exit immediately, so the method never iterates over the sequence to update max and therefore may return a non-maximum element."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__308_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The outer conditional uses 'if true', making the else branch unreachable and ignoring y (so m can be larger than y); it should compare values (for example 'if z < y') to compute the minimum correctly."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in mroot1 is reversed\u2014using (r+1)*(r+1) >= n causes the loop to run (or never terminate) instead of looping while (r+1)*(r+1) <= n to increase r until the floor square root is reached."
+        }
+    },
+    "dafny-synthesis_task_id_808__132-340_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "An unconditional 'break' at the start of the loop (line 9) causes the loop to exit immediately so the body never checks elements and the method always returns false."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__786_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13,
+                15
+            ],
+            "reason": "The loop body appends a delimiter when i==0 and then appends numbers[i], causing a delimiter to be placed at the start (index 0) instead of inserting delimiters between the numbers, so the order of appending is wrong."
+        }
+    },
+    "dafny-synthesis_task_id_113__236_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The if-condition is inverted\u2014using 'if |s| != 0' sets result false for non-empty strings instead of rejecting empty strings, so the empty/non-empty handling is reversed."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__132_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is the constant 'false', so the loop never executes and r remains 0, violating the postcondition r == x * y (it should use a condition like m > 0)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__336_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assignment uses r := r + 2 * s + 6 instead of subtracting 2*s and adding 6 (should be r := r - 2 * s + 6), so r does not become Y and subsequent asserts fail."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__284-678_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The unconditional 'break;' at line 20 exits the loop immediately so k is never decreased below 0, making the post-loop assertion k < 0 (and thus the method's correctness) fail."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__402_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is wrong (uses 'm < 0' which is never true for nat m), so the loop never executes; it should be 'm > 0' to decrement m and accumulate r."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__932_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                26
+            ],
+            "reason": "The loop's branch tests 'bb % 2 < 0', which is never true for nonnegative bb, so the even-case branch never executes and should use 'bb % 2 == 0' instead."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__220_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop guard is inverted ('while k > n' instead of 'while k < n'), so the loop never runs and k remains 0, causing the assertion k == n (for n>0) to fail."
+        }
+    },
+    "dafny-synthesis_task_id_741__278_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5,
+                6
+            ],
+            "reason": "The unconditional 'if true { return true; }' causes the method to always return true and skip the actual character-checking logic."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__786_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13
+            ],
+            "reason": "The unconditional 'if true' block always inserts a delimiter before each number (including the first), producing an extra leading delimiter and thus incorrect ordering and length."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__124-234_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "An unconditional 'break' (line 11) immediately exits the loop before any addition or decrement occurs, so the repeated-addition algorithm never executes and the postcondition r == x*y can fail."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__294_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'i == |nums|' instead of 'i < |nums|', so for valid inputs (|nums| >= 1) the loop never executes and duplicates are never detected."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The while loop condition is inverted (written as 'while d == x' instead of 'while d != x'), so the loop doesn't execute when m != n and the method returns an incorrect value."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__213_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is incorrect (while y == 0) so the loop never runs for x > 0; it should loop while y != 0 or y > 0 to decrement y and accumulate z."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__132_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The while loop uses the condition 'm < 0' instead of 'm > 0', so for natural m the loop never executes and r remains 0 instead of accumulating y*x."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Fine_Tune_Examples_50_examples_41__177-309_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The break statement on line 13 prematurely exits the loop before i and j are updated, preventing the loop from computing the intended values and causing the postcondition to fail."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__166_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'x >= 0', causing an extra iteration when x == 0 that makes z become -y instead of 0; it should be 'while x > 0' so z ends up 0."
+        }
+    },
+    "Clover_quotient__154-243_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "An unconditional 'break;' inside the loop (line 12) causes the loop to exit immediately so r and q are never updated, violating the postcondition when x >= y."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__469-479_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body only decrements m and never updates r (should add n to r each iteration), so r remains 0 and the invariant/ensures cannot hold."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The condition uses s[i] <= ' ' instead of s[i] == ' ', so characters with code less than space (e.g., control characters) are incorrectly treated as blanks and replaced."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__110_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop uses 'while true' instead of a terminating condition (e.g. 'while i < a'), so the loop runs unbounded and does not preserve the invariant/termination measure."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__672_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "The loop uses 'while true' (line 21) so when bb becomes 0 the body leaves bb unchanged and the loop never exits; it should be 'while bb > 0' so bb decreases to termination."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'i < n / 2', which skips checking i == n/2 (so divisors like 2 for n=4 are not tested), causing incorrect results for some non-primes."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_error_data_real_error_IsEven_success_1__225-329_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "A premature 'break;' inside the while loop causes the loop body to never execute, so r and i are not updated and the postcondition r <==> even(n) can fail."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__342_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assignment uses r := r - 2 * s - 6 but should be r := r - 2 * s + 6, so the constant's sign is wrong and r becomes Y-12 instead of Y."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__41_LVR_0.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                3
+            ],
+            "reason": "The variable i is initialized to 0, producing s = [1,0,3,4,5] so the assertions expecting the second element and related slices (e.g. [2,3,4,5]) fail."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__41_LVR_1.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                3
+            ],
+            "reason": "The variable i is initialized to 1, so s becomes [1,1,3,4,5] instead of [1,2,3,4,5], causing the assertions that expect 2 as the second element to fail."
+        }
+    },
+    "dafny-synthesis_task_id_770__413_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop incorrectly multiplies sum by i^4 instead of adding i^4, so the accumulator does not compute the sum of fourth powers of odd numbers."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__208_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop uses 'while i <= n' which is off-by-one so executing the body when i == n makes i become n+1 and violate the invariant 0 <= i <= n (should be while i < n)."
+        }
+    },
+    "Dafny_Learning_Experience_tmp_tmpuxvcet_u_week1_7_week5_ComputePower__280-418_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                24
+            ],
+            "reason": "The unconditional 'break;' inside the loop makes the loop exit immediately so the body that doubles p never runs, leaving p = 1 and violating the postcondition for n > 0."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__182_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop condition uses i <= n causing an off-by-one: the body increments i before adding, so it sums up to n+1 instead of up to n, violating the postcondition/invariant."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'i < n / 2', so it skips checking i == n/2 (e.g., n=4 with divisor 2), missing valid divisors; it should include n/2 (or use i*i <= n)."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__327_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop updates z with z := z - x (decrementing) instead of z := z + x, violating the invariant and preventing z from reaching x*x."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop guard uses 'while x > y' so the loop can exit when x < y (not only when x == y), causing the method to stop prematurely and return x that may not equal gcd(m,n)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__458-474_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The code falsely asserts f2(n) == 5*x*f2(k/3) + y (line 23) while omitting the x*(k%4) term that should instead be added to y, breaking the loop invariant (so y is never updated to accumulate x*(k%4))."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__348_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop updates x with subtraction ('x := a - x') instead of multiplication ('x := a * x'), which violates the invariant and yields an incorrect power computation."
+        }
+    },
+    "dafny-programs_tmp_tmpcwodh6qh_src_expt__220-344_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "An unconditional 'break' inside the loop causes it to exit immediately so res is never updated and the method fails to compute Expt(b,n)."
+        }
+    },
+    "dafny-synthesis_task_id_770__425_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop adds i*i*i - i (i^3 - i) instead of the fourth power i*i*i*i, so the accumulated sum does not match the invariant and postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_307__191-381_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body contains an unconditional 'break;' that exits the loop immediately so no elements are appended to newSeq and the sequence is never copied."
+        }
+    },
+    "dafny-synthesis_task_id_399__258_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes (should be e.g. 'i < |a|'), leaving result empty and violating the postcondition that it contains the elementwise XORs."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__56-70_CIR.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                4
+            ],
+            "reason": "s is initialized to the empty sequence (var s := []), but the subsequent assertions index and slice it as if it were a non-empty sequence (e.g. [1,2,3,4,5]), causing out-of-bounds and failing assertions."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__332_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body decrements n (n := n - 1) instead of incrementing it, so n moves away from N and the loop violates the intended invariant and postcondition."
+        }
+    },
+    "dafny_misc_tmp_tmpg4vzlnm1_rosetta_code_factorial__295-422_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The 'break;' on line 18 prematurely exits the loop so the body never executes (no multiplication/increment), leaving result equal to 1 and violating the postcondition for n > 0."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__321_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop updates c with c * k instead of c + k, so c is multiplied by k rather than incremented by k (it should use c := c + k to maintain c == i*i*i)."
+        }
+    },
+    "RollingMax__511_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "The loop updates result when numbers[i] <= result (assigning a smaller value), so the condition is inverted and causes computing a minimum instead of updating result when numbers[i] > result."
+        }
+    },
+    "dafny-synthesis_task_id_770__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13
+            ],
+            "reason": "The loop body contains no-ops (sum := sum; i := i;) instead of updating sum (adding the current odd number's fourth power) and incrementing i, so the accumulation and loop progress are never performed."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition uses 'while x < y' which skips the case x > y and causes the subtraction loop to be bypassed; it should loop until x == y (e.g., 'while x != y')."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__110_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition uses 'i > a' instead of 'i < a', so the loop never executes for nonnegative a and c remains 0, violating the postcondition."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1476_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                55
+            ],
+            "reason": "The loop condition is 'while true', causing an infinite loop; it should loop while i < n (or equivalent) so the method can terminate and satisfy the postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_290__226-480_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "An unconditional 'break' (line 12) immediately exits the loop so the code never compares or updates maxList for the remaining lists, violating the postconditions."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__339_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The update r := r - (2 + s) + 6 uses 2 + s instead of 2 * s, so r is computed incorrectly (it should subtract 2*s to eliminate 2*X) causing later assertions to fail."
+        }
+    },
+    "dafny-synthesis_task_id_273__254-474_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "An unconditional 'break;' inside the loop (line 13) causes the loop to exit immediately so no elements are appended to result, violating the postconditions."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__114-248_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The while loop in add_by_inc contains an unconditional 'break' at line 11, so the loop body never executes and z and i are never incremented, violating the postcondition."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The while loop uses the wrong relational operator ('i >= n' on line 14) instead of 'i <= n', so the loop does not iterate correctly and the factorial is not computed."
+        }
+    },
+    "dafny-synthesis_task_id_273__262_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8,
+                13
+            ],
+            "reason": "The loop uses 'while true' (line 8) so it never terminates and eventually performs an out-of-bounds access a[i] (line 13) instead of iterating while i < |a|."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop guard is reversed ('while i > n / 2') so the loop does not iterate over candidate divisors (it should be e.g. 'while i <= n / 2'), preventing divisor detection."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__553_SLD.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The statement 'rest := rest[..];' does not remove the first element and leaves rest unchanged (it should be rest := rest[1..];), so the algorithm never advances through the input."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The condition uses 's[i] >= ' '' instead of checking 's[i] == ' '', causing all characters with code >= space (not just spaces) to be replaced by ch."
+        }
+    },
+    "dafny-synthesis_task_id_605__185-415_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "An unconditional 'break' at the start of the loop causes the loop to exit immediately without checking divisors, so composite inputs remain reported as prime."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__138-144_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The variable x is declared but never initialized before the loop, yet the loop invariant and loop body use x (it should be initialized to 1 before entering the loop)."
+        }
+    },
+    "dafny-synthesis_task_id_732__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                19
+            ],
+            "reason": "The body resets s' to a single-character sequence (s' := [':'] / s' := [s[i]]) instead of appending the new character to s', so s' does not grow to match |s| and breaks the loop invariant/ensures."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__166_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is reversed\u2014using 'while x <= 0' instead of 'while x > 0' causes the loop to run for nonpositive x (violating invariants) and to not run for positive x, so z is not reduced to 0."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__166_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop uses 'while true' causing nontermination and violation of the intended decreasing condition\u2014 the loop condition should be 'while x > 0' so x decreases to zero and z becomes 0."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The while condition is inverted: it uses 'k <= 0' so the loop does not run for nonnegative n (and the proof fails); it should be 'k >= 0' to iterate until k < 0."
+        }
+    },
+    "dafny-synthesis_task_id_741__278_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The base-case check is inverted\u2014`if |s| >= 1` returns true for all non-empty strings instead of returning true only for strings of length <= 1, so the function skips necessary comparisons."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__329_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop incorrectly updates f using addition (f := f + i) instead of multiplying by i (f := f * i), so the method does not compute the factorial."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__235-347_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "An unconditional 'break' at the start of the loop prevents the loop from executing, so r never accumulates b^e and the method returns 1 instead of x^y."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is reversed (while i > n/2) so the loop often never iterates to check divisors (e.g., misses i=2 for n=4), causing incorrect primality results."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__182_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop condition is reversed (uses 'i >= n' instead of 'i < n'), preventing the loop from executing correctly and producing the intended sum."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The while loop condition is inverted ('f > i' instead of 'f < i'), so the loop never iterates for i >= 2 and composite numbers are not checked."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__57-57_AOI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assertion uses s[..|s| - 1], which yields [-1, 2, 3, 4], but the test incorrectly expects [1, 2, 3, 4] (an off-by-one / wrong slice or expected value)."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__300_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                16
+            ],
+            "reason": "The loop body updates i with i := i * 1 instead of incrementing it (e.g. i := i + 1), so i never progresses, breaking termination/progress and the loop invariant relating s to calcSum(i+1)."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__208_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is reversed (while i >= n), so the loop never executes for n > 0; it should be while i < n to iterate up to n."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__226_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is 'while false' which prevents the loop from executing (so k is not reduced to 0 and the subsequent assertions fail); it should loop while k != 0 (or k > 0)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__224_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted\u2014using 'while k == 0' prevents iteration for n>0 (it should be 'while k != 0'), so the loop body never executes and the subsequent assertions fail."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__155_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop guard is wrong: it uses 'while n == N' instead of a condition like 'while n < N', so the loop does not iterate correctly and the computed t is incorrect."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__932_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                26,
+                29
+            ],
+            "reason": "The loop's conditional branches are wrong\u2014'if bb % 2 > 0' (line 26) always captures the odd case making the 'else if bb % 2 == 1' (line 29) unreachable, so r is never updated when bb is odd."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__221_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "In add_by_inc the loop body wrongly does 'z := z - 1' instead of incrementing z, violating the invariant z == x + i and producing incorrect/underflowing results."
+        }
+    },
+    "dafny-synthesis_task_id_770__217-454_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop contains an unconditional 'break;' (line 12) that exits before any accumulation, so sum is never updated and the postcondition fails."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__706_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The loop condition uses 'values[idx] == max' so max is only reassigned on equality instead of using '>' to update when a larger element is found, preventing discovery of later larger values."
+        }
+    },
+    "dafny-synthesis_task_id_273__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "Inside the loop the code resets result to a singleton ([a[i] - b[i]]) and sets i to 1 instead of appending the new element to result and incrementing i, so the loop fails to build the full output sequence."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__317_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The outer loop condition is incorrect\u2014using 'while r == n' prevents iteration when r < n (it should be 'while r < n'), so the factorial is not computed."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The while loop uses `i != n` instead of `i != n + 1` (or `i <= n`), so the loop stops when i == n leaving f == Fat(n-1) instead of computing Fat(n)."
+        }
+    },
+    "dafny-synthesis_task_id_555__423_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop updates sumCubes by multiplying with i^3 instead of adding i^3, so the sum of cubes is computed incorrectly."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__471_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The update to y uses multiplication (y := x * (k % 4) * y) instead of adding the contribution (it should be y := x * (k % 4) + y), which breaks the loop invariant."
+        }
+    },
+    "dafny-synthesis_task_id_555__431_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop updates sumCubes with (i * i + i) instead of adding i * i * i, so it does not accumulate the cubes and violates the sumCubes invariant/specification."
+        }
+    },
+    "dafny-synthesis_task_id_555__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13
+            ],
+            "reason": "The loop body fails to update the accumulators\u2014it assigns sumCubes and sumNumbers to themselves instead of adding the current i^3 and i, so the invariants and result are never progressed."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__152_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is reversed ('while i > n' instead of 'while i < n'), so the loop never runs for n>0 and c remains 0 instead of computing n*n*n."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__333_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The loop condition uses 'rest <= []' instead of checking non-emptiness (e.g., 'rest != []' or '|rest| > 0'), so the loop condition is incorrect and the loop will not iterate as intended."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__123_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop guard 'while i <= y' allows one extra iteration (producing z = x + y + 1 and i = y + 1), violating the postcondition; it should iterate while i < y."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__395_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The inner condition uses 'z != x' instead of comparing magnitudes (should be 'z <= x'), causing m to be set to z even when z > x and thus violating m <= x."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__208_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop in SumUpTo uses 'while false', so it never iterates and leaves r = 0 (failing the postcondition for n > 0) instead of looping up to n."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__375_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "In method max the loop updates result when numbers[i] < result (and assigns result := numbers[i]), which makes it compute a minimum instead of updating on larger values\u2014 the comparison should be '>' so result is set to a larger element."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__395_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The inner condition uses 'z > x', which incorrectly picks z when it's larger than x instead of when it's the smallest (it should check the opposite, e.g. 'z <= x' or 'z < x')."
+        }
+    },
+    "dafny-synthesis_task_id_113__251-266_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9,
+                12
+            ],
+            "reason": "result is incorrectly initialized to true (should reflect |s|>0) and the for loop uses 'to |s|' causing an out-of-bounds/index error (should iterate to |s|-1)."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__308_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14,
+                15,
+                16
+            ],
+            "reason": "In the else branch the code only computes min(x,y) (assigning y then possibly x) and ignores z, so m can be greater than z and violate the postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_273__262_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes and result remains empty, violating the postconditions that result has the same length and entries as a - b."
+        }
+    },
+    "dafny-synthesis_task_id_273__262_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is reversed (while i > |a|) so the loop never executes for typical nonnegative lengths; it should be while i < |a| to iterate over the sequence indices."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__471-529_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The method always returns true (line 17) instead of computing whether nums is distinct, so the result does not reflect the actual distinctness of the sequence and violates the postcondition."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__289_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "In method SumUpTo the loop body updates r with r := r - 1 instead of incrementing (r := r + 1), violating the invariant r == sum_up_to(i) and producing an incorrect result."
+        }
+    },
+    "RollingMax__534-554_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "In method max the if branch that checks numbers[i] > result is empty, so result is never updated to larger values and the running maximum is not maintained."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__205_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body adds 2*i - 1 instead of 2*i + 1, so c is updated incorrectly (decreasing when i=0) and the invariant/ensures are violated."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__786_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The conditional \"if false\" on line 12 prevents ever appending the delimiter (it should check i>0), so the delimiter is never inserted and the length/invariant guarantees are violated."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__216-618_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The unconditional 'break;' inside the while loop causes the loop to exit immediately, leaving k unchanged (not reduced to 0) and thus violating the intended loop progress and postcondition."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__437-915_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "An unconditional 'break;' at the start of the loop (line 12) causes the loop to exit immediately so no elements are added to interspersed, violating the postconditions."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q1__795-1260_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "An unconditional 'break;' is present as the first statement in the loop, causing the loop to exit immediately and preventing the updates that compute the power."
+        }
+    },
+    "dafny-synthesis_task_id_267__-_ODL_Mul-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop updates sum by adding i (the odd number) instead of adding i*i, so it computes the sum of odd numbers rather than the sum of their squares."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1476_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                55,
+                63,
+                64
+            ],
+            "reason": "The loop uses 'i <= n' instead of 'i < n', causing an extra iteration so i and product end up corresponding to n+1 (making the final assertions about i==n and product==power(n,alpha) incorrect)."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__735_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23,
+                24,
+                25
+            ],
+            "reason": "The loop condition is inverted: it returns false and (incorrectly) asserts divides(f,i) when i % f != 0, whereas it should return false when i % f == 0 (i.e., when f divides i)."
+        }
+    },
+    "dafny-synthesis_task_id_555__431_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The accumulation for sumCubes uses (i * i - i) (i^2 - i) instead of adding i * i * i, so it does not sum cubes correctly."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop guard is 'while x == y' instead of 'while x != y', so the loop only executes when x and y are equal rather than iterating until they become equal, breaking the algorithm."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11,
+                12,
+                14
+            ],
+            "reason": "The if-condition is inverted: it checks s[i] != ' ' and appends ch for non-space characters while appending the original character for spaces, so non-spaces get replaced and spaces are not."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1476_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                55
+            ],
+            "reason": "The loop header uses 'while false' so the loop never executes (leaving i == 1), causing the later assert i == n to fail \u2014 the condition should be something like 'while i < n'."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__354_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition is reversed\u2014using 'while l >= r' instead of 'while l <= r' causes the loop to be skipped for typical inputs and prevents producing the correct result."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__132-219_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The 'break' inside mroot1's loop (line 10) causes the loop to exit immediately before r is incremented, so r remains 0 instead of computing the floor square root."
+        }
+    },
+    "dafny-synthesis_task_id_230__243-566_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The unconditional 'break;' inside the loop (line 11) exits the loop immediately, preventing any characters from being appended to s' and thus violating the postconditions."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop uses 'while true' causing nontermination because it never stops updating d and x instead of using a termination condition like 'while d != x' to exit when the gcd is reached."
+        }
+    },
+    "RollingMax__416-570_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The unconditional 'break' inside the for-loop exits immediately, preventing the loop from updating result so max returns only numbers[0] instead of the true maximum."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__224_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is 'false' (line 15), so the loop never executes leaving k == n and causing the post-loop assertions (e.g., k == 0) to fail; the condition should be something like 'while k > 0'."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is hardcoded as 'false', so the loop never runs and divisors are never checked; it should be e.g. 'i < n' to iterate over potential divisors."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes and k remains n (>= 0), making the subsequent assertion k < 0 (and the proof relying on the loop) fail."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__672_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "The while condition is inverted (bb <= 0) so the multiplication loop never executes for the required precondition b > 0, leaving r at 0 instead of computing a * b."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__226_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition 'while k >= 0' is always true for nat, so the loop can reach k == 0 without further decrease (violating termination); it should be 'while k > 0'."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__476_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body erroneously subtracts n from r (r := r - n) instead of adding it, violating the loop invariant and producing an incorrect result; it should be r := r + n."
+        }
+    },
+    "dafny-synthesis_task_id_770__-_ODL_Mul-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop updates sum with sum := sum + i (adding the odd number) instead of adding its fourth power (i^4), so the accumulated sum doesn't match the specified formula."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is 'while true', causing a non-terminating loop and violating the intended control flow; it should be 'while i <= n' so the loop progresses and terminates while maintaining the invariants."
+        }
+    },
+    "RollingMax__511_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18,
+                19
+            ],
+            "reason": "In method max the condition 'if false' (lines 17-19) prevents updating result (should compare numbers[i] to current maximum), so result is never updated to the true maximum."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__375_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The if condition in max is 'if false', so the result is never updated during the loop, preventing the method from computing the actual maximum."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop uses 'while true' instead of a termination condition like 'while x != y', so when x == y the body executes y := y - x producing y == 0 and violating the invariant/termination."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__182_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop condition is incorrectly 'false', so the loop never executes (leaving s at 0) instead of using a condition like 'i < n' to accumulate the sum."
+        }
+    },
+    "dafny-synthesis_task_id_445__261_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop guard is reversed\u2014using 'i >= |a|' instead of 'i < |a|' causes the loop to never run for non-empty sequences, so result is not populated as required."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__157_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The loop guard is 'false', so the loop never runs and r remains 0, violating the postcondition for n > 0."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__224_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted (while k < 0) so the loop never executes for nat k, leaving k == n instead of decrementing to 0 and violating the postcondition; it should be while k > 0."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__322-332_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop body only increments i (i := i + 1) and never updates f, so f does not accumulate the product and the method cannot compute Fat(n)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__220_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is incorrect: it uses 'while k == n' so the loop doesn't iterate to build up x for n>0 (it should be 'while k < n')."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The if condition uses 'x >= 0', so positive x are treated as the base case returning 0 instead of recursing; it should test 'x == 0' (or otherwise distinguish 0 from positive) so positive x perform the recursive multiplication."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__294_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is inverted ('while i > |nums|') so the loop never executes (should be 'while i < |nums|'), causing the method to always return true even when duplicates exist."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__706_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The loop uses 'if values[idx] < max' which updates max to smaller values (computing a minimum); it should use '>' to update max to larger values (the maximum)."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__554_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is off-by-one: it uses 'idx <= |values|' allowing an out-of-range access values[idx] when idx == |values|; it should be 'idx < |values|'."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__294_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes and the method always returns true instead of iterating to detect duplicates."
+        }
+    },
+    "dafny-synthesis_task_id_399__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "Inside the loop the code overwrites result with a single-element sequence (result := [a[i] ^ b[i]]) and resets i to 1 (i := 1) instead of appending the new element and incrementing i, so the result sequence and loop index are incorrect."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1092_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10,
+                11,
+                12,
+                13
+            ],
+            "reason": "The base-case check in SearchRecursive is inverted: it returns k := -1 when j > i (non-empty interval) instead of when j <= i (empty interval), causing premature incorrect termination."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__457_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted\u2014using 'while e <= 0' instead of 'while e > 0'\u2014so the loop fails to execute for positive exponents (yielding incorrect r) and can run incorrectly at e == 0."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                15
+            ],
+            "reason": "The loop body contains no-op self-assignments (interspersed := interspersed) instead of appending the delimiter and the current number, so the interspersed sequence is never constructed."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__329-345_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assertion on line 9 wrongly claims r == 2 * X + Y - 2 * X - 6 + 6 (i.e., Y) without actually changing r, performing an invalid algebraic cancellation and making subsequent assertions unprovable."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__129-135_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The loop condition and invariants use variable i before it is initialized (i is never assigned, missing i := 0 before the while)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__224_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop uses 'while true' instead of a guard like 'while k > 0', allowing the body to run when k == 0 and causing invalid k - 1 and sum(k - 1) operations."
+        }
+    },
+    "dafny-synthesis_task_id_230__470-485_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The branch for when s[i] == ' ' is empty, so the code fails to append ch to s' (violating the invariant |s'| == i and leaving the result shorter than s)."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop condition uses 'while d > x' instead of looping until the two values are equal (e.g., 'while d != x'), so when m < n the loop never runs and the method returns an incorrect d."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__212-484_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The stray 'break;' inside the while loop prematurely exits the loop, preventing the loop body from executing and k from reaching n (thus violating the postcondition/assertions)."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__57_LVR_0.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                4
+            ],
+            "reason": "The sequence s is initialized with 0 as its first element ([0, i, 3, 4, 5]) but the assertions expect the sequence to start with 1, so the first-element literal is incorrect."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__143_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The condition 'else if x != 0' is wrong (should be 'x < 0'), so nonzero x always takes the sign-flipping recursive branch, causing incorrect recursion/nontermination instead of handling negative x properly."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__243_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes and r remains 1, causing Pot to return incorrect results for y > 0 instead of computing repeated multiplication."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "mroot1's loop uses 'while true' so r is unconditionally incremented (violating the invariant and causing non-termination); the loop condition should test (r+1)*(r+1) <= n instead of true."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__361-428_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14,
+                15,
+                16,
+                17
+            ],
+            "reason": "The for loop in max has an empty body (missing the comparison and update of result), so result never gets updated and remains numbers[0] instead of the maximum."
+        }
+    },
+    "dafny-synthesis_task_id_399__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "The loop body is a no-op (it assigns result := result and i := i), so neither the result nor the loop index is updated, preventing progress and failing to compute the XOR elements."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__375_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "In method max the if uses 'numbers[i] == result' instead of checking 'numbers[i] > result', so result is never updated when a larger element is encountered."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__345-721_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The stray `break;` prematurely exits the loop (preventing the binary search from running and the method from returning a value satisfying the postcondition)."
+        }
+    },
+    "dafny-synthesis_task_id_399__258_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop guard is incorrect: it uses 'i == |a|' instead of 'i < |a|', so the loop does not iterate for non-empty sequences causing result to stay empty and violate the postconditions."
+        }
+    },
+    "dafny-synthesis_task_id_399__258_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop uses 'while true' instead of a bound like 'while i < |a|', causing infinite looping and eventual out-of-bounds access a[i] ^ b[i]."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__157_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The loop condition is reversed ('while i >= n' instead of 'while i < n'), so the loop never executes for positive n and r remains 0 instead of accumulating n*n."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__205_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body incorrectly does r := r - n instead of r := r + n, so r is decremented rather than incremented and the invariant/postcondition are violated."
+        }
+    },
+    "dafny-synthesis_task_id_3__200_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition 'i <= n * 2' is wrong and lets i reach n (and beyond), so the code tests n % n == 0 and sets result true, misclassifying primes instead of iterating only while i < n."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__398-418_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "In method max, the if numbers[i] > result branch is empty and never updates result, so the running maximum is not maintained."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1128-1134_SWS.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11,
+                12
+            ],
+            "reason": "In the recursive base case the method returns before assigning k := -1 (the return is premature and the assignment is unreachable), so the function can return an incorrect/uninitialized result violating the postcondition."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__226_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop uses 'while true' so it never exits (preventing the post-loop assertion k == 0); the condition should depend on k (e.g., 'while k != 0' or 'while k > 0')."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__182_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop uses 'while true' causing non-termination/incorrect behavior; it should loop while i < n so the invariants and decreases clause lead to a proper termination and the final s equals calcSum(n+1)."
+        }
+    },
+    "dafny-synthesis_task_id_605__197_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition 'while i <= n + 2' is incorrect (off-by), allowing i to reach n (so n % n == 0) and wrongly mark primes as composite; it should iterate only for i < n."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__520_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The update b := a * k - b uses the wrong sign; it should add a*k to the previous b (b := a * k + b) to maintain the invariant f(n) == a * f(k) + b when k decreases by 5."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop uses the incorrect termination condition `i != n / 2`, which can stop the search too early (e.g., for n=4 the body is never executed), so not all potential divisors are checked."
+        }
+    },
+    "RollingMax__511_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "The max method updates result whenever numbers[i] != result instead of only when numbers[i] > result, so it can replace the current maximum with a smaller value."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in mroot1 is the constant 'false' (line 6), so the loop never runs and r remains 0, violating the postcondition for n>0."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__354_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition is hard-coded as 'false', so the binary-search loop never executes and the method fails to produce/return a value satisfying the postcondition."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__449-561_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop body contains an unconditional 'break;' (line 18) that prevents the loop from performing the multiplication and decrement, so r remains 1 and the method returns an incorrect result."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__157_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The loop condition 'i <= n' iterates one time too many so after the loop r becomes (n+1)^2 instead of n^2, violating the postcondition."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__243_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop guard uses 'while e == 0' instead of 'while e != 0' (or 'e > 0'), so the loop runs only when the exponent is zero and thus fails to iterate for positive exponents, producing incorrect results."
+        }
+    },
+    "dafny-synthesis_task_id_445__253-473_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "An unconditional 'break' inside the loop causes the loop to exit immediately so no products are appended to result, violating the postconditions."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__513_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The midpoint is computed as (l + r) * 2 instead of (l + r) / 2, so mid can be far outside the intended search interval leading to incorrect behavior."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__395_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The code checks 'if z == x' instead of 'if z < x', so when z is smaller than x the method wrongly assigns m := x (violating m <= z) instead of choosing z as the minimum."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition is 'while false' which prevents the Euclidean subtraction loop from running, so the method returns x = m instead of computing the gcd(m, n)."
+        }
+    },
+    "dafny-synthesis_task_id_273__262_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is wrong\u2014using 'i == |a|' instead of 'i < |a|' causes the loop to either not run for non-empty sequences or run with an out-of-bounds access for empty sequences, producing incorrect results."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__308_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "The else branch ignores z by initializing m to y and comparing x with y; it should use z (m := z and compare x with z) so the case where z is the smallest is handled."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__285-580_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "There is an unconditional 'break' at the start of the loop that prevents any iteration and thus the duplicate checks, causing the function to always return true for all inputs."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1092_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The base-case check uses 'if j < i' instead of 'if j <= i', so when j == i the code still accesses a[j-1] causing an out-of-bounds/error instead of returning -1."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__554_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The while condition is inverted\u2014using 'idx >= |values|' prevents iterating over the sequence (so max stays as values[0]) instead of 'idx < |values|' to traverse all elements and compute the maximum."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__786_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The conditional is inverted\u2014using 'if i < 0' (never true) prevents appending delimiters; it should be 'if i > 0' to add the delimiter before subsequent elements."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__402_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes and r remains 0, violating the postcondition for nonzero inputs (should loop while m > 0 or similar)."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The first branch uses 'if x <= 0' which incorrectly treats negative x as zero (making the negative case unreachable); it should be 'if x == 0' (or otherwise handle negatives) so negative inputs are handled correctly."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__402_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'while m == 0' instead of iterating while m > 0 (or m != 0), so the loop runs only when m is zero and fails to decrement/add for positive m."
+        }
+    },
+    "dafny-synthesis_task_id_113__236_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The condition 'if |s| >= 0' is always true (string length nonnegative), so the method always sets result := false and never checks digits; it should check for an empty string (e.g., '|s| <= 0' or '|s| == 0') instead."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__155_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is reversed ('while n > N'), so the loop never executes and t stays 0; it should be 'while n < N' to iterate up to N and accumulate the triangle number."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__152_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'i == n' instead of 'i < n', causing incorrect loop execution and thus wrong/violating updates to c, k, and m."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__342-350_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20,
+                21,
+                23
+            ],
+            "reason": "The loop never updates x to a * x and instead contains incorrect assertions (assert x == a * pow(a, k) and related checks) that assume x already equals a*pow(a,k)/pow(a,k+1), breaking the invariant; x should be assigned a * x before incrementing k."
+        }
+    },
+    "RollingMax__520-564_CBE.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The loop in max unconditionally assigns result := numbers[i] instead of updating result to the maximum of the current result and numbers[i], causing the method to return the last element rather than the maximum and violating the loop invariant."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1092_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The base case in SearchRecursive is written as 'if false' instead of checking 'if i == j', so the method fails to handle the empty range and can access a[j-1] out of bounds."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop guard uses 'while d < x' instead of 'while d != x', making the 'if d > x' branch unreachable and causing incorrect/non-terminating behavior for cases where d > x initially."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__172-358_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The 'break;' statement inside the loop causes the loop to exit immediately, so f is never updated and the method does not compute Fat(n)."
+        }
+    },
+    "dafny-synthesis_task_id_267__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13
+            ],
+            "reason": "The loop body incorrectly assigns sum := sum and i := i, so it never accumulates the odd squares nor increments i, leaving sum always zero."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__459_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The update uses multiplication (x := x * (y * k)) instead of addition, so x does not accumulate y*k and the loop invariant/ensures are violated."
+        }
+    },
+    "dafny-synthesis_task_id_770__425_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop adds i * i * i + i (i^3 + i) instead of the fourth power i^4, so the accumulated sum is incorrect."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__317_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The outer while uses the wrong comparison 'r > n' (should be 'r < n'), so the loop never executes and u is never updated to compute Factorial(n)."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__213_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is inverted ('while y < 0') so for nonnegative x the loop never executes and z remains 0 instead of accumulating x*x; it should be 'while y > 0'."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__457_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop uses 'while e >= 0' which is always true for a nat e (causing nontermination/underflow); the condition should be 'e > 0' so the loop terminates and the invariant yields the correct result."
+        }
+    },
+    "dafny-synthesis_task_id_267__350_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop updates sum by multiplying (sum := sum * (i * i)) instead of adding the current odd square (sum := sum + i * i), so the accumulator is wrong."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__348_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop updates x using addition (x := a + x) instead of multiplication (x := a * x), breaking the invariant that x == pow(a, k+1)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__218-633_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The 'break;' on line 20 prematurely exits the loop so k is never reduced to 0 and the subsequent assertions/postcondition depending on the loop body (updating x, y, k) fail."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__452-464_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The loop decrements k without updating x (it should do e.g. x := x + y * k before k := k - 1), so the loop invariant cannot be maintained."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__132_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop guard is wrong\u2014using 'while m == 0' causes the loop to be skipped for positive m; it should be 'while m != 0' (or 'while m > 0'), so the decrementation and accumulation never occur for x > 0."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__226_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted (uses 'k <= 0' instead of 'k > 0'), so the loop body never executes for n > 0 and the invariants/claims relying on its execution are invalidated."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__672_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "The peasantMult loop uses the incorrect guard 'while bb >= 0' (line 21) instead of 'while bb > 0', allowing bb==0 to loop and break the termination/invariant reasoning."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'i == n / 2' (equality) instead of a range condition like 'i <= n/2' or 'i < n', so the loop rarely iterates and fails to check divisors for most n."
+        }
+    },
+    "dafny-synthesis_task_id_399__250-470_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The unconditional 'break' inside the while loop prevents any iterations so result is never populated, violating the postconditions."
+        }
+    },
+    "dafny-synthesis_task_id_770__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13
+            ],
+            "reason": "The loop body wrongly assigns sum := i*i*i*i and resets i := 2 instead of accumulating sum (sum := sum + i*i*i*i) and advancing the odd index by 2 (i := i + 2), so the accumulation and loop progression are incorrect."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__198-208_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body only decrements m and never updates r (the accumulator), so r remains 0 and the postcondition r == x * y is not achieved."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop condition is wrong: it uses 'while f == i' instead of 'while f < i', so the loop only runs when f equals i (e.g., i==2) and yields incorrect prime results."
+        }
+    },
+    "dafny-synthesis_task_id_445__261_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'i <= |a|' allowing i to reach |a| and causing an out-of-range access a[i] (should be 'i < |a|')."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__589-741_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                26
+            ],
+            "reason": "The inner while loop has an unconditional 'break;' (line 26) which prevents k from being decremented and causes every element to be inserted at the end, breaking the sorting logic."
+        }
+    },
+    "dafny-synthesis_task_id_457__238-498_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "An unconditional 'break;' inside the loop causes the loop to exit immediately, preventing any updates to minSublist and so the method always returns s[0] instead of the actual minimal-length sublist."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_ComputePower__211-352_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The 'break' inside the while loop prematurely exits the loop before the increment and update (x, y := x + 1, y + y), so y remains 1 and does not compute Power(N) for N > 0."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__282-292_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The while loop in SumUpTo increments i without updating r (e.g., r := r + 1), so the loop invariant r == sum_up_to(i) is violated."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is 'while k != 0' but the algorithm and postconditions require iterating until k < 0 (so it should continue for k >= 0), causing the proof to fail when k == 0."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The while condition uses 'i == n / 2' instead of an inequality like 'i <= n / 2', so the loop only runs when i equals n/2 and thus fails to check most divisors."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__158-270_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The unconditional 'break;' at line 13 exits the loop immediately, preventing the decrement of x and the subtraction from z so z remains x*y for x>0 and the postcondition z==0 can be violated."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__110_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition uses 'i == a' instead of 'i < a', so the loop does not iterate the correct number of times and produces an incorrect result."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1128-1134_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10,
+                11
+            ],
+            "reason": "The base-case if (j == i) only sets k := -1 but fails to return, so execution continues to a[j-1] causing an out-of-bounds access when j == i; the branch should return immediately."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1476_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                55
+            ],
+            "reason": "The loop guard is inverted ('while i >= n' instead of 'while i < n'), so the loop never executes for n>1 and the subsequent assertions fail."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__308-338_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop body only increments i (line 14) but does not update c, k, and m accordingly, so the invariants are violated and c never reaches n*n*n."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__308_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6,
+                7,
+                8,
+                9,
+                10,
+                11
+            ],
+            "reason": "The branch guarded by 'if z != y' only compares z and x (ignoring y) and thus can return a value larger than y instead of the minimum of x, y, and z."
+        }
+    },
+    "dafny-synthesis_task_id_555__242_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The for-loop upper bound is wrong ('for i := 1 to n * 1'): it stops one iteration too early (should iterate through n), so the sums omit the i == n term (off-by-one)."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__493-529_CBE.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "An unconditional 'return false;' inside the loop causes the method to exit on the first iteration before checking/recording elements, so it never correctly determines whether the sequence is distinct."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__220_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop uses `while true` instead of a terminating condition (it should be `while k < n`), so the body always executes and eventually violates the loop invariant/termination reasoning."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1408-1421_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                53
+            ],
+            "reason": "The code asserts product == power(1.0, alpha) without calling or otherwise using the lemma power1 that establishes power(1.0, alpha) == alpha, so the verifier cannot prove the base-case assertion."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__427_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The loop body uses the condition 'if x == y' instead of 'if x > y', so the else branch always runs (given the while condition x != y), causing incorrect subtraction and violating the intended algorithm."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__110_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition is 'false' (line 6), so the loop never executes and c stays 0 instead of being incremented to a*a for a>0."
+        }
+    },
+    "dafny-programs_tmp_tmpcwodh6qh_src_factorial__220-448_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop body contains an immediate 'break' (line 19) so the multiplication and increment never execute and res remains 1, preventing computation of the factorial."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__375_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The max method uses 'if numbers[i] != result' instead of comparing with '>' so it replaces result on any difference (yielding the last differing element) rather than only when a larger element is found."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__152_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop uses 'while true' (line 8), causing an infinite loop and allowing i to exceed n instead of stopping at i == n (it should be 'while i < n')."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The base-case condition in M1 is inverted (it uses 'if x != 0' instead of 'if x == 0'), so nonzero x returns 0 and the multiplication recursion is never executed."
+        }
+    },
+    "dafny-synthesis_task_id_445__261_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is 'while true' instead of 'while i < |a|', so the loop runs past the end of the sequences and will access a[i] and b[i] out of bounds."
+        }
+    },
+    "RollingMax__511_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "In method max the conditional uses 'numbers[i] == result' instead of 'numbers[i] > result', so the maximum is never updated when encountering larger elements."
+        }
+    },
+    "dafny-synthesis_task_id_732__327-683_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                16
+            ],
+            "reason": "The loop contains an unconditional 'break;' as the first statement so the body never executes and s' remains empty, violating the postconditions (length and per-character mapping)."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__354_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop uses 'while l < r' so when the search narrows to l == r (or initially for x=0) the loop is skipped/exits without performing the final check/return, causing the method to fail to produce the required result."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__476_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop updates r with multiplication (r := r * n) instead of adding n (r := r + n), breaking the invariant and producing incorrect product accumulation."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__317_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The outer loop uses 'while true' instead of a terminating condition (it should be 'while r < n'), causing the loop to run past r == n and violate the invariant r <= n."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__326-570_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The stray 'break;' inside the while loop causes the loop to exit immediately so no subtraction steps are performed, leaving d equal to m rather than reducing to gcd(m,n)."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1476_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                55
+            ],
+            "reason": "The while loop condition is reversed (uses 'i > n' instead of 'i < n'), so the loop never executes and i/product are not advanced to satisfy the postcondition."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__532_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop body incorrectly does r := r - b (subtraction) instead of multiplying r by b (r := r * b), violating the invariant and producing the wrong power."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__208_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is 'while i == n' instead of 'while i < n', so the loop never runs for i=0 when n>0 and r doesn't reach sum_up_to(n)."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__123_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop in add_by_inc uses the constant condition 'false' so it never executes, preventing z and i from being incremented to achieve z == x + y and i == y."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__220_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is 'false', so the loop never executes and k remains 0, causing the later assertion 'k == n' (and the postcondition) to fail when n != 0."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop uses 'while true' so it ends up testing i == n (making n % n == 0 set result true); the guard should be 'while i < n' to avoid treating n itself as a divisor."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__182_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop condition is wrong\u2014using 'while i == n' instead of a loop like 'while i != n' or 'while i < n' prevents the loop from iterating as intended and stops the sum from being accumulated."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__215-223_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "In add_by_inc the loop body only increments i (line 11) but never updates z, violating the loop invariant z == x + i and thus the postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_113__289-540_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The unconditional 'break;' as the first statement in the for-loop causes the loop body that checks each character to never execute, so non-empty strings always remain true even when they contain non-digits."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__147-361_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body contains an unconditional 'break;' (line 12) which makes the loop exit immediately so n and t never update and the postcondition fails for N>0."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__226_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is 'while k < 0', which never holds for a nat k so the loop never executes and the later assertion k == 0 (and thus the method's correctness) fails for n > 0."
+        }
+    },
+    "dafny-synthesis_task_id_741__278_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The for loop uses 'to |s|' which lets i reach |s| and then accesses s[i] out of bounds (off-by-one); the loop upper bound should stop at |s|-1."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'i != n / 2' instead of a correct bound like 'i <= n / 2' (or 'i < n'), so the loop can be skipped when i == n/2 and the algorithm returns incorrect results."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The while loop uses the condition 'i == n' (line 14) instead of 'i <= n', so it only iterates when i equals n rather than iterating from 1 up to n, producing incorrect factorial results for n>1."
+        }
+    },
+    "dafny-synthesis_task_id_273__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                14
+            ],
+            "reason": "The loop body assigns result := result and i := i, so it never appends a[i]-b[i] or increments i, causing no progress (infinite loop) and violating the intended update of result."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop guard is incorrect\u2014using 'while d <= x' allows the loop to exit when d > x (so d and x may not be equal), causing gcdI to return a non-gcd value; it should loop until d == x (e.g., 'while d != x')."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The conditional is 'if true', so the method always takes the r := 0 branch instead of handling base/recursive cases, violating the ensures r == x * y."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__102-227_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The unconditional 'break;' inside the loop causes the loop body never to execute, leaving c at 0 and violating the postcondition for a > 0."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__394-504_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop immediately executes 'break;' (line 11), preventing the loop from performing the repeated additions that compute x*y, so r stays 0 for x>0."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__317_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The outer loop condition is reversed ('while r >= n') causing the loop not to execute for typical inputs; it should be 'while r < n' so r and u are advanced to compute Factorial(n)."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__213_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is inverted ('while y <= 0' instead of 'while y > 0'), so for positive x the loop body never executes and z remains 0, violating the postcondition r == x * x."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__243_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop uses 'while true' causing an infinite loop and incorrect termination (it should loop while e != 0 / e > 0 so the exponent is consumed)."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__786_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The condition 'if i <= 0' is inverted so a delimiter is prepended when i == 0 instead of only inserting delimiters between elements (it should be 'if i > 0')."
+        }
+    },
+    "dafny-synthesis_task_id_445__261_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is 'false' (line 8), so the loop never executes and result stays empty, violating the postcondition that result has the same length and elements as a*b."
+        }
+    },
+    "dafny-synthesis_task_id_414__190-416_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "An unconditional 'break' at the start of the loop prevents checking any elements, so result is never set true when a matching element exists."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__554_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The while loop uses the wrong comparison ('idx > |values|') so it never runs (should be 'idx < |values|'), leaving max stuck at values[0] and violating the postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_113__236_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10,
+                11,
+                12
+            ],
+            "reason": "The if condition and its branches are swapped: it uses 'if |s| > 0 { result := false } else { check characters }' so non-empty strings are incorrectly set to false and the character-check loop runs only for empty strings instead of the other way around."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__155_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is reversed\u2014using 'while n >= N' prevents iterating up to N (and wrongly enters for N==0); it should be 'while n < N'."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__224_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition 'while k >= 0' allows the loop to execute when k == 0, leading to calls to sum(k - 1) with an invalid negative index; it should be 'while k > 0'."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The first branch tests `x < 0` (duplicating the next branch) instead of the base-case `x == 0`, causing negative x to incorrectly return 0 and breaking the multiplication logic."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo7-ComputeSum__178-301_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop body immediately executes a stray 'break;' (line 18), preventing the loop from performing the increments and updates that would establish s == Sum(n)."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__294_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'i <= |nums|' allowing i to reach |nums| and then nums[i] is out-of-range inside the loop, causing an invalid access (should be i < |nums|)."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__706_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The loop uses 'if values[idx] != max' instead of comparing '>' so any differing (smaller) element can overwrite the current maximum."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__554_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop guard is 'false', so the loop never runs and max remains values[0] instead of iterating through values to compute the actual maximum."
+        }
+    },
+    "dafny-synthesis_task_id_732__650-667_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The else branch is empty (line 19) so non-space/comma/dot characters are never appended to s', causing incorrect length and contents of the result."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__-_ODL_Mul-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The variable z is initialized to y instead of xInit * y (or x * y), violating the loop invariant z == x * y at loop entry and breaking the proof of the postcondition."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1092_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10,
+                11,
+                12
+            ],
+            "reason": "An unconditional 'if true' block in SearchRecursive (lines 10-12) always sets k to -1 and returns, preventing the actual recursive search from executing."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The conditional is hardcoded as 'if false' instead of checking s[i] == ' ', so the code never appends ch for space characters and thus fails to replace blanks."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__308_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6,
+                7,
+                13,
+                14,
+                15
+            ],
+            "reason": "The branch conditions and assignments use the wrong comparison directions (e.g., 'z >= y' and unconditionally 'm := y' then 'if x < y') so the code does not correctly select the minimum of x, y, and z."
+        }
+    },
+    "dafny-synthesis_task_id_454__174-418_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "An unconditional 'break;' at the start of the loop causes the loop to exit immediately so the body never checks characters for 'z'/'Z'."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__308-579_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "An unconditional 'break' at the start of the main loop prevents the loop body from running, so the algorithm never updates u and fails to compute Factorial(n) for n>1."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__322-814_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "A spurious 'break;' inside the main while loop causes immediate exit from the loop, preventing any insertion steps and thus violating the postconditions for non-empty inputs."
+        }
+    },
+    "dafny-synthesis_task_id_267__354_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body uses sum := sum + (i - i) (which is always zero) instead of adding the square of the current odd number (i * i), so the sum never accumulates the intended values."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1087-1140_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "SearchRecursive dereferences a[j-1] without first handling the empty-interval case (i==j), causing an out-of-range access when i==j."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__155_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is 'false' (line 7), so the loop never executes and t remains 0 for N>0 instead of iterating (should use a condition like 'n < N')."
+        }
+    },
+    "dafny-synthesis_task_id_741__365-588_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "There is an unintended break at the start of the loop which causes the loop to exit immediately so no characters after the first are checked, leaving result true incorrectly."
+        }
+    },
+    "dafny-synthesis_task_id_555__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7,
+                12,
+                13
+            ],
+            "reason": "The loop only iterates from 1 to 1 and its body overwrites instead of accumulating (should iterate to n+1 and add i^3 and i to the running sums), so the computed sums are incorrect."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is 'false', so the loop never runs and the function always returns true instead of iterating (e.g., while i < n) to check divisors."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__416_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The inner loop's condition 'while s <= r + 1' iterates one time too many, causing u to become (r+2)*Factorial(r) instead of (r+1)*Factorial(r) (it should stop at s == r+1, so the condition should be 's <= r')."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The while condition in mroot1 uses '==' ((r+1)*(r+1) == n) instead of the correct '<=' so r is only incremented when (r+1)^2 equals n, breaking the square-root loop for most n."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__143_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition 'r + 1 - (r + 1) <= n' is identically '0 <= n' (a tautology given the precondition), so the loop never tests r and thus never terminates/advances correctly to compute the integer square root."
+        }
+    },
+    "dafny-synthesis_task_id_113__511-516_SWS.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18,
+                19
+            ],
+            "reason": "The break statement comes before result := false, making the assignment unreachable so result is not set to false when a non-digit is encountered."
+        }
+    },
+    "RollingMax__497-564_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14,
+                15,
+                16,
+                17
+            ],
+            "reason": "The for loop in method max has an empty body and never updates result, so it always returns numbers[0] instead of computing the maximum."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__157_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The loop condition is inverted ('while i > n' instead of 'while i < n'), so for nonnegative n the loop never runs and r remains 0, violating the postcondition."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__354_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                34
+            ],
+            "reason": "The method can exit the while loop without returning a value (there is no return after the loop), so mySqrt fails to produce a result for some inputs."
+        }
+    },
+    "dafny-synthesis_task_id_732__636-677_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                16,
+                17,
+                18
+            ],
+            "reason": "The loop only appends ':' when IsSpaceCommaDot(s[i]) is true and lacks an else branch to append the original s[i], so s' does not get constructed to the same length/content as s."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is the constant 'false', so the loop never executes and f remains 1 instead of computing the factorial, producing incorrect results for n>1."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__378-1087_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "An unconditional 'break' at the start of the loop prevents any divisor checks from running, so test_prime always exits the loop and returns true even for composite i."
+        }
+    },
+    "dafny-synthesis_task_id_741__283-310_CBE.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The function has an immediate 'return true;' (line 5) that makes it always return true and skip the actual string checks."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__41_LVR_3.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                3
+            ],
+            "reason": "The variable i is initialized to 3 (line 3) instead of 2, so s is [1,3,3,4,5] while the subsequent assertions expect the element at index 1 to be 2."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__459_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "Line 23 uses x := x - y * k (subtracting y*k) instead of adding y*k, which breaks the loop invariant (and can make x negative despite nat) \u2014 it should be x := x + y * k."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__333_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The while loop uses the condition 'rest == []' instead of 'rest != []', so it only iterates when the remaining sequence is empty rather than while elements remain to be processed."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__318_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop wrongly updates the accumulator with subtraction (r := b - r) instead of multiplying by the base (r := b * r), so r does not accumulate the power correctly."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__-_ODL_Sub-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9,
+                12
+            ],
+            "reason": "The assignments r := 2 * s + 6 and s := 3 are incorrect attempts to recover X and Y from p and q (they should compute X = q - 3 and Y = p - 2*(q - 3)), causing the subsequent asserts and the postcondition to fail."
+        }
+    },
+    "dafny-synthesis_task_id_741__317-338_SWS.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The code reads s[0] to initialize firstChar before checking that |s| > 0, which can cause an out-of-bounds access and violates the required length condition."
+        }
+    },
+    "dafny-synthesis_task_id_267__350_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body uses subtraction (sum := sum - i * i) instead of addition, so the accumulator is decremented rather than accumulating the squares of odd numbers."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__123_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in add_by_inc is 'while i == y' (line 6) instead of 'while i < y', causing the loop to run at the wrong times and produce incorrect results."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__205_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop updates r by multiplying (r := r * n) instead of adding n each iteration (should be r := r + n), so r does not accumulate n and the product is incorrect."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__317_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The outer loop uses 'while r <= n' (off-by-one) so r can be incremented to n+1 and violate the loop invariant; the guard should be 'r < n' to maintain the invariant and compute Factorial(n)."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__143_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8,
+                9,
+                11,
+                12
+            ],
+            "reason": "M1's recursion uses incorrect signs and adjustments (calling M1(-x, ...) and M1(x-1, ...) with A1(..., y)), so the recursion moves away from the base case and produces nontermination/incorrect results."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__213_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition 'y >= 0' allows one extra iteration when y == 0, causing z to be incremented one too many times and return x*x + x instead of x*x."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__457_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is incorrect (e < 0) so the loop never runs for nat e; it should be e > 0, causing the method to always return 1 for y>0."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__208_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The SumUpTo method uses 'while true' (line 14) instead of a guard like 'while i < n', causing the loop to never terminate and violate the invariants/postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_741__278_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8,
+                10,
+                14
+            ],
+            "reason": "The code indexes s[0] without handling the empty string and the loop runs up to i = |s| (inclusive), causing an out-of-bounds access s[i] (off-by-one and missing empty-string check)."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__144-365_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The stray 'break;' inside the loop (line 14) causes the loop to exit immediately so the updates never run and c remains 0, violating the postcondition for n>0."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop condition 'while d >= x' includes the case d == x, causing the else branch to set x := x - d to 0 and violate the invariant x > 0; the loop should stop when d == x (e.g., while d != x)."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The base-case conditional is incorrect \u2014 it uses 'if x > 0' instead of checking 'x == 0', causing positive x to return 0 and zero to recurse incorrectly."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__294_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The while loop condition is reversed (i >= |nums| instead of i < |nums|), so the loop never runs and duplicates are never detected."
+        }
+    },
+    "dafny-synthesis_task_id_113__236_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The condition uses '|s| < 0' (which is never true) instead of detecting an empty string (e.g. '|s| == 0'), so empty inputs are incorrectly accepted."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__155_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'n <= N', allowing one extra iteration that increments n to N+1 and thus violates the invariant 0 <= n <= N (and the decreases measure), so it should be 'n < N'."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_sum__224_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted ('while k <= 0') so the loop never runs for positive n; it should loop while k > 0, causing the subsequent assertions about k==0 and the accumulation to fail."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__174-329_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                16
+            ],
+            "reason": "The loop body contains an unconditional 'break;' (line 16) which prevents advancing i and updating s, so the method never computes the required sum and the postcondition fails for n>0."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__513_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The midpoint is computed as 'var mid := l + r - 2;' (line 25) instead of taking the average (e.g. (l + r)/2), so mid gets wrong values and the binary search logic breaks."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1092_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10,
+                11,
+                12
+            ],
+            "reason": "The base-case conditional in SearchRecursive is inverted\u2014'if j >= i' causes an immediate k := -1 return for all valid inputs instead of only when the interval is empty (j <= i or j == i)."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__786_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13,
+                14,
+                15
+            ],
+            "reason": "The loop unconditionally appends the delimiter first (the condition 'i >= 0' is always true) and then the number, causing the wrong ordering and lengths; it should append the number first and only append the delimiter between elements."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__280-434_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "The unconditional 'break' inside the for-loop in max causes the loop to exit immediately, preventing any comparisons/updates and leaving result as numbers[0] instead of the actual maximum."
+        }
+    },
+    "dafny-synthesis_task_id_445__261_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is reversed (uses 'i > |a|' instead of 'i < |a|'), so the loop never executes and result remains empty instead of being filled with element-wise products."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__148-276_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop contains an unconditional 'break' (line 15) that prevents the loop body from executing, so r stays 0 and the postcondition r == n * n fails for n>0."
+        }
+    },
+    "dafny-synthesis_task_id_555__242_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The for loop uses 'to n - 1' (off-by-one), so it iterates only up to n-1 and omits adding the nth term, causing the sums to be computed for 1..n-1 instead of 1..n."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__336_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assignment uses multiplication (r := r * (2 * s) + 6) instead of the intended subtraction (r := r - (2 * s) + 6), so r does not become Y as required."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__333_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                18,
+                20
+            ],
+            "reason": "The loop is 'while true' instead of checking that rest is non-empty, which leads to out-of-bounds accesses at rest[0] and rest[1..] when rest becomes empty."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__199-312_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The stray 'break;' on line 18 immediately exits the loop in SumUpTo, so the loop body never updates r and i and the postcondition r == sum_up_to(n) cannot be satisfied."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__166_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The while condition is wrong: it uses 'x == 0' instead of looping while x > 0 (or x != 0), so the loop is skipped for positive x leaving z != 0 and it decrements into negative x when x == 0."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__148_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "z is incorrectly initialized to x + y instead of x * y, which violates the loop invariant z == x * y and prevents the postcondition from holding."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop guard is incorrect (uses 'while k == 0') so the loop only runs when k equals 0 instead of iterating while k is nonnegative (e.g., 'k >= 0'), preventing the recurrence from being applied for positive n."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__672_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "The loop guard is 'while bb < 0' instead of 'while bb > 0', so the loop never executes for the required positive b and r is not computed."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__554_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop uses 'while true' without a termination condition (it never checks idx < |values|), which causes an out-of-bounds access when idx reaches |values|."
+        }
+    },
+    "t1_MF_tmp_tmpi_sqie4j_exemplos_introducao_ex4__178-296_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "An unconditional 'break' inside the loop prevents any iterations, leaving r unchanged (1) and violating the postcondition r == Fat(n) for n > 0."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__354_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition is reversed (while l > r) so the binary-search loop never executes (or terminates incorrectly), preventing the method from finding and returning the correct integer square root."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__540-554_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7,
+                17
+            ],
+            "reason": "The set s is never updated inside the loop (missing s := s + {num} before incrementing i), so s remains empty and the membership invariant/result is violated."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop uses 'if true' instead of testing 's[i] == ' '', so every character is unconditionally replaced by ch rather than only replacing spaces."
+        }
+    },
+    "dafny-synthesis_task_id_732__319-320_CIR_char.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The variable s' is incorrectly initialized to ['a','b','c'] instead of an empty string, violating the invariant |s'| == i and leading to wrong length/invariant failures."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__599_COR_Or.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                22
+            ],
+            "reason": "The inner loop condition uses logical OR (||) instead of AND (&&), causing the loop to evaluate r[k-1] when k==0 (out-of-bounds) and to decrement k incorrectly."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__511-523_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The assertion on line 23 incorrectly drops the a * k term from the equality (missing an update b := a * k + b before scaling a), so the loop invariant is not maintained."
+        }
+    },
+    "dafny-synthesis_task_id_743__229-459_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body immediately executes an unconditional 'break;', so the loop never appends elements to 'rotated' and returns an empty sequence instead of the rotated result."
+        }
+    },
+    "dafny-synthesis_task_id_273__262_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop guard uses the wrong comparison (i >= |a|) instead of i < |a|, causing the loop to not iterate correctly (or to run when it shouldn't), which breaks the intended element-wise subtraction and length invariant."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__104_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5
+            ],
+            "reason": "The base-case in M1 is written as 'if false' (line 5) instead of checking for x == 0, so the recursion has no proper base case and leads to incorrect/nonterminating behavior."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__395_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The inner condition uses 'z >= x' (line 7) reversed, causing z to be chosen when x is smaller; it should compare z <= x so the minimum is selected."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__375_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "In method max the loop uses the wrong comparison and assignment (it updates result when numbers[i] <= result, thus choosing smaller values) instead of updating when numbers[i] > result, so it computes a minimum rather than the maximum."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in mroot1 uses '(r+1)*(r+1) < n' instead of '<= n', causing the loop to stop too early for perfect squares and produce an r with (r+1)*(r+1) == n, violating the postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_399__258_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses i <= |a| (off-by-one), so the loop runs with i == |a| and the body accesses a[i] and b[i] out of bounds."
+        }
+    },
+    "Clover_cal_sum__124-236_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The stray 'break;' at line 11 causes the loop to exit immediately so the body never executes and s remains 0 instead of accumulating the sum."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__457_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is the constant 'false', so the loop never runs and Pot always returns 1 instead of iteratively computing x^y (it should test e>0 or similar)."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__243_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition uses 'e >= 0' (line 15), which is always true for nat and causes underflow/non-termination when e == 0; it should be 'e > 0' (or e != 0)."
+        }
+    },
+    "dafny-synthesis_task_id_741__271-310_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7,
+                11
+            ],
+            "reason": "The loop uses 'for i := 1 to |s|' so i can become |s|, and then the access s[i] (line 11) is out-of-range, an off-by-one error in the loop bound."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__148_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The initial assignment z := x - y is incorrect\u2014z should be initialized to x * y so the loop invariant z == x * y holds and the postcondition z == 0 is satisfied."
+        }
+    },
+    "dafny-synthesis_task_id_267__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12,
+                13
+            ],
+            "reason": "The loop body incorrectly assigns sum := i * i and resets i := 2 instead of accumulating the square (sum := sum + i * i) and advancing the odd term (i := i + 2), breaking the invariant and final result."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__123_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop in add_by_inc uses 'while true' (line 6) so the termination metric y - i cannot be shown to reach 0 and the loop never stops; the guard should depend on i (e.g. i < y or i != y)."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__-_ODL_Mul-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The variable z is initialized to x (line 7) instead of x*y, which violates the loop invariant z == x * y at loop entry and prevents verification."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__235-245_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop body never updates r (missing r := r + x), so the invariant r == i * i and thus the postcondition r == n * n cannot be maintained."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__206-392_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The unconditional 'break;' inside the loop prematurely exits before updating z and y, so the loop never accumulates x and the result is incorrect."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__333_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The outer while uses 'rest < []' (a sequence comparison) instead of checking non-emptiness (e.g., rest != [] or |rest| > 0), so the loop condition is incorrect."
+        }
+    },
+    "RollingMax__511_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "The loop body unconditionally assigns result := numbers[i] (using 'if true') instead of updating only when numbers[i] > result, violating the isMax invariant."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__457_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop guard is 'while e == 0' (line 15), so the loop runs only when the exponent is zero instead of iterating while e > 0 (or e != 0), causing incorrect results."
+        }
+    },
+    "dafny-synthesis_task_id_267__189-383_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "An unconditional 'break;' on the first line of the loop causes the loop body to never execute, so the sum is never accumulated and the postcondition is violated."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__152_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The while loop condition is reversed (i >= n) instead of the correct i < n, so the loop does not iterate for n>0 and behaves incorrectly for n=0."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__932_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33
+            ],
+            "reason": "The loop's if/else-if conditions are incorrect and swapped so the odd case never adds to r (the first branch tests for odd but performs the even update and the else-if repeats the odd test and is unreachable)."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__402_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'm >= 0' instead of 'm > 0', causing the body to execute when m == 0 and then decrement m below zero (breaking the intended iteration and nat assumption)."
+        }
+    },
+    "dafny-synthesis_task_id_3__188-416_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The stray unconditional 'break;' at line 11 causes the loop to exit immediately so the method never checks any divisors and thus computes the wrong result."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__220_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is k <= n instead of k < n, allowing k to become n+1 and thus violate the loop invariants and the decreases measure."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop uses the condition 'f != i' instead of 'f < i', so the verifier cannot conclude that f < i inside the loop (needed to show the found divisor is strictly less than i and thus that IsPrime(i) is false)."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_tutorial_maximum__554_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'idx == |values|' instead of 'idx < |values|', so the loop never iterates and the method returns the first element instead of the maximum."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__-_ODL_Sub-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9,
+                12
+            ],
+            "reason": "The updates are incorrect: line 9 (r := r + 6) fails to compute Y from r and s (it should subtract 2*s then add 6), and line 12 (s := s) does not convert s from X+3 to X (it should subtract 3), so the postcondition cannot be reached."
+        }
+    },
+    "dafny-synthesis_task_id_741__278_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5,
+                10
+            ],
+            "reason": "The base-case check is inverted (if |s| != 1 returns true) and the for-loop upper bound is off-by-one (iterating to |s| causes out-of-range access), so the method returns true for most inputs and can index s out of bounds instead of correctly handling |s| <= 1 and iterating up to |s|-1."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1610-1636_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                59,
+                60
+            ],
+            "reason": "The loop body never updates 'product' (missing product := product * alpha) before incrementing i, so the invariant product == power(i) cannot be maintained after i := i + 1."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__457_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop uses 'while true' (line 15), causing an infinite loop because it never checks or stops based on the exponent e (it should loop while e > 0 / e != 0 and include a decreases clause)."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop uses 'while true' and thus never terminates for prime inputs\u2014there is no termination condition to return true after checking all possible divisors."
+        }
+    },
+    "dafny-synthesis_task_id_732__689-698_SWS.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The method returns immediately on line 11 before executing the loop that builds the result, so s' remains empty and the postconditions are not satisfied."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__182_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The while loop condition is reversed ('i > n' instead of 'i < n'), so the loop never executes for nonnegative n and s remains 0, violating the postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The while loop condition is inverted (uses 'i >= n / 2' instead of 'i <= n / 2'), causing the loop to run in the wrong cases (e.g., testing i == 2 for n == 2) and produce incorrect results."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__283-467_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The unconditional 'break;' at line 23 exits the while loop immediately so x and y are never reduced to their gcd, preventing the postcondition d == gcd(m,n) from being established."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__208_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is reversed (while i > n) so the loop never executes for nonnegative n, causing r to remain 0 instead of being incremented to sum_up_to(n)."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__318_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop incorrectly updates r with addition (r := b + r) instead of multiplication (r := b * r), so the method computes repeated addition instead of exponentiation."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop condition is inverted ('while f >= i' instead of iterating while f < i'), so the loop never runs for typical inputs and composites are not detected."
+        }
+    },
+    "dafny-synthesis_task_id_113__236_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The conditional incorrectly uses 'if false' instead of checking for an empty string (e.g. |s| == 0), so the empty-string case is not handled and result remains true for \"\"."
+        }
+    },
+    "dafny-synthesis_task_id_555__226-478_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The stray 'break;' inside the loop causes the loop to exit immediately so the sum accumulators are never updated and the result remains zero instead of computing the intended sums."
+        }
+    },
+    "dafny-synthesis_task_id_113__478-493_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The for loop uses an inclusive upper bound 'to |s|' causing i to reach |s| and access s[i] out-of-bounds (off-by-one); it should iterate only up to |s|-1."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__143_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "mroot1's loop condition incorrectly uses r + 1 + (r + 1) <= n (i.e. 2*(r+1) <= n) instead of (r + 1) * (r + 1) <= n, so it does the wrong comparison for the square root loop."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The condition is inverted: it checks s[i] > ' ' (replacing non-space characters) instead of checking s[i] == ' ' to replace only spaces with ch."
+        }
+    },
+    "Workshop_tmp_tmp0cu11bdq_Lecture_Answers_triangle_number__332_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body sets n := n * 1 instead of incrementing n (should be n := n + 1), so n never advances and the accumulation/termination are incorrect."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assignment r := 6 incorrectly overwrites r instead of computing r := r - 2*X (to extract Y from p = 2*X + Y), so r never becomes Y as required."
+        }
+    },
+    "dafny-synthesis_task_id_555__402-434_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body only updates sumNumbers and never updates sumCubes (it should accumulate i^3), so sumCubes remains wrong and the postcondition/invariants fail."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is reversed (while i > n) so the loop never executes for n >= 1, leaving f equal to 1 instead of iteratively computing the factorial."
+        }
+    },
+    "dafny-synthesis_task_id_3__196_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is reversed (using 'i >= n / 2' instead of 'i <= n / 2'), so the loop often never iterates and non-prime divisors are not checked."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__321_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop updates c with c - k instead of c + k, so c decreases rather than being incremented by 3*i*i+3*i+1 and thus fails to track i^3."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__672_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                21
+            ],
+            "reason": "The loop condition is inverted ('while bb == 0'), so the multiplication loop never executes for positive b (it should be 'while bb != 0')."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted (while k < 0) so the loop never executes for nonnegative n, preventing the iterative recurrence from being applied; it should be while k >= 0."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_C_convert_examples_11__123-244_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The stray 'break;' on line 11 causes the loop to exit immediately so i and j never get updated (remain 0), violating the postcondition j == 2 * x."
+        }
+    },
+    "dafny-synthesis_task_id_741__278_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                5,
+                6
+            ],
+            "reason": "The initial length check is inverted\u2014it returns true when |s| > 1 instead of returning early for |s| <= 1, causing premature true results (and possible out-of-bounds access)."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__132_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition uses 'm >= 0' (line 7) which is off-by-one and causes one extra iteration (violating the intended invariant and producing a wrong result) instead of using 'm > 0'."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_Generated_Code_rand__166_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is inverted (while x < 0) so the loop never runs for nonnegative x, leaving z = x*y and violating the postcondition (it should be while x > 0)."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__213_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is hardcoded as 'while true' (line 7) instead of a condition like 'while y > 0', causing an unbounded/infinite loop that breaks the intended termination and invariant reasoning."
+        }
+    },
+    "cs245-verification_tmp_tmp0h_nxhqp_A8_Q2__308_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The top-level condition is the constant 'false', so the branch that uses z is never taken and the method computes only min(x,y) rather than the minimum of x,y,z."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assignment r := r - 2 * s subtracts 2*(X+3) without adding back 6, so r becomes Y-6 instead of Y, breaking subsequent assertions and the final result."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__513_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The midpoint is computed as 'l + r + 2' instead of taking the average (e.g., 'l + (r - l) / 2' or '(l + r) / 2'), producing incorrect mid values and breaking the binary search."
+        }
+    },
+    "ProjectosCVS_tmp_tmp_02_gmcw_Handout 1_CVS_handout1_55754_55780__663-1178_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                26
+            ],
+            "reason": "The stray 'break;' at line 26 prematurely exits the while loop in peasantMult, preventing the algorithm from executing and producing the correct product."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p2__342_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                9
+            ],
+            "reason": "The assignment r := (r - 2 * s) * 6 erroneously multiplies by 6 instead of adding 6, so r becomes 6*Y - 36 rather than Y and later assertions fail."
+        }
+    },
+    "dafny-synthesis_task_id_770__413_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body uses subtraction (sum := sum - i * i * i * i) instead of adding each fourth power, causing the accumulated sum to be wrong and violate the invariant/postcondition."
+        }
+    },
+    "dafny-synthesis_task_id_605__197_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The while loop condition uses 'i <= n * 2' so the loop eventually tests i == n (n % n == 0) and marks primes as composite; it should iterate only while i < n."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__460_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                25
+            ],
+            "reason": "The loop's conditional uses 'if d == x' instead of 'if d > x', making the intended subtraction branch unreachable and breaking the Euclidean step."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1476_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                55
+            ],
+            "reason": "The loop guard is incorrect (while i == n) so the loop does not iterate to increment i up to n; it should use a condition like i < n so the loop runs until i equals n."
+        }
+    },
+    "dafny-synthesis_task_id_3__200_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The while loop condition 'i <= n + 2' is wrong and allows i to reach n (so n % n == 0), causing composites to be detected incorrectly; it should only iterate with i < n (or equivalent) so divisors checked are less than n."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__110_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition is inverted: it uses 'while i >= a' instead of 'while i < a', so the loop does not iterate correctly and c is not computed as a*a."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition 'while x <= y' is incorrect\u2014 it should loop until x == y (e.g., 'while x != y'), otherwise the loop can exit when x > y and d := x will not equal gcd(m,n)."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_example_DafnyIntro_01_Simple_Loops__1084-1192_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The Gauss method's loop contains an unconditional 'break', so the loop exits immediately and never updates i or sum, violating the postcondition for n>0."
+        }
+    },
+    "Software-Verification_tmp_tmpv4ueky2d_Contains Duplicate_contains_duplicate__294_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop uses 'while true' (line 8) instead of iterating while i < |nums|, causing an out-of-bounds access nums[i] when i == |nums| and preventing correct termination."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__317_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is the literal 'false', so the loop never executes and u remains 1, causing the method to return an incorrect result (not Factorial(n))."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__327_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop mistakenly uses z := z * x instead of z := z + x, so z never accumulates x and the method returns 0 instead of x * x."
+        }
+    },
+    "dafny-synthesis_task_id_759__279-531_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "An unconditional 'break;' as the first statement inside the loop causes the loop to exit immediately, so no characters are ever checked for a '.' with exactly two characters following it."
+        }
+    },
+    "se2011_tmp_tmp71eb82zt_ass1_ex4__213_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is 'false', so the loop never runs and z remains 0 instead of accumulating x*x (it should use a condition like 'y > 0')."
+        }
+    },
+    "RollingMax__511_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "In method max the loop updates result when numbers[i] < result (choosing the smaller value) instead of when numbers[i] > result, so it computes a minimum rather than the required maximum."
+        }
+    },
+    "dafny_examples_tmp_tmp8qotd4ez_leetcode_0069-sqrt__354_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition uses 'while l == r' (line 18) instead of a relational condition like 'l <= r' or 'l < r', so the loop is skipped for most inputs and the method fails to compute/return the square root."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_5__-_ODL_Add-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13,
+                15
+            ],
+            "reason": "Inside the loop the code assigns interspersed to single-element sequences (interspersed := [delimiter]; and interspersed := [numbers[i]];) instead of appending to the existing sequence, so the result is not accumulated correctly."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__333_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                13
+            ],
+            "reason": "The outer loop uses the constant condition 'false' (line 13), so the insertion loop never executes and r remains empty, violating the ensures for non-empty inputs."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__110_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition uses 'i <= a', causing one extra iteration that produces c=(a+1)^2 and breaks the postcondition/invariant (it should be 'i < a')."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__291_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop condition uses 'while x >= y' which is incorrect (it skips iteration when x < y and runs when x == y causing y to become 0); it should loop until the two values are equal (e.g., 'while x != y')."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__314-320_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                16
+            ],
+            "reason": "The local variable x is declared but not initialized (it should be set to n before the loop), causing use of an uninitialized value in the loop and invariants."
+        }
+    },
+    "MFES_2021_tmp_tmpuljn8zd9_FCUL_Exercises_8_sum__300_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                16
+            ],
+            "reason": "The loop decrements i (i := i - 1) instead of incrementing it, violating the loop invariant and producing the wrong sum."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop condition uses 'f <= i', so when f reaches i the code detects i % i == 0 and returns false, incorrectly classifying primes (the loop should stop before f == i)."
+        }
+    },
+    "dafny-synthesis_task_id_445__261_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'i == |a|' instead of 'i < |a|', so the loop either never executes for non-empty sequences or behaves incorrectly for empty ones, preventing proper iteration over elements."
+        }
+    },
+    "dafny-synthesis_task_id_267__354_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop adds (i + i) (twice the odd number) instead of i * i, so it accumulates 2*i rather than the square of the odd numbers."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__57_LVR_2.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                4
+            ],
+            "reason": "The sequence s is initialized as [2, i, 3, 4, 5] so its first element is 2, but the assertions expect s to be [1, 2, 3, 4, 5], causing the s[..|s|-1] == [1, 2, 3, 4] check to fail."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1468-1662_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                51
+            ],
+            "reason": "An unintended 'break' on line 51 immediately exits the loop so the loop never increments i or updates product, violating the postconditions/assertions that i == n and product == power(n, alpha)."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__226_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted\u2014using 'while k == 0' prevents iterating for n>0 (it should be 'while k != 0' or similar), so the loop body never executes for positive n and the computation/invariants fail."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                30
+            ],
+            "reason": "The post-loop assertion 'assert k < 0;' is too strong because k can be 0 (for n divisible by 5), so the code should allow k <= 0 (or otherwise handle k == 0)."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex1__132_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is inverted (uses 'm <= 0' instead of 'm > 0'), so the loop runs at the wrong times and the repeated-addition algorithm does not execute correctly for positive x."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__157_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The loop uses 'while true' (line 10), causing an infinite loop and no termination condition\u2014 it should loop while i < n so the algorithm can stop after n iterations."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_fatorial2__180_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is 'i < n' instead of 'i <= n', so the loop runs one fewer iteration and f is not multiplied by n, yielding an incorrect factorial."
+        }
+    },
+    "dafny-synthesis_task_id_230__441_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The code uses s[i] < ' ' instead of s[i] == ' ', so it replaces characters with codepoints below space rather than replacing actual space characters."
+        }
+    },
+    "dafny-synthesis_task_id_732__586-602_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11,
+                16,
+                17
+            ],
+            "reason": "The for-loop uses an inclusive bound 'to |s|' causing out-of-bounds access and the then-branch of the if is empty (it should append ':'), so spaces/commas/dots are not replaced and the length/invariants are violated."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__152_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop uses 'i <= n' (off-by-one) so the loop runs one iteration too many, producing c == (n+1)^3 instead of n^3."
+        }
+    },
+    "dafny-synthesis_task_id_732__-_ODL_Add-right.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11,
+                17,
+                19
+            ],
+            "reason": "The loop uses an incorrect inclusive upper bound (line 11) leading to potential out-of-bounds access, and both branches (lines 17 and 19) fail to append the required characters to s', so the result is never constructed as specified."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in mroot1 uses '(r + 1) * (r + 1) != n', so it only stops for perfect squares and can strictly increase r past the invariant (violating r*r <= n); it should instead test '(r + 1) * (r + 1) <= n' (or equivalently stop when (r+1)^2 > n)."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__60-60_AOI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                4
+            ],
+            "reason": "The sequence s is initialized with -i (yielding -2) instead of i, so the second element is negative while the subsequent assertions expect a positive 2."
+        }
+    },
+    "cs357_tmp_tmpn4fsvwzs_lab7_question5__143_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The 'else if' on line 7 incorrectly tests 'x == 0' instead of 'x < 0', so negative x cases are never handled and the recursion/multiplication logic is broken."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_potencia__532_AOR_Add.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "The loop uses r := r + b (addition) instead of r := r * b (multiplication), violating the multiplicative invariant and producing sums rather than powers."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_AI_agent_verify_examples_Cube__152_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition is hardcoded as 'false' so the loop never runs and c remains 0 instead of being updated to compute n^3."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_dafny2_TuringFactorial__407-559_LBI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                24
+            ],
+            "reason": "The inner loop contains an immediate 'break;' (line 24) which prevents the updates u := u + v and s := s + 1 from executing, so u is never multiplied to become Factorial(r+1)."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__384-428_CBE.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17
+            ],
+            "reason": "In method max the loop unconditionally sets result := numbers[i] on each iteration instead of updating it only when numbers[i] is greater, so the algorithm returns the last element rather than the maximum."
+        }
+    },
+    "Program-Verification-Dataset_tmp_tmpgbdrlnu__Dafny_basic examples_sumto_sol__289_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                18
+            ],
+            "reason": "In SumUpTo's loop the statement r := r * 1 leaves r unchanged instead of incrementing it (should be r := r + 1), breaking the loop invariant r == sum_up_to(i) after i is incremented."
+        }
+    },
+    "dafny-synthesis_task_id_770__-_ODL_Mul-left.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop adds the odd number i itself instead of its fourth power (should add i*i*i*i), so the computed sum does not match the specified formula."
+        }
+    },
+    "Metodos_Formais_tmp_tmpql2hwcsh_Invariantes_multiplicador__402_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop condition is wrong: it uses 'while m <= 0' (causing the loop to be skipped for positive m) instead of looping while m > 0, so the multiplication body never executes for x>0."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex06-solution__427_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The loop uses 'if x != y' instead of 'if x > y', causing subtraction in the wrong direction when x < y and violating the algorithm's invariants."
+        }
+    },
+    "M2_tmp_tmp2laaavvl_Software Verification_Exercices_Exo9-Carre__205_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop update on line 11 sets c := (c + 2 * i) * 1, which omits the required +1 (c should become c + 2*i + 1) to maintain c == (i+1)*(i+1) and satisfy the postcondition."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_pow__220_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                14
+            ],
+            "reason": "The loop condition is inverted (while k >= n) \u2014 it should be while k < n, so as written the loop won't execute when k < n and the intended inductive updates to x and k never occur."
+        }
+    },
+    "Dafny_Verify_tmp_tmphq7j0row_dataset_bql_exampls_Square__157_ROR_Eq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The while loop condition is 'i == n' instead of 'i < n', so the loop fails to iterate for n>0 and r is not computed correctly."
+        }
+    },
+    "dafny-synthesis_task_id_605__193_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                7
+            ],
+            "reason": "The loop uses `while true`, so for prime inputs it never terminates (no divisor found) \u2014 the loop should stop when i reaches n (e.g., `while i < n`)."
+        }
+    },
+    "dafny-synthesis_task_id_399__258_ROR_Ge.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The while loop condition is inverted (uses 'i >= |a|' instead of 'i < |a|'), so the loop never iterates correctly and leads to wrong behavior or out-of-bounds access."
+        }
+    },
+    "Metodos_Formais_tmp_tmpbez22nnn_Aula_2_ex2__243_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop condition is inverted\u2014using 'while e <= 0' instead of 'while e > 0' causes the loop to not iterate for positive exponents."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__221_AOR_Mul.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "The loop body does z := z * 1 instead of incrementing z (should be z := z + 1), so z does not increase with i and the loop invariant/ensures are violated."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_tests_InsertionSortSeq__540-557_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                28
+            ],
+            "reason": "The loop body never updates rest (missing rest := rest[1..]; after inserting x), so rest remains unchanged causing an infinite loop and breaking the intended progress/multiset update."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__735_ROR_Lt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The loop checks 'i % f < 0', which is always false for nonnegative remainders, so divisibility is never detected; it should check 'i % f == 0'."
+        }
+    },
+    "Dafny-Exercises_tmp_tmpjm75muf__Session2Exercises_ExerciseSquare_root__150_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in mroot1 is inverted\u2014using '(r + 1) * (r + 1) > n' should be '(r + 1) * (r + 1) <= n', causing r to increase incorrectly and violate the postcondition."
+        }
+    },
+    "Programmverifikation-und-synthese_tmp_tmppurk6ime_PVS_Assignment_ex_06_Hoangkim_ex_06_hoangkim__335_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                19
+            ],
+            "reason": "The loop guard is 'false' so the subtraction loop never executes, leaving d equal to m instead of computing the gcd(m,n)."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1092_ROR_Neq.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                10
+            ],
+            "reason": "The base-case in SearchRecursive is reversed: it uses 'if j != i' instead of 'if j == i', so the method returns -1 prematurely for non-empty ranges."
+        }
+    },
+    "dafny-synthesis_task_id_273__262_ROR_Le.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                8
+            ],
+            "reason": "The loop condition uses 'i <= |a|' allowing i == |a|' which causes out-of-bounds access a[i]/b[i] and produces a result of length |a|+1 instead of |a| (should be 'i < |a|')."
+        }
+    },
+    "dafny_tmp_tmp59p638nn_examples_realExponent__1572-1600_SDL.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                56
+            ],
+            "reason": "The loop invariant only states i <= n but omits a lower bound (i >= 1), so the verifier cannot establish i > 0 needed to apply powerLemma and thus cannot prove the invariant is preserved."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_mockExam2_p5__292_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                15
+            ],
+            "reason": "The loop header uses 'while true' instead of a guard like 'while k >= 0', so the loop never exits and the decreases k invariant can become negative, breaking termination/invariant reasoning."
+        }
+    },
+    "Prog-Fun-Solutions_tmp_tmp7_gmnz5f_extra_mod2__471_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                23
+            ],
+            "reason": "The update y := x * (k % 4) - y uses subtraction instead of addition, violating the invariant\u2014new y should be x*(k%4) + old y to preserve f2(n) == 5*x*f2(k/3) + new_y."
+        }
+    },
+    "dafny-synthesis_task_id_555__423_AOR_Sub.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                12
+            ],
+            "reason": "The loop body subtracts i*i*i from sumCubes instead of adding it, so the accumulated sum of cubes is computed incorrectly."
+        }
+    },
+    "Dafny_tmp_tmp0wu8wmfr_Heimaverkefni 1_LinearSearch__1116_AOD.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                11
+            ],
+            "reason": "In SearchRecursive the base case incorrectly sets k := 1 instead of returning -1 for the empty interval, violating the postcondition and producing an invalid index."
+        }
+    },
+    "summer-school-2020_tmp_tmpn8nf7zf0_chapter02_solutions_exercise02_solution__387_BBR_false.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                20
+            ],
+            "reason": "The loop guard is 'false' (line 20), so the divisor-checking loop never runs and test_prime always returns true instead of actually testing divisors."
+        }
+    },
+    "dafny-language-server_tmp_tmpkir0kenl_Test_LanguageServerTest_DafnyFiles_symbolTable_15_array__41-41_AOI.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                3
+            ],
+            "reason": "The variable i is incorrectly initialized to -2 (should be 2), causing s[1..] and other sequence assertions to mismatch the expected values."
+        }
+    },
+    "Dafny_tmp_tmpmvs2dmry_examples2__123_ROR_Gt.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                6
+            ],
+            "reason": "The loop condition in add_by_inc is reversed ('while i > y') so the loop never runs to increment z and i; it should be 'while i < y'."
+        }
+    },
+    "llm-verified-eval_tmp_tmpd2deqn_i_dafny_9__375_BBR_true.test.dfy": {
+        "gpt-5-mini": {
+            "lines": [
+                17,
+                18
+            ],
+            "reason": "Inside max the loop contains 'if true' and unconditionally assigns result := numbers[i], so result becomes the last element instead of being updated only when numbers[i] is greater than the current maximum."
+        }
+    }
+}

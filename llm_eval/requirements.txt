@@ -1,0 +1,7 @@
+psutil
+tqdm
+matplotlib
+scipy
+seaborn
+openai
+boto3
