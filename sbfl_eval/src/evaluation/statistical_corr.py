@@ -33,14 +33,10 @@ def get_fair_rank_and_exam(ranked_list, target_lines):
             return fair_rank, exam_score
     return None, None
 
-def get_pass_fail_counts(coverage_file_path, possible_keys):
-    if not os.path.exists(coverage_file_path):
-        return None, None # Using None to indicate missing file
+def get_pass_fail_counts(cov_data, possible_keys):
+    if cov_data is None:
+        return None, None
     
-    with open(coverage_file_path, 'r') as f:
-        cov_data = json.load(f)
-        
-    # Try multiple key formats to guarantee a match
     actual_key = None
     for key in possible_keys:
         if key in cov_data:
@@ -48,7 +44,7 @@ def get_pass_fail_counts(coverage_file_path, possible_keys):
             break
             
     if not actual_key:
-        return -1, -1 # Using -1 to indicate missing key
+        return -1, -1
         
     passed = sum(1 for test in cov_data[actual_key].values() if test.get('passed') == True)
     failed = sum(1 for test in cov_data[actual_key].values() if test.get('passed') == False)
@@ -62,14 +58,12 @@ def main():
     with open(os.path.join(DATASET_ROOT, "ground_truth.json"), 'r') as f: 
         truth_data = json.load(f)
 
-    metric_to_analyze = "ochiai" 
+    metric_to_analyze = "naish2_prox" 
     result_files = [f for f in os.listdir(RESULTS_ROOT) if f.endswith('_results.json')]
     labels = [f.replace('_results.json', '') for f in result_files]
 
-    # Store continuous data: approach -> {ratios: [], exams: [], mrrs: []}
     continuous_data = {label: {'ratios': [], 'exams': [], 'mrrs': [], 'top1s': []} for label in labels}
 
-    # Debug trackers
     missing_cov_files = 0
     missing_keys = 0
 
@@ -79,14 +73,20 @@ def main():
             sbfl_data = json.load(f)
             
         coverage_file = os.path.join(RESULTS_ROOT, f"{label}_coverage.json") 
-            
+        
+        cov_data = None
+        if os.path.exists(coverage_file):
+            with open(coverage_file, 'r') as f:
+                cov_data = json.load(f)
+
         for filename, true_bug_lines in truth_data.items():
             results_key = filename.replace('.dfy', '.test.dfy')
             if results_key in sbfl_data and metric_to_analyze in sbfl_data[results_key]:
                 rank, exam = get_fair_rank_and_exam(sbfl_data[results_key][metric_to_analyze], true_bug_lines)
                 
                 possible_keys = [filename, results_key, filename.replace('.dfy', '')]
-                passes, fails = get_pass_fail_counts(coverage_file, possible_keys)
+                
+                passes, fails = get_pass_fail_counts(cov_data, possible_keys)
                 
                 if passes is None:
                     missing_cov_files += 1
@@ -112,7 +112,6 @@ def main():
     if missing_keys > 0:
         print(f"⚠️ WARNING: Found the coverage file, but could not match {missing_keys} keys inside it.")
 
-    # --- STATISTICAL OUTPUT ---
     print("\n" + "="*80)
     print(" 📈 CONTINUOUS STATISTICAL CORRELATION (Spearman's Rho)")
     print("="*80)
@@ -159,17 +158,14 @@ def main():
             else:
                 print(f"{label:<20} | {len(ratios):<12} | Insufficient data for correlation.")
 
-    # --- VISUALIZATION: SCATTER PLOT WITH TRENDLINE ---
     GRAPHS_ROOT.mkdir(parents=True, exist_ok=True)
     
-    # Calculate grid size based on number of labels
     num_plots = len(labels)
     cols = 2 if num_plots > 1 else 1
     rows = (num_plots + 1) // 2
     
     fig, axes = plt.subplots(rows, cols, figsize=(8 * cols, 6 * rows))
     
-    # Handle the case where axes might not be an array (if rows=1, cols=1)
     if num_plots == 1:
         axes = [axes]
     else:
@@ -182,10 +178,8 @@ def main():
         exams = np.array(continuous_data[label]['exams'])
         
         ax = axes[i]
-        # Use scatter with low alpha so dense clusters get darker
         ax.scatter(ratios, exams, alpha=0.3, color='royalblue', edgecolors='none', s=40)
         
-        # Add a simple polynomial trend line (degree 2 to catch curves)
         if len(ratios) > 10:
             z = np.polyfit(ratios, exams, 2)
             p = np.poly1d(z)
@@ -200,7 +194,6 @@ def main():
         if len(ratios) > 10:
             ax.legend()
 
-    # Hide any unused subplots
     for j in range(i + 1, len(axes)):
         fig.delaxes(axes[j])
 

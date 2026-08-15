@@ -2,6 +2,7 @@ import json
 import csv
 import os
 import sys
+import argparse
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -60,10 +61,11 @@ def get_fair_rank(ranked_list, target_lines):
     if not isinstance(target_lines, list):
         target_lines = [target_lines]
 
+    target_lines = [str(t) for t in target_lines]
     total_lines = len(ranked_list)
     for i, item in enumerate(ranked_list):
-        if item['line'] in target_lines:
-            score = item['score']
+        if str(item['line']) in target_lines:
+            score = round(item['score'], 8)
             block_start = i
             while block_start > 0 and ranked_list[block_start - 1]['score'] == score:
                 block_start -= 1
@@ -76,6 +78,27 @@ def get_fair_rank(ranked_list, target_lines):
             return fair_rank, exam_score
             
     return None, None
+
+""" def get_optimistic_rank(ranked_list, target_lines):
+    if not isinstance(target_lines, list):
+        target_lines = [target_lines]
+
+    target_lines = [str(t) for t in target_lines]
+    total_lines = len(ranked_list)
+    for i, item in enumerate(ranked_list):
+        if str(item['line']) in target_lines:
+            score = round(item['score'], 8)
+
+            block_start = i
+            while block_start > 0 and ranked_list[block_start - 1]['score'] == score:
+                block_start -= 1
+
+            optimistic_rank = block_start + 1 
+            exam_score = optimistic_rank / total_lines if total_lines > 0 else 0
+            
+            return optimistic_rank, exam_score
+            
+    return None, None """
 
 def calculate_stats(ranks_list, exams_list):
     if not ranks_list:
@@ -101,10 +124,16 @@ def calculate_stats(ranks_list, exams_list):
         "total": total
     }
 
-# ==========================================
-# Main Execution
-# ==========================================
 def main():
+    parser = argparse.ArgumentParser(description="Generate tables and plots for SBFL metrics.")
+    parser.add_argument(
+        '--metrics',
+        nargs='+',
+        default=None,
+        help="List of metrics to include in tables and plots. If omitted, all available metrics are shown."
+    )
+    args = parser.parse_args()
+
     if not os.path.isdir(RESULTS_ROOT):
         print(f"Error: Directory '{RESULTS_ROOT}' not found.")
         sys.exit(1)
@@ -124,50 +153,85 @@ def main():
     with open(os.path.join(DATASET_ROOT, "ground_truth.json"), 'r') as f: 
         truth_data = json.load(f)
 
-    metrics = ["ochiai", "tarantula", "dstar"]
+    available_metrics = []
+    with open(file_paths[0], 'r') as f:
+        sample_data = json.load(f)
+        if sample_data:
+            first_key = next(iter(sample_data))
+            available_metrics = list(sample_data[first_key].keys())
+            
+    if not available_metrics:
+        print("Error: Could not determine metrics from result files.")
+        sys.exit(1)
+
+    if args.metrics:
+        invalid = [m for m in args.metrics if m not in available_metrics]
+        if invalid:
+            print(f"\n[ERROR] Invalid metrics selected: {invalid}")
+            print(f"Available metrics in data: {available_metrics}")
+            sys.exit(1)
+        metrics = args.metrics
+    else:
+        metrics = available_metrics
+        
+    print(f"Processing Metrics: {', '.join(metrics)}")
+
     ranks = {label: {m: [] for m in metrics} for label in raw_labels}
     exams = {label: {m: [] for m in metrics} for label in raw_labels}
     stats = {label: {} for label in raw_labels}
 
-    # Tracking 0-failing test mutants
     zero_fails = {label: 0 for label in raw_labels}
     total_mutants = {label: 0 for label in raw_labels}
 
-    # Extract ranks for all approaches
+    all_data = {}
     for i, res_file in enumerate(file_paths):
         raw_label = raw_labels[i]
         with open(res_file, 'r') as f:
-            data = json.load(f)
-            
-        for filename, true_bug_lines in truth_data.items():
-            results_key = filename.replace('.dfy', '.test.dfy')
+            all_data[raw_label] = json.load(f)
+    common_triggered_mutants = []
+
+    for filename, true_bug_lines in truth_data.items():
+        results_key = filename.replace('.dfy', '.test.dfy')
+        
+        triggered_by_all = True
+        
+        for raw_label in raw_labels:
+            data = all_data[raw_label]
             if results_key in data:
                 total_mutants[raw_label] += 1
                 
-                # Check if the highest score is 0.0 (meaning 0 failing tests triggered)
-                if data[results_key]["ochiai"] and data[results_key]["ochiai"][0]["score"] == 0.0:
+                if not data[results_key]: 
                     zero_fails[raw_label] += 1
+                    triggered_by_all = False
+                else:
+                    first_metric = next(iter(data[results_key]))
+                    metric_data = data[results_key].get(first_metric)
+                    
+                    if not metric_data or metric_data[0]["score"] == 0.0:
+                        zero_fails[raw_label] += 1
+                        triggered_by_all = False
+            else:
+                triggered_by_all = False
+                
+        if triggered_by_all:
+            common_triggered_mutants.append((results_key, true_bug_lines))
+
+    print(f"\n[INFO] Found {len(common_triggered_mutants)} mutants triggered by ALL strategies.")
+    print("[INFO] SBFL metrics will be calculated strictly on this common subset.")
+
+    for results_key, true_bug_lines in common_triggered_mutants:
+        for raw_label in raw_labels:
+            data = all_data[raw_label]
+            
+            for metric in metrics:
+                if metric not in data[results_key]:
                     continue
+                    
+                r, e = get_fair_rank(data[results_key][metric], true_bug_lines)
 
-                for metric in metrics:
-                    r, e = get_fair_rank(data[results_key][metric], true_bug_lines)
-
-                    bug_line_score = next((item['score'] for item in data[results_key][metric] if item['line'] in true_bug_lines), 0.0)
-
-                    if r is not None: 
-                        ranks[raw_label][metric].append(r)
-                        exams[raw_label][metric].append(e)
-
-    # --- CONSOLE OUTPUT: FAILING TEST STATS ---
-    print("\n" + "="*50)
-    print(" 📉 ZERO-FAILURE MUTANT STATISTICS")
-    print("="*50)
-    for raw_label in raw_labels:
-        formatted_label = clean_label(raw_label)
-        total = total_mutants[raw_label]
-        zero = zero_fails[raw_label]
-        pct = (zero / total) * 100 if total > 0 else 0
-        print(f"{formatted_label:<12}: {zero:<4} out of {total:<4} mutants ({pct:.1f}%) had 0 failing tests. (Valid = {(total-zero):<4})")
+                if r is not None: 
+                    ranks[raw_label][metric].append(r)
+                    exams[raw_label][metric].append(e)
 
     # --- CONSOLE OUTPUT & STATS CALCULATION ---
     print("\n" + "="*100)
@@ -195,15 +259,15 @@ def main():
         for raw_label in raw_labels:
             s = stats[raw_label][metric]
             formatted_label = clean_label(raw_label)
-            m_label = metric.capitalize() if raw_label == raw_labels[0] else ""
+            m_label = metric.replace("_", "\\_").capitalize() if raw_label == raw_labels[0] else ""
             
             latex_rows.append(f"{m_label} & {formatted_label} & {s['top_1_pct']:.1f}\\% & {s['top_3_pct']:.1f}\\% & {s['top_5_pct']:.1f}\\% & {s['mrr']:.3f} & {s['avg_rank']:.2f} & {s['avg_exam']:.2f}\\% \\\\")
         latex_rows.append("\\hline")
 
-    latex_path = os.path.join(TABLES_ROOT, "all_metrics_table.tex")
+    latex_path = os.path.join(TABLES_ROOT, "selected_metrics_table.tex")
     with open(latex_path, 'w') as f:
         f.write("\\begin{table}[htbp]\n\\centering\n")
-        f.write("\\caption{Fault Localisation Performance by Test Generation Strategy and Metric}\n\\label{tab:all_metrics_results}\n")
+        f.write("\\caption{Fault Localisation Performance by Test Generation Strategy and Metric}\n\\label{tab:metrics_results}\n")
         f.write("\\begin{tabular}{l l c c c c c c}\n\\hline\n")
         f.write("\\textbf{Metric} & \\textbf{Strategy} & \\textbf{Top-1 (\\%)} & \\textbf{Top-3 (\\%)} & \\textbf{Top-5 (\\%)} & \\textbf{MRR} & \\textbf{Avg Rank} & \\textbf{EXAM (\\%)} \\\\\n\\hline\n")
         for row in latex_rows:
@@ -215,7 +279,7 @@ def main():
 
     # --- VISUALIZATIONS (INDIVIDUAL GRAPHS) ---
     GRAPHS_ROOT.mkdir(parents=True, exist_ok=True)
-    x_labels = [m.capitalize() for m in metrics]
+    x_labels = [m.replace("_", " ").capitalize() for m in metrics]
 
     plot_configs = {
         "top_1_pct": {"title": "Top-1 Accuracy Across Similarity Coefficients", "ylabel": "Top-1 Accuracy (%)"},
@@ -227,7 +291,7 @@ def main():
     }
 
     for stat_key, config in plot_configs.items():
-        plt.figure(figsize=(8, 6))
+        plt.figure(figsize=(10, 6)) # slightly wider to accommodate more metrics
         
         for raw_label in raw_labels:
             formatted_label = clean_label(raw_label)
@@ -243,6 +307,10 @@ def main():
         plt.ylabel(config["ylabel"])
         plt.xlabel('Similarity Coefficient')
         
+        # Rotate x labels slightly if there are many metrics
+        if len(metrics) > 4:
+            plt.xticks(rotation=45, ha='right')
+            
         plt.legend(title="Strategy", frameon=True, fancybox=True, shadow=True)
         
         filename = f"sbfl_{stat_key}_comparison.png"

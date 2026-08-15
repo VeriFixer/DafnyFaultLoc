@@ -1,8 +1,9 @@
 import json
+import csv
 import os
-import glob
 import sys
-import math
+import argparse
+import glob
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -10,6 +11,8 @@ import numpy as np
 from src.utils.config import (
     DATASET_ROOT,
     RESULTS_ROOT,
+    GRAPHS_ROOT,
+    TABLES_ROOT
 )
 
 # ==========================================
@@ -33,10 +36,7 @@ STRATEGY_COLORS = {
     "Path": "#ff7f0e",
     "Spec": "#2ca02c",
     "SpecBva": "#d62728",
-    "SpecBva+Block": "#9467bd",
-    "SpecBva+Path": "#8c564b",
-    "Spec+Block": "#e377c2",
-    "Spec+Path": "#7f7f7f"
+    "Combined": "#000000"
 }
 
 STRATEGY_MARKERS = {
@@ -44,26 +44,23 @@ STRATEGY_MARKERS = {
     "Path": "s",
     "Spec": "^",
     "SpecBva": "D",
-    "SpecBva+Block": "v",
-    "SpecBva+Path": "p",
-    "Spec+Block": "*",
-    "Spec+Path": "X"
+    "Combined": "*"
 }
 
 LABEL_MAP = {
-    "tests_block": "Block",
-    "tests_path": "Path",
-    "tests_spec": "Spec",
-    "tests_spec_bva": "SpecBva",
-    "combined_spec_bva_block": "SpecBva+Block",
-    "combined_spec_bva_path": "SpecBva+Path",
-    "combined_spec_block": "Spec+Block",
-    "combined_spec_path": "Spec+Path"
+    "block": "Block",
+    "path": "Path",
+    "spec": "Spec",
+    "spec_bva": "SpecBva",
+    "combined": "Combined"
 }
 
 def clean_label(raw_label):
     return LABEL_MAP.get(raw_label, raw_label)
 
+# ==========================================
+# Helper Functions
+# ==========================================
 def get_method_body_lines(content, attribute_idx):
     line_end = content.find('\n', attribute_idx)
     if line_end == -1: line_end = len(content)
@@ -94,27 +91,6 @@ def get_method_body_lines(content, attribute_idx):
             
     return count, curr_idx
 
-def get_fair_rank(ranked_list, target_lines):
-    if not isinstance(target_lines, list):
-        target_lines = [target_lines]
-
-    total_lines = len(ranked_list)
-    for i, item in enumerate(ranked_list):
-        if item['line'] in target_lines:
-            score = item['score']
-            block_start = i
-            while block_start > 0 and ranked_list[block_start - 1]['score'] == score:
-                block_start -= 1
-            block_end = i
-            while block_end < len(ranked_list) - 1 and ranked_list[block_end + 1]['score'] == score:
-                block_end += 1
-            
-            fair_rank = sum(range(block_start + 1, block_end + 2)) / (block_end - block_start + 1)
-            exam_score = fair_rank / total_lines if total_lines > 0 else 0
-            return fair_rank, exam_score
-            
-    return None, None
-
 def get_qualified_files(folder_path, threshold=8):
     qualified = set()
     dfy_files = glob.glob(os.path.join(folder_path, "*.dfy"))
@@ -133,6 +109,28 @@ def get_qualified_files(folder_path, threshold=8):
             if max_len >= threshold:
                 qualified.add(os.path.basename(f))
     return qualified
+
+def get_fair_rank(ranked_list, target_lines):
+    if not isinstance(target_lines, list):
+        target_lines = [target_lines]
+
+    target_lines = [str(t) for t in target_lines]
+    total_lines = len(ranked_list)
+    for i, item in enumerate(ranked_list):
+        if str(item['line']) in target_lines:
+            score = round(item['score'], 8)
+            block_start = i
+            while block_start > 0 and ranked_list[block_start - 1]['score'] == score:
+                block_start -= 1
+            block_end = i
+            while block_end < len(ranked_list) - 1 and ranked_list[block_end + 1]['score'] == score:
+                block_end += 1
+            
+            fair_rank = sum(range(block_start + 1, block_end + 2)) / (block_end - block_start + 1)
+            exam_score = fair_rank / total_lines if total_lines > 0 else 0
+            return fair_rank, exam_score
+            
+    return None, None
 
 def calculate_stats(ranks_list, exams_list):
     if not ranks_list:
@@ -158,211 +156,257 @@ def calculate_stats(ranks_list, exams_list):
         "total": total
     }
 
-def calculate_sbfl_for_file(file_data):
-    all_lines = set()
-    total_failed = 0
-    total_passed = 0
-    
-    for test, info in file_data.items():
-        all_lines.update(info['coverage'])
-        if info['passed']: total_passed += 1
-        else: total_failed += 1
-            
-    results = {"ochiai": [], "tarantula": [], "dstar": []}
-    if not all_lines: return results
-    
-    if total_failed == 0: 
-        return results
-        
-    for line in all_lines:
-        n_cf = 0
-        n_cp = 0
-        
-        for test, info in file_data.items():
-            if line in info['coverage']:
-                if info['passed']: n_cp += 1
-                else: n_cf += 1
-                    
-        n_uf = total_failed - n_cf
-        
-        denom_ochiai = math.sqrt(total_failed * (n_cf + n_cp))
-        ochiai = (n_cf / denom_ochiai) if denom_ochiai > 0 else 0.0
-        
-        fail_ratio = (n_cf / total_failed) if total_failed > 0 else 0.0
-        pass_ratio = (n_cp / total_passed) if total_passed > 0 else 0.0
-        denom_tarantula = fail_ratio + pass_ratio
-        tarantula = (fail_ratio / denom_tarantula) if denom_tarantula > 0 else 0.0
-        
-        denom_dstar = n_cp + n_uf
-        dstar = ((n_cf ** 2) / denom_dstar) if denom_dstar > 0 else 0.0
-        
-        results["ochiai"].append({"line": line, "score": ochiai})
-        results["tarantula"].append({"line": line, "score": tarantula})
-        results["dstar"].append({"line": line, "score": dstar})
-        
-    for metric in results:
-        results[metric].sort(key=lambda x: (-x['score'], x['line']))
-        
-    return results
-
-def merge_coverages(cov1, cov2, label1, label2):
-    merged = {}
-    if cov1:
-        for k, v in cov1.items(): merged[f"{k}_{label1}"] = v
-    if cov2:
-        for k, v in cov2.items(): merged[f"{k}_{label2}"] = v
-    return merged
-
+# ==========================================
+# Main Execution
+# ==========================================
 def main():
-    ref_folder = os.path.join(DATASET_ROOT, "tests_block") 
-    qualified_programs = get_qualified_files(ref_folder, threshold=8)
-    
-    print(f"Filtering: Only including {len(qualified_programs)} programs with >= 8 lines.")
+    parser = argparse.ArgumentParser(description="Calculate complementarity between SBFL strategies.")
+    parser.add_argument(
+        '--metrics',
+        nargs='+',
+        default=None,
+        help="List of metrics to include. If omitted, all available metrics are shown."
+    )
+    parser.add_argument(
+        '--strategies',
+        nargs='+',
+        default=None,
+        help="List of strategies to combine (e.g., Block Spec). If omitted, all found strategies are used."
+    )
+    args = parser.parse_args()
 
-    # 1. Load Standard Result Files
+    if not os.path.isdir(RESULTS_ROOT):
+        print(f"Error: Directory '{RESULTS_ROOT}' not found.")
+        sys.exit(1)
+
     result_files = [f for f in os.listdir(RESULTS_ROOT) if f.endswith('_results.json')]
     if not result_files:
         print(f"Error: No files ending in '_results.json' found in {RESULTS_ROOT}.")
         sys.exit(1)
 
-    standard_labels = [f.replace('_results.json', '') for f in result_files]
-    standard_labels.sort(key=lambda x: clean_label(x))
+    global_labels = [f.replace('_results.json', '') for f in result_files]
+    global_labels.sort(key=lambda x: clean_label(x))
     
-    # 2. Add Combined Labels
-    combined_labels = [
-        "combined_spec_bva_block", 
-        "combined_spec_bva_path",
-        "combined_spec_block",
-        "combined_spec_path"
-    ]
-    all_labels = standard_labels + combined_labels
+    raw_labels = global_labels.copy()
 
-    print(f"Approaches to evaluate: {', '.join([clean_label(lbl) for lbl in all_labels])}")
+    if args.strategies:
+        target_labels = [s.lower() for s in args.strategies]
+        filtered_labels = [lbl for lbl in raw_labels if clean_label(lbl).lower() in target_labels]
+        if len(filtered_labels) < 2:
+            print(f"Error: Found only {len(filtered_labels)} matching strategies. Need at least 2 for complementarity.")
+            sys.exit(1)
+        raw_labels = filtered_labels
 
-    # Load Ground Truth
+    print(f"Global Pool (determining common mutants): {', '.join([clean_label(lbl) for lbl in global_labels])}")
+    print(f"Evaluating Strategies: {', '.join([clean_label(lbl) for lbl in raw_labels])}")
+
     with open(os.path.join(DATASET_ROOT, "ground_truth.json"), 'r') as f: 
         truth_data = json.load(f)
 
-    metrics = ["ochiai", "tarantula", "dstar"]
-    ranks = {label: {m: [] for m in metrics} for label in all_labels}
-    exams = {label: {m: [] for m in metrics} for label in all_labels}
-    stats = {label: {} for label in all_labels}
-    zero_fails = {label: 0 for label in all_labels}
-    total_mutants = {label: 0 for label in all_labels}
+    ref_folder = os.path.join(DATASET_ROOT, "tests_block") 
+    qualified_programs = get_qualified_files(ref_folder, threshold=8)
+    print(f"Filtering: Only including {len(qualified_programs)} programs with >= 8 lines.")
 
-    # ==========================================
-    # Dynamic Coverage Loader
-    # ==========================================
-    all_cov_data = {}
-    for f in os.listdir(RESULTS_ROOT):
-        if f.endswith('_coverage.json'):
-            label = f.replace('_coverage.json', '')
-            with open(os.path.join(RESULTS_ROOT, f), 'r') as fp:
-                all_cov_data[label] = json.load(fp)
+    available_metrics = []
+    with open(os.path.join(RESULTS_ROOT, f"{global_labels[0]}_results.json"), 'r') as f:
+        sample_data = json.load(f)
+        if sample_data:
+            first_key = next(iter(sample_data))
+            available_metrics = list(sample_data[first_key].keys())
+            
+    if not available_metrics:
+        print("Error: Could not determine metrics from result files.")
+        sys.exit(1)
 
-    # Find the specific keys dynamically
-    key_bva = next((k for k in all_cov_data.keys() if "spec_bva" in k), None)
-    key_spec = next((k for k in all_cov_data.keys() if "spec" in k and "bva" not in k), None)
-    key_block = next((k for k in all_cov_data.keys() if "block" in k and "bva" not in k), None)
-    key_path = next((k for k in all_cov_data.keys() if "path" in k and "bva" not in k), None)
+    if args.metrics:
+        invalid = [m for m in args.metrics if m not in available_metrics]
+        if invalid:
+            print(f"\n[ERROR] Invalid metrics selected: {invalid}")
+            sys.exit(1)
+        metrics = args.metrics
+    else:
+        metrics = available_metrics
+        
+    print(f"Processing Metrics: {', '.join(metrics)}")
 
-    if not key_bva: print("⚠️ Warning: SpecBva coverage not found, SpecBva combinations will be empty!")
-    if not key_spec: print("⚠️ Warning: Standard Spec coverage not found, Spec combinations will be empty!")
-    if not key_block: print("⚠️ Warning: Block coverage not found, Block combinations will be empty!")
-    if not key_path: print("⚠️ Warning: Path coverage not found, Path combinations will be empty!")
-
-    # --- PROCESS STANDARD RESULTS ---
-    for raw_label in standard_labels:
-        res_file = os.path.join(RESULTS_ROOT, f"{raw_label}_results.json")
+    # ---------------------------------------------------------
+    # Parse and Store Data Per-Mutant for Complementarity
+    # ---------------------------------------------------------
+    mutant_data = {}
+    
+    for lbl in global_labels:
+        res_file = os.path.join(RESULTS_ROOT, f"{lbl}_results.json")
         with open(res_file, 'r') as f:
             data = json.load(f)
             
         for filename, true_bug_lines in truth_data.items():
             if filename.replace('.dfy', '.test.dfy') not in qualified_programs:
                 continue
-                
+
             results_key = filename.replace('.dfy', '.test.dfy')
-            if results_key in data:
-                total_mutants[raw_label] += 1
+            if results_key not in mutant_data:
+                mutant_data[results_key] = {}
                 
-                # Check for zero fails
-                metric_data = data[results_key]["ochiai"]
-                if not metric_data or metric_data[0]["score"] == 0.0:
-                    zero_fails[raw_label] += 1
-                    continue
-
-                for metric in metrics:
-                    r, e = get_fair_rank(data[results_key][metric], true_bug_lines)
-                    if r is not None: 
-                        ranks[raw_label][metric].append(r)
-                        exams[raw_label][metric].append(e)
-
-    # --- PROCESS COMBINED RESULTS ---
-    for filename, true_bug_lines in truth_data.items():
-        if filename.replace('.dfy', '.test.dfy') not in qualified_programs:
-            continue
+            is_zero_fail = False
+            ranks_dict = {}
+            is_present = results_key in data
             
-        cov_key = filename.replace('.dfy', '.test.dfy')
-        
-        # Grab coverage info
-        cov_bva = all_cov_data[key_bva].get(cov_key, {}) if key_bva else {}
-        cov_spec = all_cov_data[key_spec].get(cov_key, {}) if key_spec else {}
-        cov_block = all_cov_data[key_block].get(cov_key, {}) if key_block else {}
-        cov_path = all_cov_data[key_path].get(cov_key, {}) if key_path else {}
-        
-        combos = {
-            "combined_spec_bva_block": merge_coverages(cov_bva, cov_block, "bva", "block"),
-            "combined_spec_bva_path": merge_coverages(cov_bva, cov_path, "bva", "path"),
-            "combined_spec_block": merge_coverages(cov_spec, cov_block, "spec", "block"),
-            "combined_spec_path": merge_coverages(cov_spec, cov_path, "spec", "path")
-        }
-        
-        for label, merged_cov in combos.items():
-            if not merged_cov:
-                continue
+            if is_present:
+                if not data[results_key]:
+                    is_zero_fail = True
+                else:
+                    first_metric = next(iter(data[results_key]))
+                    metric_data = data[results_key].get(first_metric)
+                    
+                    if not metric_data or metric_data[0]["score"] == 0.0:
+                        is_zero_fail = True
+                    else:
+                        for metric in metrics:
+                            if metric in data[results_key]:
+                                r, e = get_fair_rank(data[results_key][metric], true_bug_lines)
+                                if r is not None:
+                                    ranks_dict[metric] = (r, e)
+                                    
+            mutant_data[results_key][lbl] = {
+                'present': is_present,
+                'zero_fail': is_zero_fail,
+                'ranks': ranks_dict
+            }
+
+    # ---------------------------------------------------------
+    # Aggregate Stats (Including Virtual "Combined" Strategy)
+    # ---------------------------------------------------------
+    all_labels = raw_labels + ["combined"]
+    
+    ranks = {label: {m: [] for m in metrics} for label in all_labels}
+    exams = {label: {m: [] for m in metrics} for label in all_labels}
+
+    common_mutants = {}
+    for m_key, strategies_dict in mutant_data.items():
+        triggered_by_all = True
+        for lbl in global_labels:
+            s_data = strategies_dict.get(lbl, {})
+            if not s_data.get('present', False) or s_data.get('zero_fail', True):
+                triggered_by_all = False
+                break
                 
-            total_mutants[label] += 1
-            scores = calculate_sbfl_for_file(merged_cov)
-            
-            # Skip if there were zero tests that failed the combined execution
-            if not scores["ochiai"] or scores["ochiai"][0]["score"] == 0.0:
-                zero_fails[label] += 1
-                continue
-                
+        if triggered_by_all:
+            common_mutants[m_key] = strategies_dict
+
+    print(f"\n[INFO] Found {len(common_mutants)} mutants successfully triggered by ALL {len(global_labels)} global strategies.")
+    print(f"[INFO] SBFL metrics will be calculated strictly on this common subset.")
+
+    for m_key, strategies_dict in common_mutants.items():
+        for raw_label in raw_labels:
+            s_ranks = strategies_dict[raw_label].get('ranks', {})
             for metric in metrics:
-                r, e = get_fair_rank(scores[metric], true_bug_lines)
-                if r is not None:
-                    ranks[label][metric].append(r)
-                    exams[label][metric].append(e)
-
-    # --- CONSOLE OUTPUT: FAILING TEST STATS ---
-    print("\n" + "="*55)
-    print(" 📉 ZERO-FAILURE MUTANT STATISTICS")
-    print("="*55)
-    for raw_label in all_labels:
-        formatted_label = clean_label(raw_label)
-        total = total_mutants[raw_label]
-        zero = zero_fails[raw_label]
-        pct = (zero / total) * 100 if total > 0 else 0
-        print(f"{formatted_label:<15}: {zero:<4} out of {total:<4} mutants ({pct:.1f}%) had 0 failing tests. (Valid = {(total-zero):<4})")
+                if metric in s_ranks:
+                    ranks[raw_label][metric].append(s_ranks[metric][0])
+                    exams[raw_label][metric].append(s_ranks[metric][1])
+                    
+        for metric in metrics:
+            best_r = None
+            best_e = None
+            for lbl in raw_labels:
+                s_ranks = strategies_dict.get(lbl, {}).get('ranks', {})
+                if metric in s_ranks:
+                    r, e = s_ranks[metric]
+                    if best_r is None or r < best_r:
+                        best_r = r
+                        best_e = e
+            
+            if best_r is not None:
+                ranks["combined"][metric].append(best_r)
+                exams["combined"][metric].append(best_e)
 
     # --- CONSOLE OUTPUT & STATS CALCULATION ---
     print("\n" + "="*105)
-    print(f" 🐛 SBFL APPROACH COMPARISON ({len(all_labels)} Methods)")
+    print(f" 🐛 SBFL APPROACH COMPARISON (WITH COMBINED METRIC)")
     print("="*105)
     print(f"{'Metric':<14} | {'Approach':<15} | {'Top-1 (%)':<9} | {'Top-3 (%)':<9} | {'Top-5 (%)':<9} | {'MRR':<7} | {'Avg Rank':<8} | {'EXAM (%)':<8}")
     print("-" * 105)
 
+    stats = {label: {} for label in all_labels}
     for metric in metrics:
-        for raw_label in all_labels:
-            s = calculate_stats(ranks[raw_label][metric], exams[raw_label][metric])
-            stats[raw_label][metric] = s
+        for label in all_labels:
+            s = calculate_stats(ranks[label][metric], exams[label][metric])
+            stats[label][metric] = s
             
-            m_label = metric.capitalize() if raw_label == all_labels[0] else ""
-            formatted_label = clean_label(raw_label)
+            m_label = metric.capitalize() if label == all_labels[0] else ""
+            formatted_label = clean_label(label)
             
             print(f"{m_label:<14} | {formatted_label:<15} | {s['top_1_pct']:<9.1f} | {s['top_3_pct']:<9.1f} | {s['top_5_pct']:<9.1f} | {s['mrr']:<7.3f} | {s['avg_rank']:<8.2f} | {s['avg_exam']:<8.2f}")
         print("-" * 105)
+
+    # --- FILE EXPORTS (ALL METRICS FOR REPO) ---
+    TABLES_ROOT.mkdir(parents=True, exist_ok=True)
+    
+    latex_rows = []
+    for metric in metrics:
+        for label in all_labels:
+            s = stats[label][metric]
+            formatted_label = "\\textbf{" + clean_label(label) + "}" if label == "combined" else clean_label(label)
+            m_label = metric.replace("_", "\\_").capitalize() if label == all_labels[0] else ""
+            
+            latex_rows.append(f"{m_label} & {formatted_label} & {s['top_1_pct']:.1f}\\% & {s['top_3_pct']:.1f}\\% & {s['top_5_pct']:.1f}\\% & {s['mrr']:.3f} & {s['avg_rank']:.2f} & {s['avg_exam']:.2f}\\% \\\\")
+        latex_rows.append("\\hline")
+
+    latex_path = os.path.join(TABLES_ROOT, "complementarity_metrics_table.tex")
+    with open(latex_path, 'w') as f:
+        f.write("\\begin{table}[htbp]\n\\centering\n")
+        f.write("\\caption{Fault Localisation Complementarity Performance}\n\\label{tab:complementarity_results}\n")
+        f.write("\\begin{tabular}{l l c c c c c c}\n\\hline\n")
+        f.write("\\textbf{Metric} & \\textbf{Strategy} & \\textbf{Top-1 (\\%)} & \\textbf{Top-3 (\\%)} & \\textbf{Top-5 (\\%)} & \\textbf{MRR} & \\textbf{Avg Rank} & \\textbf{EXAM (\\%)} \\\\\n\\hline\n")
+        for row in latex_rows:
+            f.write(row + "\n")
+        f.write("\\end{tabular}\n")
+        f.write("\\end{table}\n")
+
+    print(f"\nSaved LaTeX table to: {latex_path}")
+
+    # --- VISUALIZATIONS (INDIVIDUAL GRAPHS) ---
+    GRAPHS_ROOT.mkdir(parents=True, exist_ok=True)
+    x_labels = [m.replace("_", " ").capitalize() for m in metrics]
+
+    plot_configs = {
+        "top_1_pct": {"title": "Complementarity: Top-1 Accuracy", "ylabel": "Top-1 Accuracy (%)"},
+        "top_3": {"title": "Complementarity: Top-3 Accuracy", "ylabel": "Top-3 Accuracy (Count)"},
+        "top_5": {"title": "Complementarity: Top-5 Accuracy", "ylabel": "Top-5 Accuracy (Count)"},
+        "mrr": {"title": "Complementarity: Mean Reciprocal Rank", "ylabel": "MRR (Higher is Better)"},
+        "avg_rank": {"title": "Complementarity: Average Rank", "ylabel": "Average Rank (Lower is Better)"},
+        "avg_exam": {"title": "Complementarity: EXAM Score", "ylabel": "EXAM Score (%) (Lower is Better)"}
+    }
+
+    for stat_key, config in plot_configs.items():
+        plt.figure(figsize=(10, 6))
+        
+        for label in all_labels:
+            formatted_label = clean_label(label)
+            y_vals = [stats[label][m][stat_key] for m in metrics]
+            
+            color = STRATEGY_COLORS.get(formatted_label, "#999999")
+            marker = STRATEGY_MARKERS.get(formatted_label, 'o')
+            
+            lw = 3.5 if label == "combined" else 2.0
+
+            plt.plot(x_labels, y_vals, marker=marker, linewidth=lw, markersize=9, 
+                     label=formatted_label, color=color, alpha=0.9)
+
+        plt.title(config["title"], pad=15)
+        plt.ylabel(config["ylabel"])
+        plt.xlabel('Similarity Coefficient')
+        
+        if len(metrics) > 4:
+            plt.xticks(rotation=45, ha='right')
+            
+        plt.legend(title="Strategy", frameon=True, fancybox=True, shadow=True)
+        
+        filename = f"complementarity_{stat_key}_comparison.png"
+        plot_path = os.path.join(GRAPHS_ROOT, filename)
+        plt.savefig(plot_path)
+        plt.close()
+
+    print(f"Saved {len(plot_configs)} individual complementarity graphs to: {GRAPHS_ROOT}\n")
 
 if __name__ == "__main__":
     main()

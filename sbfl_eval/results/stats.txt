@@ -2,14 +2,14 @@
  EXECUTION SUMMARY
 --------------------------------------------------
  [tests_block]
-    -> Time:  34.6730 minutes
+    -> Time:  33.8594 minutes
     -> Files: 1541 files stored in spec_coverage.json & spec_results.json
  [tests_spec_bva]
-    -> Time:  44.1960 minutes
+    -> Time:  49.5431 minutes
     -> Files: 1541 files stored in spec_coverage.json & spec_results.json
  [tests_path]
-    -> Time:  44.6170 minutes
+    -> Time:  41.5912 minutes
     -> Files: 1541 files stored in spec_coverage.json & spec_results.json
  [tests_spec]
-    -> Time:  34.7938 minutes
+    -> Time:  43.8993 minutes
     -> Files: 1541 files stored in spec_coverage.json & spec_results.json
