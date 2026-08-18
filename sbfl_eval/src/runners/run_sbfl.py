@@ -22,7 +22,7 @@ from src.utils.config import (
 )
 
 def calculate_file_metrics(file_data, target_metrics):
-    """Calculates SBFL metrics and a new Proximity-Weighted Ochiai."""
+    """Calculates SBFL metrics"""
     
     AVAILABLE_METRICS = [
         "ochiai", "ochiai_prox",
